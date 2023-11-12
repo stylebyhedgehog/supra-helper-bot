@@ -4,19 +4,18 @@ from services.api.alfa.template import AlfaApiTemplate
 from utils.date_utils import DateUtil
 
 
-class FetchCgi:
+class CgiFetcher:
     @staticmethod
     def by_group_id(group_id):
         url = "https://supra.s20.online/v2api/cgi/index"
         params = {"group_id": group_id}
-        data = AlfaApiTemplate.fetch_paginated_data(url=url, params=params)
-        return data
+        return AlfaApiTemplate.fetch_paginated_data(url=url, params=params)
 
 
-class CgiService:
+class CgiDataService:
     @staticmethod
     def get_customer_studying_in_group_months(group_alfa_id, child_alfa_id):
-        data = FetchCgi.by_group_id(group_alfa_id)
+        data = CgiFetcher.by_group_id(group_alfa_id)
         if data:
             for customer_in_group_info in data:
                 if customer_in_group_info.get("customer_id") == child_alfa_id:

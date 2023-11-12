@@ -3,25 +3,23 @@ from services.api.alfa.template import AlfaApiTemplate
 from utils.string_utils import StringUtil
 
 
-class FetchCustomer:
+class CustomerFetcher:
     @staticmethod
     def all():
         url = "https://supra.s20.online/v2api/customer/index"
-        data = AlfaApiTemplate.fetch_paginated_data(url=url)
-        return data
+        return AlfaApiTemplate.fetch_paginated_data(url=url)
 
     @staticmethod
     def by_customer_id(customer_id, with_groups=False):
         url = "https://supra.s20.online/v2api/customer/index"
         payload = {"id": customer_id, "withGroups": with_groups, "removed": 1}
-        data = AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
-        return data
+        return AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
 
 
-class CustomerService:
+class CustomerDataService:
     @staticmethod
     def get_customer_groups_by_customer_id(child_alfa_id):
-        customer_info = FetchCustomer.by_customer_id(child_alfa_id, True)
+        customer_info = CustomerFetcher.by_customer_id(child_alfa_id, True)
         if customer_info:
             result = []
             for group in customer_info.get("groups"):
@@ -37,7 +35,7 @@ class CustomerService:
 
     @staticmethod
     def get_child_balance_by_id(child_alfa_id: int) -> tuple[str, int, int] | None:
-        customer_info = FetchCustomer.by_customer_id(child_alfa_id)
+        customer_info = CustomerFetcher.by_customer_id(child_alfa_id)
 
         if customer_info:
             balance = customer_info.get("balance")
@@ -50,7 +48,7 @@ class CustomerService:
 
     @staticmethod
     def get_child_name_by_id(child_alfa_id):
-        customer_info = FetchCustomer.by_customer_id(child_alfa_id)
+        customer_info = CustomerFetcher.by_customer_id(child_alfa_id)
         if customer_info:
             name = customer_info.get("name")
             return name
@@ -60,7 +58,7 @@ class CustomerService:
 
     @staticmethod
     def get_customers_by_phone_number(parent_phone_number):
-        all_customers = FetchCustomer.all()
+        all_customers = CustomerFetcher.all()
         if all_customers:
             parent_children = []
             for customer in all_customers:

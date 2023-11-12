@@ -2,7 +2,7 @@ import logging
 from services.api.alfa.template import AlfaApiTemplate
 
 
-class FetchGroup:
+class GroupFetcher:
     @staticmethod
     def by_id(group_id):
         url = "https://supra.s20.online/v2api/group/index"
@@ -11,10 +11,10 @@ class FetchGroup:
         return data
 
 
-class GroupService:
+class GroupDataService:
     @staticmethod
     def get_group_name_by_id(group_id):
-        group = FetchGroup.by_id(group_id)
+        group = GroupFetcher.by_id(group_id)
         if group:
             return group.get("name")
         else:

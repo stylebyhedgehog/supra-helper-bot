@@ -1,8 +1,8 @@
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from db.repositories.child_repository import ChildRepository
-from services.api.alfa.cgi import CgiService
-from services.api.alfa.customer import CustomerService
+from services.api.alfa.cgi import CgiDataService
+from services.api.alfa.customer import CustomerDataService
 from services.bot.attendance_service import AttendanceService
 from utils.constants.callback_names import CPP
 from utils.constants.messages import PPM_ATTENDANCE
@@ -49,7 +49,7 @@ def register_child_get_attendance_handlers(bot):
         month_selection(child_alfa_id, child_group_alfa_id, month, call.message)
 
     def child_selection(child_alfa_id, message):
-        child_groups = CustomerService.get_customer_groups_by_customer_id(child_alfa_id)
+        child_groups = CustomerDataService.get_customer_groups_by_customer_id(child_alfa_id)
         if child_groups is None:
             bot.edit_message_text(PPM_ATTENDANCE.ERROR_GROUPS_NOT_FOUND, chat_id=message.chat.id,
                                   message_id=message.message_id)
@@ -69,7 +69,7 @@ def register_child_get_attendance_handlers(bot):
                                   chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
 
     def group_selection(child_alfa_id, group_alfa_id, message):
-        month_names = CgiService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
+        month_names = CgiDataService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
         markup = InlineKeyboardMarkup(row_width=1)
         for month in month_names:
             date_y_m = month['year_month']

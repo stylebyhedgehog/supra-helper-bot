@@ -38,7 +38,7 @@ class StringUtil:
 
     @staticmethod
     def is_contain_feedback(note):
-        return len(note) > 0 and note.lower().startswith("ос")
+        return len(note) > 0 and note.lower().startswith("ос:")
 
     @staticmethod
     def extract_teacher_feedback(note):
@@ -51,4 +51,9 @@ class StringUtil:
     @staticmethod
     def extract_course_subject(full_name):
         course_name, subject_name = full_name.split(":")
-        return course_name.split(), subject_name.split()
+        return StringUtil.remove_spaces(course_name), StringUtil.remove_spaces(subject_name)
+
+
+    @staticmethod
+    def remove_spaces(string):
+        return string.replace(" ", "")

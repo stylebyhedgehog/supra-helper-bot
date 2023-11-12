@@ -3,7 +3,7 @@ import os
 from db.repositories.administrator_repository import AdministratorRepository
 from db.repositories.child_repository import ChildRepository
 from db.repositories.parent_repository import ParentRepository
-from services.api.alfa.customer import FetchCustomer, CustomerService
+from services.api.alfa.customer import CustomerFetcher, CustomerDataService
 from utils.string_utils import StringUtil
 
 
@@ -33,7 +33,7 @@ class AuthenticationService:
     @staticmethod
     def authorize_parent(phone_number, parent_telegram_id):
         normalized_phone_number = StringUtil.remove_brackets_dashes_and_spaces(phone_number)
-        parent_children = CustomerService.get_customers_by_phone_number(normalized_phone_number)
+        parent_children = CustomerDataService.get_customers_by_phone_number(normalized_phone_number)
         saved_children_names = []
         if parent_children:
             parent_name = parent_children[0].get("parent_name")

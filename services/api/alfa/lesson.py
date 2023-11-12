@@ -5,13 +5,14 @@ from utils.date_utils import DateUtil
 from utils.string_utils import StringUtil
 
 
-class FetchLesson:
+class LessonFetcher:
     @staticmethod
     def _all():
         url = "https://supra.s20.online/v2api/lesson/index"
-        payload = {"date_from": "2023-10-15", "date_to": "2023-11-02"}
+        payload = {"date_from": "2023-11-01", "date_to": "2023-11-15", "lesson_type_id": 2}
         data = AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
         return data
+
 
     @staticmethod
     def _by_child_id_group_id_period(child_alfa_id, group_alfa_id, date_from, date_to):
@@ -29,22 +30,25 @@ class FetchLesson:
         return data
 
 
-class LessonService:
+class LessonDataService:
     @staticmethod
     def get_child_lessons_info(child_alfa_id, group_alfa_id, date_from):
-        lessons = FetchLesson._by_child_id_group_id_period(child_alfa_id, group_alfa_id, date_from,
-                                      DateUtil.next_month(date_from))
+        lessons = LessonFetcher._by_child_id_group_id_period(child_alfa_id, group_alfa_id, date_from,
+                                                             DateUtil.next_month(date_from))
         result = []
         for lesson in lessons:
             lesson_topic = lesson.get("topic")
             for child_info in lesson.get("details"):
                 if child_info.get("customer_id") == child_alfa_id:
                     grade = child_info.get("grade", 0)
-                    grade = float(grade.replace(",", "."))
+                    if grade:
+                        grade_value = float(grade.replace(",", "."))
+                    else:
+                        grade_value = 0
                     child_lesson_info = {
                         "topic": lesson_topic,
                         "is_attend": child_info.get("is_attend"),
-                        "grade": grade,
+                        "grade": grade_value,
                         "note": child_info.get("note")
                         }
                     result.append(child_lesson_info)
@@ -95,7 +99,7 @@ class LessonService:
 
     @staticmethod
     def get_absent_children(lesson_id):
-        lesson_info = FetchLesson._by_lesson_id(lesson_id)
+        lesson_info = LessonFetcher._by_lesson_id(lesson_id)
         if lesson_info:
             absent_children = []
 

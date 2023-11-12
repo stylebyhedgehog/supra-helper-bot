@@ -3,15 +3,14 @@ import os
 from dotenv import load_dotenv
 
 from services.admin_service import clear_all_tables
-from services.api.alfa.customer import FetchCustomer
+from services.api.alfa.customer import CustomerFetcher
 from services.bot.authentication_service import AuthenticationService
 from utils.string_utils import StringUtil
 
 
 def authenticate_all():
-    # clear_all_tables()
     i = 0
-    customers = FetchCustomer._all()
+    customers = CustomerFetcher.all()
     unique_phones = set()
     for customer in customers:
         phones = customer.get("phone")

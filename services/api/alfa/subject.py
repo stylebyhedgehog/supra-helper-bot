@@ -1,7 +1,7 @@
 from services.api.alfa.template import AlfaApiTemplate
 
 
-class FetchSubject:
+class SubjectFetcher:
     @staticmethod
     def all():
         url = "https://supra.s20.online/v2api/subject/index"
@@ -14,10 +14,10 @@ class FetchSubject:
         return data
 
 
-class SubjectService:
+class SubjectDataService:
     @staticmethod
     def get_subject_name(subject_id):
-        subjects = FetchSubject.all()
+        subjects = SubjectFetcher.all()
         if subjects is None:
             return
         for subject in subjects:

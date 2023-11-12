@@ -1,14 +1,18 @@
 import os
+from typing import Generator, Any
 
 import requests
 import logging
 
 
-
 class AlfaApiTemplate:
     _TOKEN = ""
+
     @staticmethod
-    def _authenticate():
+    def _authenticate() -> str:
+        """
+        Аутентификация пользователя и получение токена.
+        """
         auth_url = "https://supra.s20.online/v2api/auth/login"
         auth_data = {"email": os.getenv("ALFA_AUTH_EMAIL"), "api_key": os.getenv("ALFA_AUTH_KEY")}
 
@@ -18,16 +22,18 @@ class AlfaApiTemplate:
             return response.json()["token"]
         except requests.exceptions.RequestException as e:
             logging.error(f"Authentication failed: {e}")
-            return None
+            return ""
 
     @staticmethod
-    def _make_authenticated_request(url, json, params,token=None):
-        if token:
-            headers = {"X-ALFACRM-TOKEN": token}
-        else:
-            headers = {"X-ALFACRM-TOKEN": AlfaApiTemplate._TOKEN}
+    def _make_authenticated_request(url: str, json_data: dict, params: dict, token: str = None) -> dict:
+        """
+        Отправка аутентифицированного запроса к внешнему API.
+        """
+        print("authed_request")
+        headers = {"X-ALFACRM-TOKEN": token or AlfaApiTemplate._TOKEN}
+
         try:
-            response = requests.post(url, headers=headers, json=json, params=params)
+            response = requests.post(url, headers=headers, json=json_data, params=params)
             response.raise_for_status()
             return response.json()
         except requests.exceptions.HTTPError as e:
@@ -35,18 +41,21 @@ class AlfaApiTemplate:
                 logging.info("Token expired. Re-authenticating...")
                 new_token = AlfaApiTemplate._authenticate()
                 if new_token:
-                    return AlfaApiTemplate._make_authenticated_request(token=new_token, url=url, json=json,
+                    AlfaApiTemplate._TOKEN = new_token
+                    return AlfaApiTemplate._make_authenticated_request(token=new_token, url=url, json_data=json_data,
                                                                        params=params)
                 else:
                     logging.error(f"Unable to re-authenticate. Exiting.")
-                    return None
+                    return {}
             else:
                 logging.error(f"Request failed: {e}")
-                return None
+                return {}
 
     @staticmethod
-    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None):
-        data_list = []
+    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None) -> Generator[dict, None, None]:
+        """
+        Получение данных из внешнего API с поддержкой пагинации.
+        """
         current_count = 0
         page = 0
 
@@ -56,39 +65,34 @@ class AlfaApiTemplate:
             else:
                 payload = {"page": page}
 
-            response_data = AlfaApiTemplate._make_authenticated_request(url=url, json=payload,
+            response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload,
                                                                         params=params)
             if not response_data:
                 logging.error(f"Request failed. Error for unspecified reasons ")
-                return None
+                return
 
-            data_list.extend(response_data.get("items"))
+            yield response_data.get("items", [])
 
-            current_count += response_data.get("count")
-            if current_count >= response_data.get("total"):
+            current_count += response_data.get("count", 0)
+            if current_count >= response_data.get("total", 0):
                 break
 
             page += 1
 
-        if len(data_list) != 0:
-            return data_list
-        else:
-            return None
-
-
     @staticmethod
     def fetch_single_data(url: str, payload: dict = None, params: dict = None):
-        response_data = AlfaApiTemplate._make_authenticated_request(url=url, json=payload,
+        """
+        Получение единичных данных из внешнего API.
+        """
+        response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload,
                                                                     params=params)
-        if not response_data :
+        if not response_data:
             logging.error(f"Request failed. Error for unspecified reasons ")
             return None
 
-        items = response_data.get("items")
-        if len(items) == 0:
-            logging.error(f"Alfa api response with empty items ")
+        items = response_data.get("items", [])
+        if not items:
+            logging.error(f"Alfa API response with empty items ")
             return None
 
         return items[0]
-
-

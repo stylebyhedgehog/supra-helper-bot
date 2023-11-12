@@ -3,7 +3,7 @@ import logging
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from db.repositories.child_repository import ChildRepository
-from services.api.alfa.customer import FetchCustomer, CustomerService
+from services.api.alfa.customer import CustomerFetcher, CustomerDataService
 from utils.constants.callback_names import CPP
 from utils.constants.messages import PPM_BALANCE
 
@@ -33,7 +33,7 @@ def register_child_get_balance(bot):
         get_balance_child_selection(child_alfa_id, call.message)
 
     def get_balance_child_selection(child_alfa_id, message):
-        result = CustomerService.get_child_balance_by_id(child_alfa_id)
+        result = CustomerDataService.get_child_balance_by_id(child_alfa_id)
         markup = None
         if result:
             name, balance, paid_count = result

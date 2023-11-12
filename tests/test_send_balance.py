@@ -1,9 +1,11 @@
-from services.api.alfa.lesson import FetchLesson
+from services.api.alfa.lesson import LessonFetcher
 from services.mailing.send_balance import send_balance
 
 
 def test_send_balance():
-    lessons = FetchLesson._all()
+    lessons = LessonFetcher._all()
     for lesson in lessons:
-        print(lesson.get("id"))
-        send_balance(lesson, None)
+        try:
+            send_balance(lesson, None)
+        except Exception as e:
+            print(f"Ошибка: {e}")

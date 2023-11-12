@@ -15,7 +15,8 @@ from controllers.bot.parent.performance_handlers import register_child_get_perfo
 
 from db.core import DatabaseManager
 from services.admin_service import clear_all_tables
-from services.api.alfa.lesson import FetchLesson
+from services.api.alfa.lesson import LessonFetcher
+from services.api.alfa.template import AlfaApiTemplate
 from services.mailing.send_balance import send_balance
 from services.mailing.send_recordings_after_lesson_held import send_recordings_after_lesson_held
 from services.mailing.send_recordings_after_recording_completed import send_recordings_after_recording_completed
@@ -25,7 +26,7 @@ from tests.test_send_balance import test_send_balance
 from tests.test_send_recordings import test_send_recordings
 from tests.test_send_reports import test_send_reports
 from utils.encryption import Encryption
-from utils.file_utils import get_path_to_db
+from utils.file_utils import FileUtil
 
 logging.basicConfig(level=logging.ERROR,
                     format='%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d - %(funcName)s - %(message)s')
@@ -36,7 +37,7 @@ logging.basicConfig(level=logging.WARNING,
 load_dotenv()
 # todo изменить бд на серверную
 # todo реализовать отлавливание изменения состава групп
-DatabaseManager.init_db('sqlite:///' + get_path_to_db())
+DatabaseManager.init_db('sqlite:///' + FileUtil.get_path_to_db())
 app = Flask(__name__)
 bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
 
@@ -74,7 +75,7 @@ if os.getenv("DEV_MODE") == "0":
         data = request.json
         if is_lesson_conducted(data) and is_lesson_type_eq_group(data):
             lesson_id = data["entity_id"]
-            lesson_info = FetchLesson._by_lesson_id(lesson_id)
+            lesson_info = LessonFetcher._by_lesson_id(lesson_id)
             if lesson_info:
                 send_balance(lesson_info, bot)
                 send_reports(lesson_info, bot)
@@ -103,10 +104,23 @@ if os.getenv("DEV_MODE") == "0":
 
 
 else:
+
+    import tracemalloc
     print("start")
     # authenticate_all()
     # test_send_balance()
     # test_send_recordings()
-    test_send_reports()
-    bot.polling(none_stop=True)
+    tracemalloc.start()
+
+    for processed_page in LessonFetcher._all():
+        # Здесь можно выполнять дополнительные действия с обработанными данными
+        print("Processed Page:", processed_page)
+
+    current, peak = tracemalloc.get_traced_memory()
+    print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
+    tracemalloc.stop()
+    # test_send_reports()
+    print("end")
+
+    # bot.polling(none_stop=True)
 

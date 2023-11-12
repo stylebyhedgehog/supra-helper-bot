@@ -3,9 +3,9 @@ import logging
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from db.repositories.child_repository import ChildRepository
-from services.api.alfa.cgi import FetchCgi, CgiService
-from services.api.alfa.customer import FetchCustomer, CustomerService
-from services.api.alfa.lesson import FetchLesson
+from services.api.alfa.cgi import CgiFetcher, CgiDataService
+from services.api.alfa.customer import CustomerFetcher, CustomerDataService
+from services.api.alfa.lesson import LessonFetcher
 from services.bot.performance_service import PerformanceService
 from utils.constants.callback_names import CPP
 from utils.constants.messages import PPM_PERFORMANCE
@@ -51,7 +51,7 @@ def register_child_get_performance_handlers(bot):
         month_selection(child_alfa_id, child_group_alfa_id, month, call.message)
 
     def child_selection(child_alfa_id, message):
-        child_groups = CustomerService.get_customer_groups_by_customer_id(child_alfa_id)
+        child_groups = CustomerDataService.get_customer_groups_by_customer_id(child_alfa_id)
         if child_groups is None:
             bot.edit_message_text(PPM_PERFORMANCE.ERROR_GROUPS_NOT_FOUND, chat_id=message.chat.id,
                                   message_id=message.message_id)
@@ -71,7 +71,7 @@ def register_child_get_performance_handlers(bot):
                                   chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
 
     def group_selection(child_alfa_id, group_alfa_id, message):
-        month_names = CgiService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
+        month_names = CgiDataService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
 
         markup = InlineKeyboardMarkup(row_width=1)
         for month in month_names:

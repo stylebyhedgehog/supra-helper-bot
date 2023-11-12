@@ -1,62 +1,56 @@
+import logging
+
 from db.repositories.parent_repository import ParentRepository
-from services.api.alfa.subject import  SubjectService
+from services.api.alfa.customer import CustomerDataService
+from services.api.alfa.group import GroupDataService
 from services.bot.report_service import ReportService
-from tests.utils import TestUtils
-from utils.constants.messages import PPM_REPORT_DISPATCHING
 from utils.date_utils import DateUtil
+from utils.file_utils import FileUtil
 from utils.string_utils import StringUtil
 
 
 def send_reports(lesson_info, bot):
-    group_id = lesson_info.get("group_ids")[0]
-    date_y_m_d = lesson_info.get("date")
-    full_subject_name = SubjectService.get_subject_name(lesson_info.get("subject_id"))
-    course_name, subject_name = StringUtil.extract_course_subject(full_subject_name)
-    month_name = DateUtil.get_month_name(date_y_m_d)
+    children_on_lesson = lesson_info.get("details")
+    # Отчеты отправляются только в случае наличия ос у всех детей на уроке
+    if _is_fb_present_for_all_children(children_on_lesson):
+        group_id = lesson_info.get("group_ids")[0]
+        date_y_m_d = lesson_info.get("date")
+        date_y_m = DateUtil.remove_day(date_y_m_d)
+        subject_id = lesson_info.get("subject_id")
 
-    children_with_fb = form_list_of_children_with_fb(lesson_info.get("details"))
-    for child_with_fb in children_with_fb:
-        child_id = child_with_fb["child_id"]
-        teacher_fb = child_with_fb["teacher_fb"]
-        res = ReportService.form_monthly_report(child_id, group_id, date_y_m_d)
-        lessons_amount, attended_lessons_amount, average_attendance, topic_performance = res
-
-        report = _create_notification_message(month_name, lessons_amount, average_attendance,
-                                              attended_lessons_amount, teacher_fb, topic_performance,
-                                              subject_name, course_name)
-        _send_notification_message(child_id, report)
+        reports_containers = ReportService.get_monthly_reports(group_id, date_y_m, subject_id, children_on_lesson)
+        for report_container in reports_containers:
+            child_id = report_container.get("child_id")
+            parent = ParentRepository.find_parent_by_child_alfa_id(child_id)
+            # _send_notification_message(parent, report, bot)
+            _write_in_json(report_container,parent)
 
 
-def form_list_of_children_with_fb(lesson_details):
-    children = []
-    for child_info in lesson_details:
-        child_note = child_info.get("note")
-        if StringUtil.is_contain_feedback(child_note):
-            children.append(
-                {"child_id": child_info.get("customer_id"),
-                 "teacher_fb": StringUtil.extract_teacher_feedback(child_note)}
-            )
-    return children
+def _is_fb_present_for_all_children(children_on_lesson):
+    for child_on_lesson in children_on_lesson:
+        if not StringUtil.is_contain_feedback(child_on_lesson.get("note")):
+            return False
+    return True
 
+def _write_in_json(report_container,parent):
+    try:
+        path = FileUtil.get_path_to_tmp_json_file("reports.json")
 
-def _create_notification_message(month_name, lessons_amount, average_attendance,
-                                 attd_lessons_amount, teacher_fb, topic_perf,
-                                 subject_name, course_name):
-    report = None
-    if course_name == "АЯ":
-        report = PPM_REPORT_DISPATCHING.RESULT_EC(month_name, lessons_amount, average_attendance,
-                                                  attd_lessons_amount, teacher_fb)
-    elif course_name == "КК":
-        report = PPM_REPORT_DISPATCHING.RESULT_CC(month_name, lessons_amount, subject_name,
-                                                  average_attendance, attd_lessons_amount,
-                                                  topic_perf, teacher_fb)
-    return report
+        status = "Не отправлен (Родитель не зарегистрирован в системе)"
+        if parent:
+            status = "Отправлен"
+        data = {
+            "group_name": GroupDataService.get_group_name_by_id(report_container.get("group_id")),
+            "child_name": CustomerDataService.get_child_name_by_id(report_container.get("child_id")),
+            "month_name": report_container.get("month_name"),
+            "report": report_container.get("report"),
+            "status": status
+        }
+        FileUtil.add_to_json_file(data,path)
+    except Exception as e:
+        logging.error(f"Ошибка записи отчета в файл {e}")
 
-
-def _send_notification_message(child_id, report):
-    parent = ParentRepository.find_parent_by_child_alfa_id(child_id)
+def _send_notification_message(parent, info, bot):
     if parent:
-        # bot.send_message(parent.telegram_id, report)
-        TestUtils.append_to_file("Отправлен: " + report, "reports.txt")
-    else:
-        TestUtils.append_to_file("Не отправлен: " + report, "reports.txt")
+        bot.send_message(parent.telegram_id, info)
+

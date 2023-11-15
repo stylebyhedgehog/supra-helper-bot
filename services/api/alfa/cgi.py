@@ -1,6 +1,7 @@
 import logging
 from datetime import datetime
 from services.api.alfa.template import AlfaApiTemplate
+from services.logger import Logger
 from utils.date_utils import DateUtil
 
 
@@ -24,6 +25,6 @@ class CgiDataService:
                     current_date = datetime.now().strftime("%Y-%m")
                     month_names = DateUtil.generate_month_names(child_start_studying_in_group_date, current_date)
                     return month_names
-        else:
-            logging.error(f"Не удалось получить информацию для ребенка с id={child_alfa_id}")
-            return None
+
+        Logger.entity_not_found_error("Cgi", group_alfa_id=group_alfa_id, customer_alfa_id=child_alfa_id)
+        return None

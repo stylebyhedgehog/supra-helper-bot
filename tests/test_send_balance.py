@@ -3,7 +3,7 @@ from services.mailing.send_balance import send_balance
 
 
 def test_send_balance():
-    lessons = LessonFetcher._all()
+    lessons = LessonFetcher.all()
     for lesson in lessons:
         try:
             send_balance(lesson, None)

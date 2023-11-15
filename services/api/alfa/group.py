@@ -1,5 +1,6 @@
 import logging
 from services.api.alfa.template import AlfaApiTemplate
+from services.logger import Logger
 
 
 class GroupFetcher:
@@ -7,8 +8,7 @@ class GroupFetcher:
     def by_id(group_id):
         url = "https://supra.s20.online/v2api/group/index"
         payload = {"id": group_id, "removed": 3}
-        data = AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
-        return data
+        return AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
 
 
 class GroupDataService:
@@ -18,5 +18,5 @@ class GroupDataService:
         if group:
             return group.get("name")
         else:
-            logging.error(f"Не найдена группа с id={group_id}")
+            Logger.entity_not_found_error("Group (Group name)", alfa_group_id=group_id)
             return None

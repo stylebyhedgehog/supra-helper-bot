@@ -2,6 +2,7 @@ import os
 
 from telebot import types
 
+from exceptions.bot_error_handler import bot_error_handler
 from services.bot.authentication_service import AuthenticationService
 from utils.constants.callback_names import CPP, CAP
 from utils.constants.messages import MENU
@@ -9,6 +10,7 @@ from utils.constants.messages import MENU
 
 def register_menu_handlers(bot):
     @bot.message_handler(commands=['start', 'help'])
+    @bot_error_handler(bot)
     def handle_help(message):
         #todo вынести в команду /help_admin
 

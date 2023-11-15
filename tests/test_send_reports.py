@@ -3,7 +3,7 @@ from services.mailing.send_reports import send_reports
 
 
 def test_send_reports():
-    lessons = LessonFetcher._all()
+    lessons = LessonFetcher.all()
     for lesson in lessons:
         try:
             send_reports(lesson, None)

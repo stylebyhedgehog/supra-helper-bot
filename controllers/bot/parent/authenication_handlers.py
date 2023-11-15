@@ -1,6 +1,6 @@
 from telebot import types
 
-
+from exceptions.bot_error_handler import bot_error_handler
 from services.bot.authentication_service import AuthenticationService
 from utils.constants.messages import PPM_AUTH, PAM_AUTH
 from utils.string_utils import StringUtil
@@ -8,6 +8,7 @@ from utils.string_utils import StringUtil
 
 def register_authorization_handlers(bot):
     @bot.message_handler(commands=['admin'])
+    @bot_error_handler(bot)
     def handle_admin_login(message):
         if AuthenticationService.is_admin_authorized(message.chat.id):
             bot.send_message(message.chat.id, PAM_AUTH.ERROR_ALREADY_AUTHENTICATED)
@@ -22,6 +23,7 @@ def register_authorization_handlers(bot):
             bot.send_message(message.chat.id, msg)
 
     @bot.message_handler(commands=['login'])
+    @bot_error_handler(bot)
     def handle_parent_login(message):
         if AuthenticationService.is_parent_authorized(message.chat.id):
             bot.send_message(message.chat.id, PPM_AUTH.ERROR_ALREADY_AUTHENTICATED)
@@ -33,6 +35,7 @@ def register_authorization_handlers(bot):
             bot.send_message(message.chat.id, PPM_AUTH.INFO_AUTH_METHOD_SELECTION, reply_markup=markup)
 
     @bot.callback_query_handler(func=lambda call: call.data.startswith("auth_by"))
+    @bot_error_handler(bot)
     def process_auth_type_selection(call):
         if call.data == 'auth_by_input':
             bot.send_message(call.message.chat.id, PPM_AUTH.INFO_AUTH_METHOD_MANUAL_INPUT_HINT)
@@ -45,6 +48,7 @@ def register_authorization_handlers(bot):
                              reply_markup=markup)
 
     @bot.message_handler(content_types=['contact'])
+    @bot_error_handler(bot)
     def process_auth_contact_tg_handler(message):
         contact = message.contact
         phone_number = contact.phone_number
@@ -58,7 +62,7 @@ def register_authorization_handlers(bot):
             msg = PPM_AUTH.ERROR_AUTH_FAILED
         bot.send_message(message.chat.id, msg)
 
-
+    @bot_error_handler(bot)
     def process_auth_contact_input_handler(message):
         phone_number = message.text
         parent_tg_id = message.chat.id

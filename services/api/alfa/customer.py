@@ -1,5 +1,6 @@
 import logging
 from services.api.alfa.template import AlfaApiTemplate
+from services.logger import Logger
 from utils.string_utils import StringUtil
 
 
@@ -27,10 +28,9 @@ class CustomerDataService:
             if len(result) > 0:
                 return result
             else:
-                logging.error(f"Не найдены группы, привязанные к ребенку с alfa_id={child_alfa_id}.")
-                return None
+                Logger.entity_not_found_error("Customer (Groups)", customer_alfa_id=child_alfa_id)
         else:
-            logging.error(f"Не найден ребенок с alfa_id={child_alfa_id}.")
+            Logger.entity_not_found_error("Customer", customer_alfa_id=child_alfa_id)
             return None
 
     @staticmethod
@@ -43,7 +43,7 @@ class CustomerDataService:
             name = customer_info.get("name")
             return name, balance, paid_count
         else:
-            logging.error(f"Не найден ребенок с alfa_id={child_alfa_id}")
+            Logger.entity_not_found_error("Customer (Customer balance)", customer_alfa_id=child_alfa_id)
             return None
 
     @staticmethod
@@ -53,7 +53,7 @@ class CustomerDataService:
             name = customer_info.get("name")
             return name
         else:
-            logging.error(f"Не найден ребенок с alfa_id={child_alfa_id}")
+            Logger.entity_not_found_error("Customer (Customer name)", customer_alfa_id=child_alfa_id)
             return None
 
     @staticmethod
@@ -72,9 +72,6 @@ class CustomerDataService:
                              "parent_name": customer.get("legal_name")})
             if len(parent_children) > 0:
                 return parent_children
-            else:
-                logging.error(f"Не найдены дети с номером телефона={parent_phone_number}")
-                return None
         else:
-            logging.error(f"Не удалось получить список всех детей")
+            Logger.entity_not_found_error("Customer", parent_phone_number=parent_phone_number)
             return None

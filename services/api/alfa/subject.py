@@ -1,4 +1,5 @@
 from services.api.alfa.template import AlfaApiTemplate
+from services.logger import Logger
 
 
 class SubjectFetcher:
@@ -10,16 +11,15 @@ class SubjectFetcher:
             "active": False
         }
         # возвращает список всех предметов вопреки параметрам фильтрации
-        data = AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
-        return data
+        return AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
 
 
 class SubjectDataService:
     @staticmethod
     def get_subject_name(subject_id):
         subjects = SubjectFetcher.all()
-        if subjects is None:
-            return
         for subject in subjects:
             if subject.get("id") == subject_id:
                 return subject.get("name")
+        Logger.entity_not_found_error("Subject (Subject name)", subject_id=subject_id)
+        return None

@@ -43,30 +43,6 @@ class DateUtil:
 
         return month_list
 
-    # @staticmethod
-    # def get_month_name(date_str):
-    #     date_object = datetime.strptime(date_str, '%Y-%m-%d')
-    #
-    #     month_number = date_object.month
-    #
-    #     months = {
-    #         1: 'Январь',
-    #         2: 'Февраль',
-    #         3: 'Март',
-    #         4: 'Апрель',
-    #         5: 'Май',
-    #         6: 'Июнь',
-    #         7: 'Июль',
-    #         8: 'Август',
-    #         9: 'Сентябрь',
-    #         10: 'Октябрь',
-    #         11: 'Ноябрь',
-    #         12: 'Декабрь'
-    #     }
-    #
-    #     return months.get(month_number)
-
-
     @staticmethod
     def get_month_name(date_str):
         date_object = datetime.strptime(date_str, '%Y-%m')
@@ -89,35 +65,6 @@ class DateUtil:
         }
 
         return months.get(month_number)
-    # def generate_month_names(start_date_str, end_date_str):
-    #     start_date = datetime.strptime(start_date_str, "%Y-%m")
-    #     end_date = datetime.strptime(end_date_str, "%Y-%m")
-    #
-    #     current_date = start_date
-    #     month_list = []
-    #
-    #     if start_date.year == end_date.year:
-    #         while current_date <= end_date:
-    #             month_name = current_date.strftime("%B")
-    #             month_dict = {
-    #                 "month_name": en_month_ru_month[month_name],
-    #                 "year_month": current_date.strftime("%Y-%m")
-    #             }
-    #             month_list.append(month_dict)
-    #             current_date += relativedelta(months=1)
-    #
-    #     else:
-    #         while current_date <= end_date:
-    #             month_name = current_date.strftime("%B")
-    #             year = current_date.strftime("%Y")
-    #             month_dict = {
-    #                 "month_name": en_month_ru_month[month_name] + " " + year,
-    #                 "year_month": current_date.strftime("%Y-%m")
-    #             }
-    #             month_list.append(month_dict)
-    #             current_date += relativedelta(months=1)
-    #
-    #     return month_list
 
     @staticmethod
     def next_month(date_str):
@@ -141,8 +88,8 @@ class DateUtil:
 
     @staticmethod
     def remove_day(date_str):
-        y,m,d=date_str.split("-")
-        return y+"-"+m
+        y, m, d = date_str.split("-")
+        return y + "-" + m
 
     @staticmethod
     def moscow_to_utc(moscow_date):
@@ -168,4 +115,3 @@ class DateUtil:
         utc_date = moscow_datetime.strftime('%Y-%m-%d')
         utc_time = moscow_datetime.strftime('%H:%M')
         return utc_date, utc_time
-

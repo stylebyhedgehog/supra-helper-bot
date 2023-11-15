@@ -4,16 +4,16 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from db.repositories.child_repository import ChildRepository
 from exceptions.bot_error_handler import bot_error_handler
-from services.api.alfa.customer import CustomerFetcher, CustomerDataService
-from utils.constants.callback_names import CPP
+from services.api.alfa.customer import CustomerDataService
+from utils.constants.callback_names import CPP_MENU, CPP_BALANCE
 from utils.constants.messages import PPM_BALANCE
 
 
 def register_child_get_balance(bot):
-    @bot.message_handler(func=lambda message: message.text.lower() == CPP.MENU_BALANCE.lower())
+    @bot.message_handler(func=lambda message: message.text.lower() == CPP_MENU.BALANCE.lower())
     @bot_error_handler(bot)
     def get_balance_handler(message):
-        message = bot.send_message(message.chat.id, CPP.MENU_BALANCE)
+        message = bot.send_message(message.chat.id, CPP_MENU.BALANCE)
         children = ChildRepository.find_children_by_parent_telegram_id(message.chat.id)
         if children is None:
             bot.edit_message_text(chat_id=message.chat.id, message_id=message.message_id,
@@ -27,12 +27,12 @@ def register_child_get_balance(bot):
             markup = InlineKeyboardMarkup(row_width=1)
             for child in children:
                 button = InlineKeyboardButton(child.child_name,
-                                              callback_data=f"{CPP.BALANCE_S_C}_{child.child_alfa_id}")
+                                              callback_data=f"{CPP_BALANCE.S_C}_{child.child_alfa_id}")
                 markup.add(button)
             bot.edit_message_text(PPM_BALANCE.INFO_CHILD_SELECTION,
                                   chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
 
-    @bot.callback_query_handler(func=lambda call: call.data.startswith(f'{CPP.BALANCE_S_C}_'))
+    @bot.callback_query_handler(func=lambda call: call.data.startswith(f'{CPP_BALANCE.S_C}_'))
     @bot_error_handler(bot)
     def get_balance_child_selection_handler(call):
         child_alfa_id = int(call.data.split("_")[-1])

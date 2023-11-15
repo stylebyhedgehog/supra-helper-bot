@@ -1,25 +1,28 @@
-class CPP:
-    MENU_BALANCE = "Баланс"  # Узнать баланс
-    BALANCE = "par_get_bal"
-    BALANCE_S_C = f"{BALANCE}_select_child"  # Выбор ребенка
-
-    MENU_PERFORMANCE = "Успеваемость"  # Узнать успеваемость  ребенка
-    PERFORMANCE = "par_get_per"
-    PERFORMANCE_S_C = f"{PERFORMANCE}_select_child"  # Выбор ребенка
-    PERFORMANCE_S_G = f"{PERFORMANCE}_select_group"  # Выбор группы
-    PERFORMANCE_S_M = f"{PERFORMANCE}_select_month"  # Выбор месяца
-
-    MENU_ATTENDANCE = "Посещаемость"  # Узнать посещаемость  ребенка
-    ATTENDANCE = "par_get_att"
-    ATTENDANCE_S_C = f"{ATTENDANCE}_select_child"  # Выбор ребенка
-    ATTENDANCE_S_G = f"{ATTENDANCE}_select_group"  # Выбор группы
-    ATTENDANCE_S_M = f"{ATTENDANCE}_select_month"  # Выбор месяца
-
-    MENU_CONTACT = "Кнопка связи"  # Связаться с администратором
-    menu = [
-        [MENU_BALANCE, MENU_PERFORMANCE],
-        [MENU_ATTENDANCE, MENU_CONTACT]
+class CPP_MENU:
+    BALANCE = "Баланс"  # Узнать баланс
+    PERFORMANCE = "Успеваемость"  # Узнать успеваемость  ребенка
+    ATTENDANCE = "Посещаемость"  # Узнать посещаемость  ребенка
+    CONTACT = "Кнопка связи"  # Связаться с администратором
+    MENU = [
+        [BALANCE, PERFORMANCE],
+        [ATTENDANCE, CONTACT]
     ]
+
+class CPP_BALANCE:
+    BASE = "par_get_bal"
+    S_C = f"{BASE}_select_child"  # Выбор ребенка
+
+class CPP_PERFORMANCE:
+    BASE = "par_get_per"
+    S_C = f"{BASE}_select_child"  # Выбор ребенка
+    S_G = f"{BASE}_select_group"  # Выбор группы
+    S_M = f"{BASE}_select_month"  # Выбор месяца
+
+class CPP_ATTENDANCE:
+    BASE = "par_get_att"
+    S_C = f"{BASE}_select_child"  # Выбор ребенка
+    S_G = f"{BASE}_select_group"  # Выбор группы
+    S_M = f"{BASE}_select_month"  # Выбор месяца
 
 
 class CAP:

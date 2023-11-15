@@ -4,7 +4,7 @@ from telebot import types
 
 from exceptions.bot_error_handler import bot_error_handler
 from services.bot.authentication_service import AuthenticationService
-from utils.constants.callback_names import CPP, CAP
+from utils.constants.callback_names import CAP, CPP_MENU
 from utils.constants.messages import MENU
 
 
@@ -27,7 +27,7 @@ def register_menu_handlers(bot):
 
 def parent_menu():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    for row in CPP.menu:
+    for row in CPP_MENU.MENU:
         markup.add(*[types.KeyboardButton(button) for button in row])
     return markup
 

@@ -1,11 +1,11 @@
 from db.repositories.administrator_repository import AdministratorRepository
 from exceptions.bot_error_handler import bot_error_handler
-from utils.constants.callback_names import CPP
+from utils.constants.callback_names import CPP_MENU
 from utils.constants.messages import PPM_CONTACT
 
 
 def register_contact_administrator(bot):
-    @bot.message_handler(func=lambda message: message.text.lower() == CPP.MENU_CONTACT.lower())
+    @bot.message_handler(func=lambda message: message.text.lower() == CPP_MENU.CONTACT.lower())
     @bot_error_handler(bot)
     def contact_administrator_handler(message):
         administrators = AdministratorRepository.find_all_administrators()

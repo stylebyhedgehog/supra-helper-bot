@@ -15,7 +15,7 @@ def send_balance(lesson_info, bot):
         if res:
             name, balance, paid_count = res
             if int(paid_count) <= 1:
-                parent = ParentRepository.find_parent_by_child_alfa_id(child_id)
+                parent = ParentRepository.find_by_child_alfa_id(child_id)
                 balance_info = PPM_BALANCE_NOTIFICATION_DISPATCHING.RESULT(balance, paid_count, name)
                 # _send_notification_message(parent, balance_info, bot)
                 _write_in_json(child_id, lesson_info.get("group_ids")[0], lesson_info.get("date"),balance_info, parent)

@@ -5,7 +5,7 @@ from utils.constants.callback_names import CAP
 def register_get_authed_parents_list(bot):
     @bot.callback_query_handler(func=lambda call: call.data == CAP.AUTH_PARENT_LIST)
     def authed_parents_list_handler(call):
-        parents = ParentRepository.find_all_parents()
+        parents = ParentRepository.find_all()
         res = "Список авторизованных в системе родителей"
         if len(parents) == 0:
             res+= " пуст"

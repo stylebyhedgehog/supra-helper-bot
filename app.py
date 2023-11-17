@@ -100,23 +100,17 @@ if os.getenv("DEV_MODE") == "0":
 
 else:
 
-    # import tracemalloc
-    # print("start")
-    # # authenticate_all()
-    # # test_send_balance()
-    # # test_send_recordings()
-    # tracemalloc.start()
-    #
-    # print(LessonDataService.get_child_lessons_info(3086,166111,"2023-10"))
-    # # print(LessonDataService.all())
-    # # for processed_page in LessonDataService.get_child_lessons_info(3086,166,"2023-10"):
-    # #     # Здесь можно выполнять дополнительные действия с обработанными данными
-    # #     print("Processed Page:", processed_page)
-    #
-    # current, peak = tracemalloc.get_traced_memory()
-    # print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
-    # tracemalloc.stop()
-    # # test_send_reports()
-    # print("end")
-    bot.polling(none_stop=True)
+    import tracemalloc
+    print("start")
+    tracemalloc.start()
+    # authenticate_all()
+    # test_send_balance()
+    test_send_recordings()
+    # test_send_reports()
+
+    current, peak = tracemalloc.get_traced_memory()
+    print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
+    tracemalloc.stop()
+    print("end")
+    # bot.polling(none_stop=True)
 

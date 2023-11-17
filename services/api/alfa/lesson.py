@@ -1,16 +1,13 @@
-import logging
-
 from services.api.alfa.template import AlfaApiTemplate
-from services.logger import Logger
+from utils.logger import Logger
 from utils.date_utils import DateUtil
-from utils.string_utils import StringUtil
 
 
 class LessonFetcher:
     @staticmethod
     def all():
         url = "https://supra.s20.online/v2api/lesson/index"
-        payload = {"date_from": "2023-10-01", "date_to": "2023-11-15", "lesson_type_id": 2}
+        payload = {"date_from": "2023-11-01", "date_to": "2023-11-15", "lesson_type_id": 2}
         return AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
 
     @staticmethod
@@ -68,5 +65,4 @@ class LessonDataService:
                     absent_children.append({"child_id": child_info.get("customer_id")})
             if len(absent_children) > 0:
                 return absent_children
-        Logger.entity_not_found_error("Lesson (Absent Children)", alfa_lesson_id=lesson_id)
         return None

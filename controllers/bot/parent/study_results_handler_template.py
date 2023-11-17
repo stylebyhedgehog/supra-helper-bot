@@ -11,7 +11,7 @@ def register_child_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_R
     @bot_error_handler(bot)
     def main_handler(message):
         message = bot.send_message(message.chat.id, menu_text)
-        children = ChildRepository.find_children_by_parent_telegram_id(message.chat.id)
+        children = ChildRepository.find_by_parent_telegram_id(message.chat.id)
         if children is None:
             bot.edit_message_text(ppm_messages.ERROR_CHILDREN_NOT_FOUND,
                                   chat_id=message.chat.id, message_id=message.message_id)

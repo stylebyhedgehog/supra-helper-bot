@@ -3,7 +3,7 @@ import os
 from functools import wraps
 import traceback
 from telebot.types import Message, CallbackQuery
-from services.logger import Logger
+from utils.logger import Logger
 
 
 def bot_error_handler(bot):

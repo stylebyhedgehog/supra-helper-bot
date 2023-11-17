@@ -1,10 +1,9 @@
 import os
-from typing import Generator, Any
+from typing import Generator
 
 import requests
-import logging
 
-from services.logger import Logger
+from utils.logger import Logger
 
 
 class AlfaApiTemplate:

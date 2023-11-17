@@ -21,7 +21,7 @@ def send_reports(lesson_info, bot):
         reports_containers = ReportService.get_monthly_reports(group_id, date_y_m, subject_id, children_on_lesson)
         for report_container in reports_containers:
             child_id = report_container.get("child_id")
-            parent = ParentRepository.find_parent_by_child_alfa_id(child_id)
+            parent = ParentRepository.find_by_child_alfa_id(child_id)
             # _send_notification_message(parent, report, bot)
             _write_in_json(report_container,parent)
 

@@ -27,13 +27,21 @@ class Child(Base):
     child_name = Column(String)
 
 
-class AbsentChild(Base):
-    __tablename__ = 'absent_child'
-    id = Column(Integer, primary_key=True)
+class LessonWithAbsentChildren(Base):
+    __tablename__ = 'lesson_with_absent_children'
+    lesson_id = Column(Integer, primary_key=True)
+    topic = Column(String)
     room_num = Column(Integer)
     start_date = Column(String)
     start_time = Column(String)
-    group_alfa_id = Column(Integer)
-    group_alfa_name = Column(String)
+    group_id = Column(Integer)
+    group_name = Column(String)
+
+
+class AbsentChild(Base):
+    __tablename__ = 'absent_child'
+    id = Column(Integer, primary_key=True, autoincrement=True)
     child_alfa_id = Column(Integer)
-    topic = Column(String)
+    child_name = Column(String)
+    lesson_with_absent_children_id = Column(Integer, ForeignKey('lesson_with_absent_children.lesson_id', ondelete='CASCADE'))
+    lesson = relationship('LessonWithAbsentChildren')

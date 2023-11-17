@@ -1,57 +1,95 @@
+import logging
+
 from db.repositories.absent_child_repository import AbsentChildRepository
+from db.repositories.lesson_with_absent_child_repository import LessonWithAbsentChildrenRepository
 from db.repositories.parent_repository import ParentRepository
-from tests.utils import TestUtils
+from services.api.alfa.customer import CustomerDataService
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
+from utils.file_utils import FileUtil
 from utils.string_utils import StringUtil
 
 
 def send_recordings_after_recording_completed(json, bot):
-    zoom_topic, host_email, start_time, share_url, password = _extract_zoom_info(json)
-    moscow_date = DateUtil.utc_to_moscow(start_time)
+    zoom_topic, host_email, start_time, share_url, passcode = _extract_zoom_info(json)
+    moscow_date_y_m_d = DateUtil.utc_to_moscow(start_time)
     group_id = StringUtil.extract_number_in_brackets(zoom_topic)
     room_num = StringUtil.extract_number_from_email(host_email)
-    absent_children = _find_absent_children(group_id, room_num, moscow_date)
+    lesson, absent_children = get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic)
 
-    unique_parents_tg_id = set()
-    absent_children_ids_for_remove = []
+    recording_url = f"{share_url}?pwd={passcode}"
+    mailing_info = PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT(lesson.topic, recording_url, lesson.group_name,
+                                                          lesson.start_date,
+                                                          lesson.start_time)
+    send_recording_info_to_parents(bot, absent_children, mailing_info)
+    write_in_json_successful_response(absent_children, lesson, mailing_info)
+    LessonWithAbsentChildrenRepository.delete_by_lesson_id(lesson.lesson_id)
+
+
+def send_recording_info_to_parents(bot, absent_children, recording_info):
+    unique_parents_tg_ids = get_unique_parents_tg_ids(absent_children)
+    for unique_parent_tg_id in unique_parents_tg_ids:
+        bot.send_message(unique_parent_tg_id, recording_info)
+
+
+def get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic):
+    group_lessons_with_abs_children_on_day = LessonWithAbsentChildrenRepository.find_by_group_id_and_room_num_and_date(
+        group_id, room_num,
+        moscow_date_y_m_d)
+    for lesson in group_lessons_with_abs_children_on_day:
+        if lesson.start_time in zoom_topic:
+            children = AbsentChildRepository.find_by_lesson_with_absent_children_id(lesson.lesson_id)
+            return lesson, children
+
+
+def write_in_json_successful_response(absent_children, lesson, mailing_info):
+    children_info = []
+    children_with_parent, children_without_parent = get_children_with_parent_in_system_and_without(absent_children)
+
+    for child_id in children_with_parent:
+        children_info.append({"child_name": CustomerDataService.get_child_name_by_id(child_id),
+                              "status": "Отправлена"})
+
+    for child_id in children_without_parent:
+        children_info.append({"child_name": CustomerDataService.get_child_name_by_id(child_id),
+                              "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"})
+
+    _write_in_json(lesson.group_name, lesson.lesson_id, lesson.topic, lesson.start_date, lesson.start_time,
+                   mailing_info, children_info)
+
+    return children_info
+
+
+def get_unique_parents_tg_ids(absent_children):
+    unique_parents_tg_ids = set()
+    for absent_child in absent_children:
+        parent = ParentRepository.find_by_child_alfa_id(absent_child.child_alfa_id)
+        if parent and parent.telegram_id not in unique_parents_tg_ids:
+            parent_tg_id = parent.telegram_id
+            unique_parents_tg_ids.add(parent_tg_id)
+    return unique_parents_tg_ids
+
+
+def get_children_with_parent_in_system_and_without(absent_children):
+    children_with_parent = []
+    children_without_parent = []
 
     for absent_child in absent_children:
-        if _is_absent_child_time_match(absent_child, zoom_topic):
-            _notify_parent_and_remove(absent_child, bot, unique_parents_tg_id, absent_children_ids_for_remove)
+        child_id = absent_child.child_alfa_id
+        parent = ParentRepository.find_by_child_alfa_id(child_id)
+        if parent:
+            children_with_parent.append(child_id)
+        else:
+            children_without_parent.append(child_id)
 
-
-def _find_absent_children(group_id, room_num, moscow_date):
-    return AbsentChildRepository.find_absent_children_by_group_id_and_room_num_and_date(group_id, room_num, moscow_date)
-
-
-def _is_absent_child_time_match(absent_child, zoom_topic):
-    return absent_child.start_time in zoom_topic
-
-
-def _notify_parent_and_remove(absent_child, bot, unique_parents_tg_id, absent_children_ids_for_remove):
-    child_parent = ParentRepository.find_parent_by_child_alfa_id(absent_child.child_alfa_id)
-    parent_tg_id = child_parent.parent_telegram_id
-
-    if parent_tg_id not in unique_parents_tg_id:
-        msg = _create_notification_message(absent_child)
-        bot.send_message(parent_tg_id, msg)
-        unique_parents_tg_id.add(child_parent.parent_telegram_id)
-        absent_children_ids_for_remove.append(absent_child.id)
-        TestUtils.append_to_file("Отправлена:" + msg, "recordings.txt")
-    _delete_absent_children(absent_children_ids_for_remove)
+    return children_with_parent, children_without_parent
 
 
 def _create_notification_message(absent_child):
-    return PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT_WITH_PASSWORD(
+    return PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT(
         absent_child.topic, absent_child.share_url, absent_child.password,
         absent_child.group_name, absent_child.start_date, absent_child.start_time
     )
-
-
-def _delete_absent_children(absent_children_ids_for_remove):
-    for id in absent_children_ids_for_remove:
-        AbsentChildRepository.delete_absent_child_by_id(id)
 
 
 def _extract_zoom_info(zoom_data):
@@ -63,9 +101,28 @@ def _extract_zoom_info(zoom_data):
         host_email = object_info.get("host_email", "")
         start_time = object_info.get("start_time", "")
         share_url = object_info.get("share_url", "")
-        password = object_info.get("password", "")
-        return topic, host_email, start_time, share_url, password
+        passcode = object_info.get("recording_play_passcode", "")
+        return topic, host_email, start_time, share_url, passcode
 
     except Exception as e:
         print(f"Error extracting Zoom info: {str(e)}")
         return None, None, None, None, None
+
+
+def _write_in_json(group_name, lesson_id, lesson_topic, start_date, start_time, mailing_info,
+                   children_info):
+    try:
+        path = FileUtil.get_path_to_tmp_json_file("recordings_after_lesson_held.json")
+
+        data = {
+            "reason_mailing": "Запись zoom готова",
+            "lesson_id": lesson_id,
+            "group_name": group_name,
+            "lesson_topic": lesson_topic,
+            "lesson_datetime": start_date + " " + start_time,
+            "mailing_info": mailing_info,
+            "mailing_result": children_info
+        }
+        FileUtil.add_to_json_file(data, path)
+    except Exception as e:
+        logging.error(f"Ошибка записи информации о записях в файл {e}")

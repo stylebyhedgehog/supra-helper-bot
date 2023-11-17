@@ -1,442 +1,260 @@
 [
   {
-    "group_name": "Elementary 1_1",
-    "topic": "Language revision. Unit 2.",
-    "child_name": "Ерофеев Илья",
-    "datetime": "2023-11-11 12:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/s_BBXSKD_bHu2YT-WYry-wUSsFA_SlssESGcMgezZtBDUoCir4OvkFEoWXfSx7se.cTcpxyOIbjBNFzVE?pwd=AwYfPsucFN7Q2X-ZF_eMo-jWsHH1g-ls",
-    "status": "Отправлена"
+    "group_name": "Web (back)_1",
+    "lesson_topic": "Формы. Метод POST часть 2",
+    "lesson_datetime": "2023-11-15 20:10",
+    "recording_status": "Не найдена (Обнаружена запись соответствующая группе, но время в названии конференции Zoom не соответствует времени проведения занятия)",
+    "recording_url": null,
+    "mailing_result": [
+      {
+        "child_name": "Просветов Александр",
+        "status": "Не отправлена"
+      },
+      {
+        "child_name": "Хожайлова Есения Сергеевна",
+        "status": "Не отправлена"
+      }
+    ]
   },
   {
-    "group_name": "Digital art 1",
-    "topic": "Blende. Введение. Знакомство с направлением",
-    "child_name": "Сайфутдинов Руслан",
-    "datetime": "2023-11-10 18:40",
-    "recording_url": "https://us06web.zoom.us/rec/share/645Czkjphw6kCQo5EnA_eiD--9p_p_OSAUuzFp7-9nDFZjP_Y34qD_XdnDaYQZAS.3pShF5LqYyfkng9s?pwd=e4VYvakuwZPWqkuwNeqoXVPTU5NStSVl",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Grammar: Present perfect",
-    "child_name": "Калинцев Тимофей Никитич",
-    "datetime": "2023-11-09 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/-oCOhsAtvs1x82ET9YxewnDJC6zM1hNnMr7nHa21H4rtcYTDS26bAF8MLl_nesoj.O5lciVmYfpsM3Co3?pwd=9zzyi-T2q01k-bosHvMXlKKOGPAaUeIB",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "grammar/speaking - past simple/requests",
-    "child_name": "Бурова Мария",
-    "datetime": "2023-11-08 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/jyxoA-k47KNCghPwMUbfz71Jl-2C3-XgQasKVdLNW3EhhbPFIDvc0aEIOKz15f2i.s9jiF08R1tsjiK4v?pwd=e9rdZrPR1PcqL1yaSiX533gbX62vBrpT",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "grammar/speaking - past simple/requests",
-    "child_name": "Водопьянова Анна",
-    "datetime": "2023-11-08 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/jyxoA-k47KNCghPwMUbfz71Jl-2C3-XgQasKVdLNW3EhhbPFIDvc0aEIOKz15f2i.s9jiF08R1tsjiK4v?pwd=e9rdZrPR1PcqL1yaSiX533gbX62vBrpT",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Roblox 2",
-    "topic": "Продвинутое 3D-моделирование. Часть 2",
-    "child_name": "Ерофеев Илья",
-    "datetime": "2023-11-07 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/C2krRwQadICIR1-quSdq46XsIrtw-T9nN3Wtr0ECzY7SLNzQy4N8jy2NVErcdX-6.kgzb2MmyIglAfnRf?pwd=oD8ochxkyxQpKcd3WOWBO9Amp-QRLmtL",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_4",
-    "topic": "vocabulary/grammar - present perfect",
-    "child_name": "Мартынюк Аделина Вадимовна",
-    "datetime": "2023-11-06 18:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/DQvdXoGrkuAYItOpl91VJhYBM4IKzi8DJMhKvy3H7b1yWKkg_2bNA2UVCvu923rW._iiXeVDO3VHsfYGV?pwd=1PKfjBWjVdI7hcB6ZJiq_nHP6B3mzzOP",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Digital art 2",
-    "topic": "Редактор шейдеров. Часть 1 (Текстуры)",
-    "child_name": "Лигуша Мария",
-    "datetime": "2023-11-06 18:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/-Y2b7FgwoENbRJ6AFnO5ZP_SflkZF9Qq24_y9OniuBs5rXvI8AiWm6Qtx60k49J4.4lare3_7fbvolIgX?pwd=90sUrdCnFpHyblHXUlt0Wiq6FiEUfdbv",
-    "status": "Отправлена"
+    "group_name": "Web (back)_1",
+    "lesson_topic": "Формы. Метод POST",
+    "lesson_datetime": "2023-11-15 19:00",
+    "recording_status": "Не найдена (Обнаружена запись соответствующая группе, но время в названии конференции Zoom не соответствует времени проведения занятия)",
+    "recording_url": null,
+    "mailing_result": [
+      {
+        "child_name": "Просветов Александр",
+        "status": "Не отправлена"
+      }
+    ]
   },
   {
     "group_name": "Web (front) 2",
-    "topic": "Дизайн интернет-магазина",
-    "child_name": "Зубалий Вероника",
-    "datetime": "2023-11-06 19:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/31NwEdSfgmc2AXjkOeMK5C10iH8vmINV5CuxQgn-tS7ChCGkeyphZfumQ9tKn8f2.ec4F274WN9x6oVqi?pwd=8Gq5Jf7mAIKEbBh-ThyjrUCJ_DwWT4pV",
-    "status": "Отправлена"
+    "lesson_topic": "Повторение материала",
+    "lesson_datetime": "2023-11-15 19:30",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/uLtRB8bW-9UIlphHBvrk4s-QcofKdh6YD6sGw93mVkegiw7QBXKn81gytcsMjQ.EhdnfcJgKMBdLRDU?pwd=gaGKBDjz0WQT6znIfVJRW__x0XiD8_OU",
+    "mailing_result": [
+      {
+        "child_name": "Иваньков Ярослав Максимович",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
+  },
+  {
+    "group_name": "Pre-Intermediate 1_2",
+    "lesson_topic": "reading/listening - culture/the USA",
+    "lesson_datetime": "2023-11-15 19:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/uqpRS7K68W5ipb98CrgBRkiDA28NipH7FEeVJ5It8OKxHbWysKYDYh94kOpmWwqP.e2hwxzqKOAkqIsfQ?pwd=TTwKUzcPVu73RYg4bPMbKYN1TbFtepwx",
+    "mailing_result": [
+      {
+        "child_name": "Мороз Милена",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      },
+      {
+        "child_name": "Братухин Иван Дмитриевич",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
+  },
+  {
+    "group_name": "Roblox 1",
+    "lesson_topic": "Raycasting",
+    "lesson_datetime": "2023-11-14 17:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/0OGemfIsYzyF6Ee4sacj8DNDZT7Si5Cg_-c29fmx4ZfyY3BPxwEuNIRSJKUPwKzY.2Okf5LNWjHR1scOe?pwd=y_geh0Z6c__8O2V4Fear6mDabQbYpFzI",
+    "mailing_result": [
+      {
+        "child_name": "Островерхий Максим Евгеньевич",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
+  },
+  {
+    "group_name": "Roblox 3",
+    "lesson_topic": "Инвентарь",
+    "lesson_datetime": "2023-11-14 19:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/zxh96X-xOAq32Yp60VshIolxFhhZ6SKwQW-Kmp2OFSSojhLGF9htmDUHYp_U8w7D.CjeqcT0WyfDBNwmS?pwd=ecPIxxuZ_0YwQIZpDRkvBw2ZFrVNnglB",
+    "mailing_result": [
+      {
+        "child_name": "Панченко Михаил",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
     "group_name": "Web (front) 2",
-    "topic": "Дизайн интернет-магазина",
-    "child_name": "Иваньков Ярослав Максимович",
-    "datetime": "2023-11-06 19:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/31NwEdSfgmc2AXjkOeMK5C10iH8vmINV5CuxQgn-tS7ChCGkeyphZfumQ9tKn8f2.ec4F274WN9x6oVqi?pwd=8Gq5Jf7mAIKEbBh-ThyjrUCJ_DwWT4pV",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Grammar: Present Perfect questions, ever and never.",
-    "child_name": "Калинцев Тимофей Никитич",
-    "datetime": "2023-11-06 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/jTnvZbsDEflbuiPYwZrVrabQD7g3EiGQdYC1zDYFfHUS1ATbvnvJjBsA21EhmXTv.KLHaTzBTE2HrvKSQ?pwd=UACwnxWyBdvTwB9fWuyi2Ht21ji4AIq6",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Grammar: Present Perfect questions, ever and never.",
-    "child_name": "Кириленко Катерина Сергеевна",
-    "datetime": "2023-11-06 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/jTnvZbsDEflbuiPYwZrVrabQD7g3EiGQdYC1zDYFfHUS1ATbvnvJjBsA21EhmXTv.KLHaTzBTE2HrvKSQ?pwd=UACwnxWyBdvTwB9fWuyi2Ht21ji4AIq6",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Grammar: Present Perfect questions, ever and never.",
-    "child_name": "Нестеров Евгений",
-    "datetime": "2023-11-06 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/jTnvZbsDEflbuiPYwZrVrabQD7g3EiGQdYC1zDYFfHUS1ATbvnvJjBsA21EhmXTv.KLHaTzBTE2HrvKSQ?pwd=UACwnxWyBdvTwB9fWuyi2Ht21ji4AIq6",
-    "status": "Отправлена"
+    "lesson_topic": "Начало разработки интернет-магазина",
+    "lesson_datetime": "2023-11-13 19:30",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/XUk5C_tXxlgOky7idAEMxzvZt0x6hQ_Ziivgw9NlngWUsZFOEj9lGpWiPBQ9484Z.NrFxxijHxN8PbnYZ?pwd=NG-Hw4z445AsskUiAtr0uJUSft13P2Sh",
+    "mailing_result": [
+      {
+        "child_name": "Иваньков Ярослав Максимович",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
     "group_name": "Pre-Intermediate 1_2",
-    "topic": "listening/grammar - past simple",
-    "child_name": "Водопьянова Анна",
-    "datetime": "2023-11-06 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/qczlDE5MHzHM5LUYkCHlZw7YG16nvwIrJgpVhtGiPTcAxbd3Fd87ZSgmMlPMOJNz.zFMsfSQgkvG1HaDE?pwd=LDYRx1dChvQx-vT-eGBzFmhBIToZTSfx",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "listening/grammar - past simple",
-    "child_name": "Мороз Милена",
-    "datetime": "2023-11-06 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/qczlDE5MHzHM5LUYkCHlZw7YG16nvwIrJgpVhtGiPTcAxbd3Fd87ZSgmMlPMOJNz.zFMsfSQgkvG1HaDE?pwd=LDYRx1dChvQx-vT-eGBzFmhBIToZTSfx",
-    "status": "Отправлена"
+    "lesson_topic": "reading - Alaska",
+    "lesson_datetime": "2023-11-13 19:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/Vhfd4lUKBlThdlk4xcG9AoS7YEuXmBDAi7vr_JUa8wNo4m27OBCCzkW8ZbQu1IPr.wnq6Lb_lo0Y9AXlW?pwd=e12JuD3b4wwgRPMxXc87SZBBhOGeUUIQ",
+    "mailing_result": [
+      {
+        "child_name": "Водопьянова Анна",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      },
+      {
+        "child_name": "Братухин Иван Дмитриевич",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
     "group_name": "Pre-Intermediate 1_1",
-    "topic": "Grammar: Should/shouldn't",
-    "child_name": "Павленко Артем",
-    "datetime": "2023-11-06 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/1PW23Oto_byvPgm8-1lmnPvP5uRrZLnO7IhVB_hBW9eVl8NAKrOcajtKdncIyPSD.CYuBG4Hy8PiyG6Y8?pwd=DsKQHgnzbhImQUm0Lsjt2LCgH3WdB_Ti",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Elementary 2_2",
-    "topic": "Grammar: Present continuous question",
-    "child_name": "Трушин Владимир",
-    "datetime": "2023-11-06 18:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/8BIjUWfTHf4cG4ESSPbBbrtbve4XNajfiGvOfotm01Q-R6YT-jxv745UWMzNgWWR.2huM1GFBc1C4k8Wl?pwd=g_hEoEsrnFZsXGrlulZxUlm58QtWEO90",
-    "status": "Отправлена"
+    "lesson_topic": "Communication: asking for and giving health advice.\r\nVocabulary: human body",
+    "lesson_datetime": "2023-11-13 19:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/-HrE5lioH6mXiAAezf0EwjtU9Ei5WwFSWk5U6P-PJrXg1cy4dduP4tIWl6N0XdF0.3_hJph3cuRndv6gO?pwd=ED9Hu-9a0f2dFWDtv2TvPiydpBllVDvu",
+    "mailing_result": [
+      {
+        "child_name": "Рогова  Александра",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
     "group_name": "Elementary 2_1",
-    "topic": "language revision",
-    "child_name": "Сморщ Дарья",
-    "datetime": "2023-11-06 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/ZEoAED566RsfECLQw2l2zWa_gX80Tkps-VdtmmAdt2pewyzOKSREGP74KWBOVcTA.A0soeRLTwgjwVamA?pwd=G7IvflaihNQ4ZA3_4rmJZjKknGxihjlm",
-    "status": "Отправлена"
+    "lesson_topic": "rammar: Present Continuous affirmative and negative.",
+    "lesson_datetime": "2023-11-13 19:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/BNR39sqRhkkGJD4eV_7Spid7_LEk_djwt20mckE4HI0sqwf680ghXG2f8H-fvG2r.AClk34bpUdQ_3O5a?pwd=BYTWNPT2O-_v5gfvHKSk-n2gDT60tURq",
+    "mailing_result": [
+      {
+        "child_name": "Сайфутдинова Эвелина",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
-    "group_name": "Intermediate 1_4",
-    "topic": "vocabulary/listening - unit 3.1",
-    "child_name": "Мартынюк Аделина Вадимовна",
-    "datetime": "2023-11-04 11:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/nM8Nrnd9IXLCDavn0vDri7RWunooWG85es17P3CkDIjLn5yr_hyaT4vXxapfWnQ.pJ2wkdGPgZ4-ppxr?pwd=V4mJ7f364G6tA6gHbkvZcT3b1tDOL11g",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_1",
-    "topic": "Grammar: Present Perfect with just, already and yet",
-    "child_name": "Мартынюк Алтея Вадимовна",
-    "datetime": "2023-11-04 11:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/JZKpsKpIV37TKK_y3vuOT3b1hL_szgGZcz8XNjB4wOFYyTfEN6ClvDsQUbtDsa3W.Qq6vAOHBgvpMlRTf?pwd=gkUmR57DlYxRy1hAfWBAEiKVyC4_sIFK",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Elementary 1_1",
-    "topic": "Reading: understanding a text about a super backpack. Vocabulary: personal/ favourite objects.",
-    "child_name": "Ерофеев Илья",
-    "datetime": "2023-11-04 12:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/sI8WCxO-aojwvFoSOg9FwjNETgTjItDYtIdIxs0xH7FPY-aZMHLmY4r4bduIeOSv.TbVyYZcT7AE1XrZ_?pwd=oukIKEd68wVyw-O8Zc430N9EHeHsz7tF",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Digital art 2",
-    "topic": "Рендер движок, материалы, освещение",
-    "child_name": "Махин Тимофей",
-    "datetime": "2023-11-03 18:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/BLXCsdyAHlHLxEEi_oboM64oSVmi5DtHxrhbn-RO2ZEMvf1udtVNnCBZHy65v4lE.hSMH3eX_cMlTSN28?pwd=q6qXOU6sfdiOPy32FuiFRY30x5fU7Lin",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Digital art 1",
-    "topic": "Слайдеры. Подготовка к проекту",
-    "child_name": "Сайфутдинов Руслан",
-    "datetime": "2023-11-03 18:40",
-    "recording_url": "https://us06web.zoom.us/rec/share/ReP41G3HJqsCSGyP5LBKOM55NJraqAd5-kq5FrKz9MpACzOUbNB3nNmopWt8MWca.AAjwMFaDB8l713eq?pwd=K4CRReY19MCz68SVdgqAXUduoxWCdmwx",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Digital art 1",
-    "topic": "Слайдеры. Подготовка к проекту",
-    "child_name": "Литфулина Аниса",
-    "datetime": "2023-11-03 18:40",
-    "recording_url": "https://us06web.zoom.us/rec/share/ReP41G3HJqsCSGyP5LBKOM55NJraqAd5-kq5FrKz9MpACzOUbNB3nNmopWt8MWca.AAjwMFaDB8l713eq?pwd=K4CRReY19MCz68SVdgqAXUduoxWCdmwx",
-    "status": "Не отправлен (Родитель не зарегистрирован в системе)"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Vocabulary: experiences.",
-    "child_name": "Калинцев Тимофей Никитич",
-    "datetime": "2023-11-02 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/UYJVVKLCli8f3UcLNhjU6SLVRkXGUVDnHf-yoGdkvEQcuH-tHtQYkEfVJUFpNzFK.4-0uJ_0602jHkf_5?pwd=luJJyx2shNGlpFgWfZ5pOvH-XDkaOYS7",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Vocabulary: experiences.",
-    "child_name": "Кириленко Катерина Сергеевна",
-    "datetime": "2023-11-02 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/UYJVVKLCli8f3UcLNhjU6SLVRkXGUVDnHf-yoGdkvEQcuH-tHtQYkEfVJUFpNzFK.4-0uJ_0602jHkf_5?pwd=luJJyx2shNGlpFgWfZ5pOvH-XDkaOYS7",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_2",
-    "topic": "Vocabulary: experiences.",
-    "child_name": "Голяков Максим",
-    "datetime": "2023-11-02 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/UYJVVKLCli8f3UcLNhjU6SLVRkXGUVDnHf-yoGdkvEQcuH-tHtQYkEfVJUFpNzFK.4-0uJ_0602jHkf_5?pwd=luJJyx2shNGlpFgWfZ5pOvH-XDkaOYS7",
-    "status": "Не отправлен (Родитель не зарегистрирован в системе)"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_1",
-    "topic": "Grammar: verb ‘have to’. Vocabulary: health problems video.",
-    "child_name": "Костадинова Валерия",
-    "datetime": "2023-11-02 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/HzyC2Xfj-h0cKboy6fcLAd74fitN571eFvlLHVNk1Ffq-nsvDX0VQbsYz-_oZW3V.g4ZjSQy184tWUT89?pwd=cvd8eqJNVcetd59f53oLEudLOSsMZanJ",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_1",
-    "topic": "Grammar: verb ‘have to’. Vocabulary: health problems video.",
-    "child_name": "Павленко Артем",
-    "datetime": "2023-11-02 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/HzyC2Xfj-h0cKboy6fcLAd74fitN571eFvlLHVNk1Ffq-nsvDX0VQbsYz-_oZW3V.g4ZjSQy184tWUT89?pwd=cvd8eqJNVcetd59f53oLEudLOSsMZanJ",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_1",
-    "topic": "Grammar: verb ‘have to’. Vocabulary: health problems video.",
-    "child_name": "Рогова  Александра",
-    "datetime": "2023-11-02 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/HzyC2Xfj-h0cKboy6fcLAd74fitN571eFvlLHVNk1Ffq-nsvDX0VQbsYz-_oZW3V.g4ZjSQy184tWUT89?pwd=cvd8eqJNVcetd59f53oLEudLOSsMZanJ",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_1",
-    "topic": "Grammar: Present Perfect with ever and never.",
-    "child_name": "Васильев Глеб",
-    "datetime": "2023-11-02 17:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/ADXkaqjIGx7U5ndou8vuOZ5MOk62a36C2LsUZYRfzOuFpSpSAWxfZjxTT7Bs6aMm.Fmb9NSiVTTsTfRG3?pwd=uEWLlF5f9OrqPeupJB7NtWmTKilkyqNR",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_1",
-    "topic": "Grammar: Present Perfect with ever and never.",
-    "child_name": "Мартынюк Алтея Вадимовна",
-    "datetime": "2023-11-02 17:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/ADXkaqjIGx7U5ndou8vuOZ5MOk62a36C2LsUZYRfzOuFpSpSAWxfZjxTT7Bs6aMm.Fmb9NSiVTTsTfRG3?pwd=uEWLlF5f9OrqPeupJB7NtWmTKilkyqNR",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Roblox 1",
-    "topic": "Продвинутое 3D-моделирование. Часть 2",
-    "child_name": "Крылова Ульяна",
-    "datetime": "2023-11-02 17:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/Q2ZyN4bvL4PN-G20sit_ApFjLSjYu1NxX5d2nMAqJDUiXmjZV9ZQ6rlqftoYxNYz.LVv0T4655sp3XrOx?pwd=9SIPV-sPpU2fmA4k9mOpIIre3LdZJvMp",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Roblox 1",
-    "topic": "Продвинутое 3D-моделирование. Часть 2",
-    "child_name": "Струцкая Соломея",
-    "datetime": "2023-11-02 17:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/Q2ZyN4bvL4PN-G20sit_ApFjLSjYu1NxX5d2nMAqJDUiXmjZV9ZQ6rlqftoYxNYz.LVv0T4655sp3XrOx?pwd=9SIPV-sPpU2fmA4k9mOpIIre3LdZJvMp",
-    "status": "Не отправлен (Родитель не зарегистрирован в системе)"
-  },
-  {
-    "group_name": "Unity_1",
-    "topic": "Битва команд. Разработка шутера. Финал",
-    "child_name": "Королев Михаил Александрович",
-    "datetime": "2023-11-02 19:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/ur89JyJ2R9ViLitmydhfp8dTzrbZ1YEEf-ml8pcpiAGmDgK2aMiQKq6V4MgoHbMB.sJgcw5yJNExKxbCu?pwd=7cCrZiPcuPKZS6z0kw-mMtOQm3SNKjit",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Unity_1",
-    "topic": "Битва команд. Разработка шутера. Финал",
-    "child_name": "Севрюгин Артемий",
-    "datetime": "2023-11-02 19:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/ur89JyJ2R9ViLitmydhfp8dTzrbZ1YEEf-ml8pcpiAGmDgK2aMiQKq6V4MgoHbMB.sJgcw5yJNExKxbCu?pwd=7cCrZiPcuPKZS6z0kw-mMtOQm3SNKjit",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Web (front) 1",
-    "topic": "Финал 3",
-    "child_name": "Хожайлова Есения Сергеевна",
-    "datetime": "2023-11-01 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/8B713CKPAtvQiYmzSb20gdDy7unPI0UjiPSai5f3mOg5CVwjksBURw7Wy2qbzkS5.o8_kqHAyGCj0l52_?pwd=yqeR9VffsSEVXCW_8sMu_LXNmVQXiHRd",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Web (front) 1",
-    "topic": "Финал 3",
-    "child_name": "Малышев Дмитрий Сергеевич",
-    "datetime": "2023-11-01 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/8B713CKPAtvQiYmzSb20gdDy7unPI0UjiPSai5f3mOg5CVwjksBURw7Wy2qbzkS5.o8_kqHAyGCj0l52_?pwd=yqeR9VffsSEVXCW_8sMu_LXNmVQXiHRd",
-    "status": "Не отправлен (Родитель не зарегистрирован в системе)"
-  },
-  {
-    "group_name": "Web (front) 2",
-    "topic": "Разработка макета интернет-магазина. Часть 2",
-    "child_name": "Пашкевич-Григорьев Федор Романович",
-    "datetime": "2023-11-01 19:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/--PFwidT5trPK0gvvYh_JQAujtZOphPIHEx7MH_o0iSPqmKd2lDq_Uee3k4Cu86A.4nxcRXuol0ZOXjFA?pwd=9bvmlfx836KqPV2oDeBgzq5v-V1uoI3I",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "vocabulary - holidays",
-    "child_name": "Мороз Милена",
-    "datetime": "2023-11-01 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/NSiD6rL1Nc9pd9-l1ej1rg2xOUEH1yhGwQLQx_L-Ao3tOjEpZ7v04ZkYldRc1SB6.mXTHAwEYrJDjVZNB?pwd=aNLO9baI1QfHQDXOVGAmvDCCnrUbiK0w",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "vocabulary - holidays",
-    "child_name": "Юрцова Екатерина",
-    "datetime": "2023-11-01 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/NSiD6rL1Nc9pd9-l1ej1rg2xOUEH1yhGwQLQx_L-Ao3tOjEpZ7v04ZkYldRc1SB6.mXTHAwEYrJDjVZNB?pwd=aNLO9baI1QfHQDXOVGAmvDCCnrUbiK0w",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Elementary 2_1",
-    "topic": "Listening for specific information.",
-    "child_name": "Сморщ Дарья",
-    "datetime": "2023-11-01 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/alrbKboz4IXoAcIrrcrt_QpSwhFTPCLUVz5Sdbd9555gc_0S1HqmLeFwDBGeBdfL.cpJqhdFrzvPLRRnQ?pwd=ySvsCmWZYU1w40fw6TFXwIpbDUKCDvbM",
-    "status": "Отправлена"
+    "group_name": "Индив Digital Art (Ева)",
+    "lesson_topic": "",
+    "lesson_datetime": "2023-11-11 20:20",
+    "recording_status": "Не найдена (Обнаружена запись соответствующая группе, но время в названии конференции Zoom не соответствует времени проведения занятия)",
+    "recording_url": null,
+    "mailing_result": [
+      {
+        "child_name": "Ириоглова Ева",
+        "status": "Не отправлена"
+      }
+    ]
   },
   {
     "group_name": "Roblox 2",
-    "topic": "Повторение",
-    "child_name": "Ерофеев Илья",
-    "datetime": "2023-10-31 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/WFnWUykOVHY8Rxlvb3WgYW06dZkYsyuQ-6mFQRbw1OWfh5cJL-MLnqHdimsaYWqA.UDkAvwHFMxDlwiue?pwd=kcAjNzX8FUWtAj7fmpV9fTkaDZy7Y8aY",
-    "status": "Отправлена"
+    "lesson_topic": "Проект NASCAR",
+    "lesson_datetime": "2023-11-11 13:00",
+    "recording_status": "Не найдена (Обнаружена запись соответствующая группе, но время в названии конференции Zoom не соответствует времени проведения занятия)",
+    "recording_url": null,
+    "mailing_result": [
+      {
+        "child_name": "Ерофеев Илья",
+        "status": "Не отправлена"
+      }
+    ]
   },
   {
-    "group_name": "Roblox 1",
-    "topic": "",
-    "child_name": "Крылова Ульяна",
-    "datetime": "2023-10-31 17:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/rHaMc1Hmbys8m5UuCn2cWGpR7o8HboZrwY42_xv-m7BZq3R76UlUxy3pUnZX7wsY.3xXmf74wMjGmvhZA?pwd=hq-1D-kzhsthQ_sBw5hs0gMIE-g2cR2O",
-    "status": "Отправлена"
+    "group_name": "Elementary 1_1",
+    "lesson_topic": "Language revision. Unit 2.",
+    "lesson_datetime": "2023-11-11 12:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/i_2S0cwIIqJ6wLe3cdkcmUNrzvvJKDesm3QGkAwLTEG86MvJK8fXNmOTvlA4c6y1.le1MWi640VIIrJMI?pwd=AwYfPsucFN7Q2X-ZF_eMo-jWsHH1g-ls",
+    "mailing_result": [
+      {
+        "child_name": "Ерофеев Илья",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
-    "group_name": "Roblox 1",
-    "topic": "",
-    "child_name": "Островерхий Максим Евгеньевич",
-    "datetime": "2023-10-31 17:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/rHaMc1Hmbys8m5UuCn2cWGpR7o8HboZrwY42_xv-m7BZq3R76UlUxy3pUnZX7wsY.3xXmf74wMjGmvhZA?pwd=hq-1D-kzhsthQ_sBw5hs0gMIE-g2cR2O",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Roblox 1",
-    "topic": "",
-    "child_name": "Струцкая Соломея",
-    "datetime": "2023-10-31 17:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/rHaMc1Hmbys8m5UuCn2cWGpR7o8HboZrwY42_xv-m7BZq3R76UlUxy3pUnZX7wsY.3xXmf74wMjGmvhZA?pwd=hq-1D-kzhsthQ_sBw5hs0gMIE-g2cR2O",
-    "status": "Не отправлен (Родитель не зарегистрирован в системе)"
-  },
-  {
-    "group_name": "Web (front) 1",
-    "topic": "Финальный проект 2",
-    "child_name": "Хожайлова Есения Сергеевна",
-    "datetime": "2023-10-30 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/PVAlnq89thnCjKhu5d3f_1OmidsZW3rJMWBjwVaDGNXelXhLoDcu1ol1kgoAx6k.X_Hj3nCfyw53TURC?pwd=CekbNnTX38X5nckpCWlqKyEeWa_STnQz",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Intermediate 1_4",
-    "topic": "vocabulary/listening - harry potter",
-    "child_name": "Мартынюк Аделина Вадимовна",
-    "datetime": "2023-10-30 18:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/7Z-QI84BIqXulm22PXk7xIm_EqjqE-1Q19v1UhOJa7h5-lColnEsc6fVhHIDmNwC.b9cjcQQfu3MdhOT_?pwd=dL76Z3M1xu-GK21WNT7CMizWlybbHted",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Web (front) 2",
-    "topic": "Разработка макета интернет-магазина. Часть 1",
-    "child_name": "Иваньков Ярослав Максимович",
-    "datetime": "2023-10-30 19:30",
-    "recording_url": "https://us06web.zoom.us/rec/share/kIK8EucWAa7i-FefZHb8MPIQ0WCIzasq1v5iRsEdtTUUM2OeUo85jGqegbwqiCfV.v2wpih7-UXhI1DXM?pwd=E5kXRKSS7EOB5e3EUS7yVVSnIJdR9fP1",
-    "status": "Отправлена"
+    "group_name": "Digital art 1",
+    "lesson_topic": "Blende. Введение. Знакомство с направлением",
+    "lesson_datetime": "2023-11-10 18:40",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/cdFwhBi1g4F5j_O7TaHGHtwHE3ihMzGtGd6k1Dg8JdaVhncCwtsSlvhhExD6xos_.bBWb_Qew9Wx9MiM8?pwd=e4VYvakuwZPWqkuwNeqoXVPTU5NStSVl",
+    "mailing_result": [
+      {
+        "child_name": "Сайфутдинов Руслан",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
     "group_name": "Intermediate 1_2",
-    "topic": "Self-check test (grammar+ vocabulary + speaking )",
-    "child_name": "Калинцев Тимофей Никитич",
-    "datetime": "2023-10-30 20:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/t4ThIhJi_Kw7VmNuk4EO2mNb3RgE65KLdKOiTOcdPNHfIll8qXqN5XNrAdhbwhOR.O4crQBjxJ4TcGaOz?pwd=nqbaX6wkR_ji5oH7QTb3S0I0EtGgyKYO",
-    "status": "Отправлена"
+    "lesson_topic": "Grammar: Present perfect",
+    "lesson_datetime": "2023-11-09 20:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/cVN3oB8VrAk1w4nvPtfyrQbW7FjrJL1kdxVIx1MPtfjvRG6kvLxwWud4JUC9VOCX.nmYnQX6wk6pAeRMP?pwd=9zzyi-T2q01k-bosHvMXlKKOGPAaUeIB",
+    "mailing_result": [
+      {
+        "child_name": "Калинцев Тимофей Никитич",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
     "group_name": "Pre-Intermediate 1_2",
-    "topic": "vocabulary/speaking/listening - harry  potter",
-    "child_name": "Бурова Мария",
-    "datetime": "2023-10-30 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/PCdyg5QiIzefj_5UeOgk7jOdvY48f_DUKAKSyHyb6agzgx-YUDHbqiI209jl5lsq.k1-Eb5OAAgZBsY3t?pwd=chYwidRYLCy311zvRFhjbot-MeuqUJ_l",
-    "status": "Отправлена"
+    "lesson_topic": "grammar/speaking - past simple/requests",
+    "lesson_datetime": "2023-11-08 19:00",
+    "recording_status": "Найдена",
+    "recording_url": "https://us06web.zoom.us/rec/share/JvtORu1XO02QpqAKwrjfjiRN7KqgdJneAsda7kEQOBK0uMUW6OvlaLZzPU8DAgYt.-4rgGOy1s--P8-0P?pwd=e9rdZrPR1PcqL1yaSiX533gbX62vBrpT",
+    "mailing_result": [
+      {
+        "child_name": "Бурова Мария",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      },
+      {
+        "child_name": "Водопьянова Анна",
+        "status": "Не отправлена (Отсутствуют зарегистрированные в системе родители)"
+      }
+    ]
   },
   {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "vocabulary/speaking/listening - harry  potter",
-    "child_name": "Мороз Милена",
-    "datetime": "2023-10-30 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/PCdyg5QiIzefj_5UeOgk7jOdvY48f_DUKAKSyHyb6agzgx-YUDHbqiI209jl5lsq.k1-Eb5OAAgZBsY3t?pwd=chYwidRYLCy311zvRFhjbot-MeuqUJ_l",
-    "status": "Отправлена"
+    "group_name": "Roblox 2",
+    "lesson_topic": "Продвинутое 3D-моделирование. Часть 2",
+    "lesson_datetime": "2023-11-07 19:00",
+    "recording_status": "Не найдена (Обнаружена запись соответствующая группе, но время в названии конференции Zoom не соответствует времени проведения занятия)",
+    "recording_url": null,
+    "mailing_result": [
+      {
+        "child_name": "Ерофеев Илья",
+        "status": "Не отправлена"
+      }
+    ]
   },
   {
-    "group_name": "Pre-Intermediate 1_2",
-    "topic": "vocabulary/speaking/listening - harry  potter",
-    "child_name": "Юрцова Екатерина",
-    "datetime": "2023-10-30 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/PCdyg5QiIzefj_5UeOgk7jOdvY48f_DUKAKSyHyb6agzgx-YUDHbqiI209jl5lsq.k1-Eb5OAAgZBsY3t?pwd=chYwidRYLCy311zvRFhjbot-MeuqUJ_l",
-    "status": "Отправлена"
+    "group_name": "Roblox 3",
+    "lesson_topic": "Анимации. Часть 1",
+    "lesson_datetime": "2023-11-07 19:00",
+    "recording_status": "Не найдена (Обнаружена запись соответствующая группе, но время в названии конференции Zoom не соответствует времени проведения занятия)",
+    "recording_url": null,
+    "mailing_result": [
+      {
+        "child_name": "Панченко Михаил",
+        "status": "Не отправлена"
+      }
+    ]
   },
   {
-    "group_name": "Pre-Intermediate 1_1",
-    "topic": "Vocabulary: health problems",
-    "child_name": "Андреева Елизавета Сергеевна",
-    "datetime": "2023-10-30 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/Lb4J1M7mgSrSYYHrdaMC9X8RRlH9WsE8QKmeaarOaymhJKgW8SwiUfGImU5dJzi0.k6ifVbiR-IFCx1UY?pwd=PsgUNIfernJTVuOknvlslC0yFZQ07WSY",
-    "status": "Отправлена"
-  },
-  {
-    "group_name": "Pre-Intermediate 1_1",
-    "topic": "Vocabulary: health problems",
-    "child_name": "Павленко Артем",
-    "datetime": "2023-10-30 19:00",
-    "recording_url": "https://us06web.zoom.us/rec/share/Lb4J1M7mgSrSYYHrdaMC9X8RRlH9WsE8QKmeaarOaymhJKgW8SwiUfGImU5dJzi0.k6ifVbiR-IFCx1UY?pwd=PsgUNIfernJTVuOknvlslC0yFZQ07WSY",
-    "status": "Отправлена"
+    "group_name": "Индив АЯ (Любовская)",
+    "lesson_topic": "",
+    "lesson_datetime": "2023-11-02 15:00",
+    "recording_status": "Не найдена(В карточке занятия не указана зум конференция)",
+    "recording_url": null,
+    "mailing_result": null
   }
 ]

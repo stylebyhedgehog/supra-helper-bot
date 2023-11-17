@@ -19,7 +19,6 @@ class ZoomApiFetcher:
             'Authorization': f'Basic {base64_auth_string}',
             'Content-Type': 'application/x-www-form-urlencoded',
         }
-        print("Zoom auth call")
         response = requests.post(auth_url, params=params, headers=headers)
         response.raise_for_status()
         token = response.json()["access_token"]

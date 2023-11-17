@@ -14,7 +14,7 @@ def register_child_get_balance(bot):
     @bot_error_handler(bot)
     def get_balance_handler(message):
         message = bot.send_message(message.chat.id, CPP_MENU.BALANCE)
-        children = ChildRepository.find_children_by_parent_telegram_id(message.chat.id)
+        children = ChildRepository.find_by_parent_telegram_id(message.chat.id)
         if children is None:
             bot.edit_message_text(chat_id=message.chat.id, message_id=message.message_id,
                                   text=PPM_BALANCE.ERROR_CHILDREN_NOT_FOUND)

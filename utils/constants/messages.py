@@ -146,7 +146,7 @@ class PPM_REPORT_DISPATCHING:
 # Сообщения бота при выполнении активности "Рассылка отчетов"
 class PPM_ZOOM_RECORDINGS_DISPATCHING:
     # Результат в положительном случае потока события
-    RESULT_INLINE_PASSWORD = lambda lesson_topic, recording_url, group_name, start_date, start_time: \
+    RESULT = lambda lesson_topic, recording_url, group_name, start_date, start_time: \
         f"""
 Ввиду пропуска занятия от {start_date} {start_time} в группе {group_name} отправляем Вам запись занятия.
 
@@ -154,14 +154,14 @@ class PPM_ZOOM_RECORDINGS_DISPATCHING:
 Ссылка на запись: {recording_url}
         """
 
-    RESULT_WITH_PASSWORD = lambda lesson_topic, recording_url, password, group_name, start_date, start_time: \
-        f"""
-    Ввиду пропуска занятия от {start_date} {start_time}в группе {group_name} отправляем Вам запись занятия.
-
-    Тема занятия: {lesson_topic}
-    Ссылка на запись: {recording_url}
-    Код доступа: {password}
-            """
+    # RESULT_WITH_PASSWORD = lambda lesson_topic, recording_url, password, group_name, start_date, start_time: \
+    #     f"""
+    # Ввиду пропуска занятия от {start_date} {start_time}в группе {group_name} отправляем Вам запись занятия.
+    #
+    # Тема занятия: {lesson_topic}
+    # Ссылка на запись: {recording_url}
+    # Код доступа: {password}
+    #         """
 
 
 # Сообщения бота при выполнении активности "Рассылка информации о необходимости пополнить баланс"

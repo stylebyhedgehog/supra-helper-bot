@@ -30,6 +30,11 @@ class StringUtil:
             return None
 
     @staticmethod
+    def contains_group_alfa_id(group_alfa_id, topic):
+        return "[" in topic and "]" in topic and group_alfa_id == StringUtil.extract_number_in_brackets(topic)
+
+
+    @staticmethod
     def list_to_string(lst):
         res = ""
         for el in lst:

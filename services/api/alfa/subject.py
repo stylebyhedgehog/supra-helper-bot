@@ -1,5 +1,5 @@
 from services.api.alfa.template import AlfaApiTemplate
-from services.logger import Logger
+from utils.logger import Logger
 
 
 class SubjectFetcher:

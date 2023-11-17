@@ -1,7 +1,6 @@
-import logging
 from datetime import datetime
 from services.api.alfa.template import AlfaApiTemplate
-from services.logger import Logger
+from utils.logger import Logger
 from utils.date_utils import DateUtil
 
 

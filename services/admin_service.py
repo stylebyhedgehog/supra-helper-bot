@@ -1,5 +1,5 @@
-from db.core import DatabaseManager
-from db.models import Child, AbsentChild, Parent, Administrator
+from data_storages.db.core import DatabaseManager
+from data_storages.db.models import Child, AbsentChild, Parent, Administrator
 
 
 def clear_all_tables():

@@ -1,14 +1,14 @@
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-from db.repositories.child_repository import ChildRepository
+from data_storages.db.repositories.child_repository import ChildRepository
 from exceptions.bot_error_handler import bot_error_handler
 from services.api.alfa.cgi import CgiDataService
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.messages import PPM_STUDY_RESULTS
 
 
-def register_child_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_RESULTS, get_result_function):
+def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_RESULTS, get_result_function, location):
     @bot.message_handler(func=lambda message: message.text.lower() == menu_text.lower())
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def main_handler(message):
         message = bot.send_message(message.chat.id, menu_text)
         children = ChildRepository.find_by_parent_telegram_id(message.chat.id)
@@ -31,26 +31,26 @@ def register_child_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_R
                                   message_id=message.message_id, reply_markup=markup)
 
     @bot.callback_query_handler(func=lambda call: call.data.startswith(f'{cpp_steps.S_C}_'))
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def child_selection_handler(call):
         child_alfa_id = int(call.data.split("_")[-1])
         child_selection(child_alfa_id, call.message)
 
     @bot.callback_query_handler(func=lambda call: call.data.startswith(f'{cpp_steps.S_G}_'))
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def group_selection_handler(call):
         data = call.data.split("_")
         child_alfa_id, child_group_alfa_id = int(data[-2]), int(data[-1])
         group_selection(child_alfa_id, child_group_alfa_id, call.message)
 
     @bot.callback_query_handler(func=lambda call: call.data.startswith(f'{cpp_steps.S_M}_'))
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def month_selection_handler(call):
         data = call.data.split("_")
         child_alfa_id, child_group_alfa_id, month = int(data[-3]), int(data[-2]), data[-1]
         month_selection(child_alfa_id, child_group_alfa_id, month, call.message)
 
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def child_selection(child_alfa_id, message):
         child_groups = CustomerDataService.get_customer_groups_by_customer_id(child_alfa_id)
         if child_groups is None:
@@ -71,7 +71,7 @@ def register_child_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_R
             bot.edit_message_text(ppm_messages.INFO_GROUP_SELECTION,
                                   chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
 
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def group_selection(child_alfa_id, group_alfa_id, message):
         month_names = CgiDataService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
         markup = InlineKeyboardMarkup(row_width=1)
@@ -84,7 +84,7 @@ def register_child_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_R
         bot.edit_message_text(ppm_messages.INFO_MONTH_SELECTION,
                               chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
 
-    @bot_error_handler(bot)
+    @bot_error_handler(bot, location)
     def month_selection(child_alfa_id, child_group_alfa_id, date_y_m, message):
         data = get_result_function(child_alfa_id, child_group_alfa_id, date_y_m)
         if data:

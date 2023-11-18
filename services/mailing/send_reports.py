@@ -1,6 +1,6 @@
 import logging
 
-from db.repositories.parent_repository import ParentRepository
+from data_storages.db.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
 from services.bot.report_service import ReportService
@@ -34,7 +34,7 @@ def _is_fb_present_for_all_children(children_on_lesson):
 
 def _write_in_json(report_container,parent):
     try:
-        path = FileUtil.get_path_to_tmp_json_file("reports.json")
+        path = FileUtil.get_path_to_mailing_results_file("reports.json")
 
         status = "Не отправлен (Родитель не зарегистрирован в системе)"
         if parent:

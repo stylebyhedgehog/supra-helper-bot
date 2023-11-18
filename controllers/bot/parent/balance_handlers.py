@@ -1,15 +1,13 @@
-import logging
-
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from db.repositories.child_repository import ChildRepository
+from data_storages.db.repositories.child_repository import ChildRepository
 from exceptions.bot_error_handler import bot_error_handler
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.callback_names import CPP_MENU, CPP_BALANCE
 from utils.constants.messages import PPM_BALANCE
 
 
-def register_child_get_balance(bot):
+def register_balance_handlers(bot):
     @bot.message_handler(func=lambda message: message.text.lower() == CPP_MENU.BALANCE.lower())
     @bot_error_handler(bot)
     def get_balance_handler(message):

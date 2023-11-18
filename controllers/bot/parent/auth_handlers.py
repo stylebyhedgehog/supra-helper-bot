@@ -6,22 +6,7 @@ from utils.constants.messages import PPM_AUTH, PAM_AUTH
 from utils.string_utils import StringUtil
 
 
-def register_authorization_handlers(bot):
-    @bot.message_handler(commands=['admin'])
-    @bot_error_handler(bot)
-    def handle_admin_login(message):
-        if AuthenticationService.is_admin_authorized(message.chat.id):
-            bot.send_message(message.chat.id, PAM_AUTH.ERROR_ALREADY_AUTHENTICATED)
-        else:
-            admin_password = message.text.split()
-            admin_password = admin_password[1]
-            username = AuthenticationService.authorize_admin(admin_password, message.chat.id, message.from_user.username)
-            if username:
-                msg = PAM_AUTH.RESULT(username)
-            else:
-                msg = PAM_AUTH.ERROR_WRONG_PASSWORD
-            bot.send_message(message.chat.id, msg)
-
+def register_parent_auth_handlers(bot):
     @bot.message_handler(commands=['login'])
     @bot_error_handler(bot)
     def handle_parent_login(message):
@@ -53,7 +38,7 @@ def register_authorization_handlers(bot):
         contact = message.contact
         phone_number = contact.phone_number
         parent_tg_id = message.chat.id
-        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id)
+        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id, message.from_user.username)
         if result:
             parent_name, saved_children_names = result
             string_children_names = StringUtil.list_to_string(saved_children_names)
@@ -66,7 +51,7 @@ def register_authorization_handlers(bot):
     def process_auth_contact_input_handler(message):
         phone_number = message.text
         parent_tg_id = message.chat.id
-        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id)
+        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id, message.from_user.username)
         if result:
             parent_name, saved_children_names = result
             string_children_names = StringUtil.list_to_string(saved_children_names)

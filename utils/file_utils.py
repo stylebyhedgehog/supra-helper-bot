@@ -8,12 +8,12 @@ class FileUtil:
     @staticmethod
     def get_path_to_db():
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_directory, "../db/sqlite.db")
+        return os.path.join(current_directory, "../data_storages/db/sqlite.db")
 
     @staticmethod
-    def get_path_to_tmp_json_file(filename):
+    def get_path_to_mailing_results_file(filename):
         current_directory = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_directory, f"../db/tmp_json/{filename}")
+        return os.path.join(current_directory, f"../data_storages/files/mailing_results/{filename}")
 
     @staticmethod
     def add_to_json_file(new_dict, file_path):

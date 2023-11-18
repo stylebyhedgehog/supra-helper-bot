@@ -17,6 +17,7 @@ class Parent(Base):
     __tablename__ = 'parent'
     telegram_id = Column(Integer, primary_key=True)
     name = Column(String)
+    telegram_username = Column(String)
     phone_number = Column(String)
 
 

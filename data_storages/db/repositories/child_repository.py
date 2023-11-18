@@ -1,7 +1,7 @@
 import logging
 
-from db.core import DatabaseManager
-from db.models import Child
+from data_storages.db.core import DatabaseManager
+from data_storages.db.models import Child
 
 
 class ChildRepository:

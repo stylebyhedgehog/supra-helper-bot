@@ -15,6 +15,5 @@ class Logger:
         logging.error(text)
 
     @staticmethod
-    def bot_error(e, location):
-        text = f"Error on bot call\n\t{location}\n\t{e}"
-        logging.error(text)
+    def bot_error(full_error_info):
+        logging.error(full_error_info)

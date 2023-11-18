@@ -1,5 +1,5 @@
-from db.core import DatabaseManager
-from db.models import LessonWithAbsentChildren
+from data_storages.db.core import DatabaseManager
+from data_storages.db.models import LessonWithAbsentChildren
 
 
 class LessonWithAbsentChildrenRepository:

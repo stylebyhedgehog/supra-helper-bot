@@ -6,7 +6,7 @@ from telebot.types import Message, CallbackQuery
 from utils.logger import Logger
 
 
-def bot_error_handler(bot):
+def bot_error_handler(bot, loc=None):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -24,11 +24,19 @@ def bot_error_handler(bot):
                         break
 
                 if chat_id:
-                    bot.send_message(chat_id, "Ошибка системы")
-                message_for_dev = f"Ошибка при обращении пользователя {chat_id}\n\tlocation: {func.__name__}\n\terror: {e}\n\ttraceback: {traceback.format_exc()}"
-                bot.send_message(os.getenv("DEVELOPER_TG_CHAT_ID"), message_for_dev)
-                Logger.bot_error(e, func.__name__)
+                    bot.send_message(chat_id, "Произошла ошибка системы")
+
+                if loc:
+                    location = loc + func.__name__
+                else:
+                    location = func.__name__
+
+                full_error_info = f"Ошибка при обращении пользователя {chat_id}\n\tlocation: {location}\n\terror: {e}\n\ttraceback: {traceback.format_exc()}"
+                Logger.bot_error(full_error_info)
+                bot.send_message(os.getenv("DEVELOPER_TG_CHAT_ID"), full_error_info)
 
         return wrapper
 
     return decorator
+
+

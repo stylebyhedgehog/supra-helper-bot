@@ -1,9 +1,9 @@
 import os
 
-from db.repositories.administrator_repository import AdministratorRepository
-from db.repositories.child_repository import ChildRepository
-from db.repositories.parent_repository import ParentRepository
-from services.api.alfa.customer import CustomerFetcher, CustomerDataService
+from data_storages.db.repositories.administrator_repository import AdministratorRepository
+from data_storages.db.repositories.child_repository import ChildRepository
+from data_storages.db.repositories.parent_repository import ParentRepository
+from services.api.alfa.customer import CustomerDataService
 from utils.string_utils import StringUtil
 
 
@@ -31,13 +31,13 @@ class AuthenticationService:
             return None
 
     @staticmethod
-    def authorize_parent(phone_number, parent_telegram_id):
+    def authorize_parent(phone_number, parent_telegram_id, telegram_username):
         normalized_phone_number = StringUtil.remove_brackets_dashes_and_spaces(phone_number)
         parent_children = CustomerDataService.get_customers_by_phone_number(normalized_phone_number)
         saved_children_names = []
         if parent_children:
             parent_name = parent_children[0].get("parent_name")
-            ParentRepository.save(parent_telegram_id, parent_name, normalized_phone_number)
+            ParentRepository.save(parent_telegram_id, parent_name, normalized_phone_number, telegram_username)
             for parent_child in parent_children:
                 child_id = parent_child.get("child_id")
                 child_name = parent_child.get("child_name")

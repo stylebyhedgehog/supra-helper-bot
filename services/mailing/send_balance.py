@@ -1,7 +1,7 @@
 import logging
 
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-from db.repositories.parent_repository import ParentRepository
+from data_storages.db.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
 from utils.constants.messages import PPM_BALANCE_NOTIFICATION_DISPATCHING
@@ -23,7 +23,7 @@ def send_balance(lesson_info, bot):
 
 def _write_in_json(child_id, group_id, date, info, parent):
     try:
-        path = FileUtil.get_path_to_tmp_json_file("balance.json")
+        path = FileUtil.get_path_to_mailing_results_file("balance.json")
 
         status = "Не отправлен (Родитель не зарегистрирован в системе)"
         if parent:

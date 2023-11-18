@@ -1,5 +1,5 @@
-from db.core import DatabaseManager
-from db.models import AbsentChild
+from data_storages.db.core import DatabaseManager
+from data_storages.db.models import AbsentChild
 
 
 class AbsentChildRepository:

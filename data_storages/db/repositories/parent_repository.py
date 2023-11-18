@@ -1,13 +1,13 @@
-from db.core import DatabaseManager
-from db.models import Parent, Child
+from data_storages.db.core import DatabaseManager
+from data_storages.db.models import Parent, Child
 
 
 class ParentRepository:
 
     @staticmethod
-    def save(telegram_id, name, phone_number):
+    def save(telegram_id, name, phone_number, telegram_username):
         with DatabaseManager.get_db() as session:
-            parent = Parent(telegram_id=telegram_id, name=name, phone_number=phone_number)
+            parent = Parent(telegram_id=telegram_id, name=name, phone_number=phone_number, telegram_username=telegram_username)
             session.add(parent)
             session.commit()
 

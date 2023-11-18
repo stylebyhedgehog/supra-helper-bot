@@ -1,8 +1,8 @@
 import logging
 
-from db.repositories.absent_child_repository import AbsentChildRepository
-from db.repositories.lesson_with_absent_child_repository import LessonWithAbsentChildrenRepository
-from db.repositories.parent_repository import ParentRepository
+from data_storages.db.repositories.absent_child_repository import AbsentChildRepository
+from data_storages.db.repositories.lesson_with_absent_child_repository import LessonWithAbsentChildrenRepository
+from data_storages.db.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
@@ -112,7 +112,7 @@ def _extract_zoom_info(zoom_data):
 def _write_in_json(group_name, lesson_id, lesson_topic, start_date, start_time, mailing_info,
                    children_info):
     try:
-        path = FileUtil.get_path_to_tmp_json_file("recordings_after_lesson_held.json")
+        path = FileUtil.get_path_to_mailing_results_file("recordings.json")
 
         data = {
             "reason_mailing": "Запись zoom готова",

@@ -1,30 +1,23 @@
-import logging
-
 from dotenv import load_dotenv
 import telebot
 from flask import Flask, request, jsonify
 import os
 
-from controllers.bot.admin.authed_parents_list_handlers import register_get_authed_parents_list
+from controllers.bot.admin.authed_parents_handlers import register_authed_parents_handlers
 from controllers.bot.menu_handlers import register_menu_handlers
-from controllers.bot.parent.attendance_handlers import register_child_get_attendance_handlers
-from controllers.bot.parent.authenication_handlers import register_authorization_handlers
-from controllers.bot.parent.balance_handlers import register_child_get_balance
-from controllers.bot.parent.contact_administrator_handler import register_contact_administrator
-from controllers.bot.parent.performance_handlers import register_child_get_performance_handlers
+from controllers.bot.parent.attendance_handlers import register_attendance_handlers
+from controllers.bot.parent.auth_handlers import register_parent_auth_handlers
+from controllers.bot.parent.balance_handlers import register_balance_handlers
+from controllers.bot.parent.contact_administrator_handler import register_contact_administrator_handlers
+from controllers.bot.parent.performance_handlers import register_performance_handlers
 
-from db.core import DatabaseManager
-from services.admin_service import clear_all_tables
-from services.api.alfa.lesson import LessonFetcher, LessonDataService
-from services.api.alfa.template import AlfaApiTemplate
+from data_storages.db.core import DatabaseManager
+from services.api.alfa.lesson import LessonFetcher
 from services.mailing.send_balance import send_balance
 from services.mailing.send_recordings_after_lesson_held import send_recordings_after_lesson_held
 from services.mailing.send_recordings_after_recording_completed import send_recordings_after_recording_completed
 from services.mailing.send_reports import send_reports
-from tests.test_authenticate_all import authenticate_all
-from tests.test_send_balance import test_send_balance
-from tests.test_send_recordings import test_send_recordings
-from tests.test_send_reports import test_send_reports
+from tests.test_send_recordings import test_send_recordings_on_recording_complete
 from utils.encryption import Encryption
 from utils.file_utils import FileUtil
 
@@ -38,12 +31,12 @@ bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
 
 
 register_menu_handlers(bot)
-register_authorization_handlers(bot)
-register_contact_administrator(bot)
-register_get_authed_parents_list(bot)
-register_child_get_performance_handlers(bot)
-register_child_get_attendance_handlers(bot)
-register_child_get_balance(bot)
+register_parent_auth_handlers(bot)
+register_contact_administrator_handlers(bot)
+register_authed_parents_handlers(bot)
+register_performance_handlers(bot)
+register_attendance_handlers(bot)
+register_balance_handlers(bot)
 
 if os.getenv("DEV_MODE") == "0":
     @app.route('/' + os.getenv("BOT_TOKEN"), methods=['POST'])
@@ -105,7 +98,8 @@ else:
     tracemalloc.start()
     # authenticate_all()
     # test_send_balance()
-    test_send_recordings()
+    # test_send_recordings_on_lesson_held()
+    test_send_recordings_on_recording_complete()
     # test_send_reports()
 
     current, peak = tracemalloc.get_traced_memory()

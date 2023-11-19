@@ -12,12 +12,15 @@ from controllers.bot.parent.contact_administrator_handler import register_contac
 from controllers.bot.parent.performance_handlers import register_performance_handlers
 
 from data_storages.db.core import DatabaseManager
+from services.admin_service import clear_all_tables
 from services.api.alfa.lesson import LessonFetcher
 from services.mailing.mailer import Mailer
-from tests.test_send_recordings import test_send_recordings_on_recording_complete
+from tests.test_authenticate_all import test_authenticate_all_in_multy_threads, test_authenticate_all_in_one_thread
+
+from tests.test_send_recordings import test_send_recordings_on_lesson_held_in_one_thread, \
+    test_send_recordings_on_lesson_held_in_multy_threads
 from utils.encryption import Encryption
 from utils.file_utils import FileUtil
-
 
 
 load_dotenv()
@@ -92,14 +95,20 @@ if os.getenv("DEV_MODE") == "0":
 
 
 else:
-
+    # clear_all_tables()
     import tracemalloc
     print("start")
     tracemalloc.start()
-    # authenticate_all()
-    # test_send_balance()
-    # test_send_recordings_on_lesson_held()
-    test_send_recordings_on_recording_complete()
+    # test_authenticate_all_in_one_thread()
+    # test_authenticate_all_in_multy_threads()
+
+    # test_send_balance_in_one_thread()
+    # test_send_balance_in_multy_thread()
+
+    # test_send_recordings_on_lesson_held_in_one_thread()
+    test_send_recordings_on_lesson_held_in_multy_threads()
+
+    # test_send_recordings_on_recording_complete()
     # test_send_reports()
 
     current, peak = tracemalloc.get_traced_memory()

@@ -17,7 +17,7 @@ from utils.file_utils import FileUtil
 class RecordingMailerOnLessonHeld:
     @staticmethod
     def send(bot, lesson_info):
-        lesson_id = lesson_info
+        lesson_id = lesson_info.get("id")
         absent_children = LessonDataService.get_absent_children(lesson_id)
 
         if absent_children:

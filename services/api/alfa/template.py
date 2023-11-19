@@ -1,4 +1,5 @@
 import os
+import threading
 from typing import Generator
 
 import requests
@@ -8,6 +9,8 @@ from utils.logger import Logger
 
 class AlfaApiTemplate:
     _TOKEN = ""
+    _lock = threading.Lock()
+
 
     @staticmethod
     def _authenticate():
@@ -37,35 +40,37 @@ class AlfaApiTemplate:
             return None
 
     @staticmethod
-    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None) -> Generator[dict] | None:
-        current_count = 0
-        page = 0
+    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None):
+        with AlfaApiTemplate._lock:
+            current_count = 0
+            page = 0
 
-        while True:
-            if payload:
-                payload["page"] = page
-            else:
-                payload = {"page": page}
+            while True:
+                if payload:
+                    payload["page"] = page
+                else:
+                    payload = {"page": page}
 
-            response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
-            if not response_data or len(response_data.get("items")) == 0:
-                Logger.api_error(url=url, payload=payload, params=params, message="Api responded with empty body")
-                return None
-            yield from response_data.get("items", [])
+                response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
+                if not response_data or len(response_data.get("items")) == 0:
+                    Logger.api_error(url=url, payload=payload, params=params, message="Api responded with empty body")
+                    return None
+                yield from response_data.get("items", [])
 
-            current_count += response_data.get("count", 0)
-            if current_count >= response_data.get("total", 0):
-                break
+                current_count += response_data.get("count", 0)
+                if current_count >= response_data.get("total", 0):
+                    break
 
-            page += 1
+                page += 1
 
     @staticmethod
     def fetch_single_data(url: str, payload: dict = None, params: dict = None):
-        response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
+        with AlfaApiTemplate._lock:
+            response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
 
-        if not response_data or len(response_data.get("items", [])) == 0:
-            Logger.api_error(url=url, payload=payload, params=params, message="Api responded with empty body")
-            return None
+            if not response_data or len(response_data.get("items", [])) == 0:
+                Logger.api_error(url=url, payload=payload, params=params, message="Api responded with empty body")
+                return None
 
-        items = response_data.get("items", [])
-        return items[0]
+            items = response_data.get("items", [])
+            return items[0]

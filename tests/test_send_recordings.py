@@ -1,21 +1,46 @@
+import threading
+
 from services.api.alfa.lesson import LessonFetcher
-from services.mailing.send_recordings_on_lesson_held import send_recordings_after_lesson_held
-from services.mailing.send_recordings_on_recording_completed import send_recordings_after_recording_completed
+from services.mailing.mailer import Mailer
+from services.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
 
 
-def test_send_recordings_on_lesson_held():
+def test_send_recordings_on_lesson_held_in_one_thread():
     lessons = LessonFetcher.all()
+    results = []
     for lesson in lessons:
-        print(lesson.get("id"))
-        try:
-            send_recordings_after_lesson_held(lesson, None)
-        except Exception as e:
-            print(f"Ошибка: {e}")
+        results.append(lesson)
 
+    mailer = Mailer(None)
+    for result in results:
+        mailer.send_recordings_on_lesson_held(result)
+        print(result)
+
+
+def threadable_task(mailer, lesson):
+    mailer.send_recordings_on_lesson_held(lesson)
+    print(lesson)
+
+def test_send_recordings_on_lesson_held_in_multy_threads():
+    lessons = LessonFetcher.all()
+    results = []
+    for lesson in lessons:
+        results.append(lesson)
+
+    mailer = Mailer(None)
+    threads = []
+    for lesson in results:
+
+        thread = threading.Thread(target=threadable_task, args=(mailer,lesson,))
+        threads.append(thread)
+        thread.start()
+
+    for thread in threads:
+        thread.join()
 
 def test_send_recordings_on_recording_complete():
     json = get_test_json()
-    send_recordings_after_recording_completed(json, None)
+    RecordingMailerOnRecordingCompleted.send(None, json)
 
 
 def get_test_json():

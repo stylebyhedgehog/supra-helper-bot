@@ -5,7 +5,7 @@ from telebot import types
 from exceptions.bot_error_handler import bot_error_handler
 from services.bot.authentication_service import AuthenticationService
 from utils.constants.callback_names import CAP, CPP_MENU
-from utils.constants.messages import PPM_MENU
+from utils.constants.messages import PPM_MENU, PAM_MENU
 
 
 def register_menu_handlers(bot):
@@ -23,7 +23,7 @@ def register_menu_handlers(bot):
         if AuthenticationService.is_admin_authorized(message.chat.id):
             admin_menu(bot, message)
         else:
-            bot.send_message(message.chat.id, PPM_MENU.INFO_PRE_AUTH)
+            bot.send_message(message.chat.id, PAM_MENU.INFO_PRE_AUTH)
 
 
 

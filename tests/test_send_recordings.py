@@ -1,6 +1,6 @@
 from services.api.alfa.lesson import LessonFetcher
-from services.mailing.send_recordings_after_lesson_held import send_recordings_after_lesson_held
-from services.mailing.send_recordings_after_recording_completed import send_recordings_after_recording_completed
+from services.mailing.send_recordings_on_lesson_held import send_recordings_after_lesson_held
+from services.mailing.send_recordings_on_recording_completed import send_recordings_after_recording_completed
 
 
 def test_send_recordings_on_lesson_held():

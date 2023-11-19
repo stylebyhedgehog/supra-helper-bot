@@ -4,7 +4,7 @@ from utils.constants.messages import PAM_AUTH
 
 
 def register_admin_auth_handlers(bot):
-    @bot.message_handler(commands=['admin'])
+    @bot.message_handler(commands=['login_admin'])
     @bot_error_handler(bot)
     def handle_admin_login(message):
         if AuthenticationService.is_admin_authorized(message.chat.id):

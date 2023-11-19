@@ -17,3 +17,7 @@ class Logger:
     @staticmethod
     def bot_error(full_error_info):
         logging.error(full_error_info)
+
+    @staticmethod
+    def mailing_error(full_error_info):
+        logging.error(full_error_info)

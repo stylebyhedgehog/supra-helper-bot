@@ -36,9 +36,8 @@ class AlfaApiTemplate:
             Logger.api_error(url=url, payload=None, params=params, message="Unacceptable Error")
             return None
 
-
     @staticmethod
-    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None) -> Generator[dict, None, None]:
+    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None) -> Generator[dict] | None:
         current_count = 0
         page = 0
 

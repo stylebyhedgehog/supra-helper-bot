@@ -1,3 +1,6 @@
+class PAM_MENU:
+    INFO_PRE_AUTH = "Используйте команду /login_admin password для прохождения авторизации. (Вместо password введите пароль)"
+
 class PPM_MENU:
     INFO_PRE_AUTH = "Используйте команду /login для прохождения авторизации."
     INFO_POST_AUTH = "Меню c доступными функциями отображено под клавиатурой"

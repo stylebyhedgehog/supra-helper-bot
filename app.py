@@ -13,10 +13,7 @@ from controllers.bot.parent.performance_handlers import register_performance_han
 
 from data_storages.db.core import DatabaseManager
 from services.api.alfa.lesson import LessonFetcher
-from services.mailing.send_balance import send_balance
-from services.mailing.send_recordings_after_lesson_held import send_recordings_after_lesson_held
-from services.mailing.send_recordings_after_recording_completed import send_recordings_after_recording_completed
-from services.mailing.send_reports import send_reports
+from services.mailing.mailer import Mailer
 from tests.test_send_recordings import test_send_recordings_on_recording_complete
 from utils.encryption import Encryption
 from utils.file_utils import FileUtil
@@ -24,7 +21,6 @@ from utils.file_utils import FileUtil
 
 
 load_dotenv()
-# todo реализовать отлавливание изменения состава групп
 DatabaseManager.init_db('sqlite:///' + FileUtil.get_path_to_db())
 app = Flask(__name__)
 bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
@@ -37,6 +33,10 @@ register_authed_parents_handlers(bot)
 register_performance_handlers(bot)
 register_attendance_handlers(bot)
 register_balance_handlers(bot)
+
+
+mailer = Mailer(bot)
+
 
 if os.getenv("DEV_MODE") == "0":
     @app.route('/' + os.getenv("BOT_TOKEN"), methods=['POST'])
@@ -54,7 +54,7 @@ if os.getenv("DEV_MODE") == "0":
                 res = Encryption.generate_encrypted_token(request.json, os.getenv("ZOOM_SECRET"))
                 return jsonify(res), 200
             elif request.json["event"] == "recording.completed":
-                send_recordings_after_recording_completed(request.json, bot)
+                mailer.send_recordings_on_recording_completed(request.json)
         return jsonify(""), 200
 
 
@@ -65,9 +65,9 @@ if os.getenv("DEV_MODE") == "0":
             lesson_id = data["entity_id"]
             lesson_info = LessonFetcher.by_lesson_id(lesson_id)
             if lesson_info:
-                send_balance(lesson_info, bot)
-                send_reports(lesson_info, bot)
-                send_recordings_after_lesson_held(lesson_info, bot)
+                mailer.send_balance(lesson_info)
+                mailer.send_reports(lesson_info)
+                mailer.send_recordings_on_lesson_held(lesson_info)
 
 
     @app.route("/alive")

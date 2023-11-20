@@ -36,3 +36,10 @@ class LessonWithAbsentChildrenRepository:
             ).all()
 
             return lessons
+
+
+    @staticmethod
+    def find_all() -> list[LessonWithAbsentChildren]:
+        with DatabaseManager.get_db() as session:
+            lessons = session.query(LessonWithAbsentChildren).all()
+            return lessons

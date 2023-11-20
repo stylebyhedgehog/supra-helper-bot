@@ -22,3 +22,4 @@ class AbsentChildRepository:
             ).all()
 
             return absent_children
+

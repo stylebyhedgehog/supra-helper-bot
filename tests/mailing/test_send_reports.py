@@ -5,5 +5,3 @@ class MailingReportsTest(MailingTest):
     def _threadable_task(self, mailer, lesson):
         mailer.send_reports(lesson)
         print(lesson)
-
-

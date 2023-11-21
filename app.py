@@ -141,12 +141,9 @@ if os.getenv("DEV_MODE") == "0":
             return False
 
 
-    if __name__ == '__main__':
-        app.run(port=8080)
-
 
 else:
-    clear_all_tables()
+    # clear_all_tables()
     # import tracemalloc
     # print("start")
     # clear_all_tables()

@@ -1,6 +1,5 @@
 import os
 import threading
-from typing import Generator
 
 import requests
 
@@ -21,7 +20,7 @@ class AlfaApiTemplate:
         return response.json().get("token", None)
 
     @staticmethod
-    def _make_authenticated_request(url: str, json_data: dict, params: dict, max_retries=3):
+    def _make_authenticated_request(url, json_data, params, max_retries=3):
         headers = {"X-ALFACRM-TOKEN": AlfaApiTemplate._TOKEN}
 
         response = requests.post(url, headers=headers, json=json_data, params=params)
@@ -40,7 +39,7 @@ class AlfaApiTemplate:
             return None
 
     @staticmethod
-    def fetch_paginated_data(url: str, payload: dict = None, params: dict = None):
+    def fetch_paginated_data(url, payload = None, params = None):
         with AlfaApiTemplate._lock:
             current_count = 0
             page = 0
@@ -64,7 +63,7 @@ class AlfaApiTemplate:
                 page += 1
 
     @staticmethod
-    def fetch_single_data(url: str, payload: dict = None, params: dict = None):
+    def fetch_single_data(url, payload= None, params = None):
         with AlfaApiTemplate._lock:
             response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
 

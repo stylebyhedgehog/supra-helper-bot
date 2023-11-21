@@ -33,7 +33,7 @@ class CustomerDataService:
             return None
 
     @staticmethod
-    def get_child_balance_by_id(child_alfa_id: int) -> tuple[str, int, int] | None:
+    def get_child_balance_by_id(child_alfa_id):
         customer_info = CustomerFetcher.by_customer_id(child_alfa_id)
 
         if customer_info:

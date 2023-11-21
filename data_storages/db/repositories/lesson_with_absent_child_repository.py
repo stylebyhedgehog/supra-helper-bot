@@ -27,7 +27,7 @@ class LessonWithAbsentChildrenRepository:
                 session.commit()
 
     @staticmethod
-    def find_by_group_id_and_room_num_and_date(group_id, room_num, date) -> list[LessonWithAbsentChildren]:
+    def find_by_group_id_and_room_num_and_date(group_id, room_num, date):
         with DatabaseManager.get_db() as session:
             lessons = session.query(LessonWithAbsentChildren).filter(
                 LessonWithAbsentChildren.group_id == group_id,
@@ -39,7 +39,7 @@ class LessonWithAbsentChildrenRepository:
 
 
     @staticmethod
-    def find_all() -> list[LessonWithAbsentChildren]:
+    def find_all():
         with DatabaseManager.get_db() as session:
             lessons = session.query(LessonWithAbsentChildren).all()
             return lessons

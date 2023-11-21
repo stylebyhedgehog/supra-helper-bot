@@ -15,6 +15,7 @@ class CgiFetcher:
 class CgiDataService:
     @staticmethod
     def get_customer_studying_in_group_months(group_alfa_id, child_alfa_id):
+        #todo не должны отображаться месяцы если группа закончила раньше
         data = CgiFetcher.by_group_id(group_alfa_id)
         if data:
             for customer_in_group_info in data:

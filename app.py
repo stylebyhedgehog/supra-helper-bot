@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 import telebot
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, json
 import os
 
 from controllers.bot.admin.auth_handler import register_admin_auth_handlers
@@ -84,27 +84,30 @@ if os.getenv("DEV_MODE") == "0":
                 mailer.send_balance(lesson_info)
                 mailer.send_reports(lesson_info)
                 mailer.send_recordings_on_lesson_held(lesson_info)
-
+        return jsonify(""), 200
 
 
     @app.route("/mailing_results/balance")
     def mailing_results_balance():
         file_path = FileUtil.get_path_to_mailing_results_file("balance.json")
         data = FileUtil.read_from_json_file(file_path)
-        return data, 200
+        response = Response(response=json.dumps(data, ensure_ascii=False), status=200, mimetype="application/json")
+        return response
 
     @app.route("/mailing_results/reports")
     def mailing_results_reports():
         file_path = FileUtil.get_path_to_mailing_results_file("reports.json")
         data = FileUtil.read_from_json_file(file_path)
-        return data, 200
+        response = Response(response=json.dumps(data, ensure_ascii=False), status=200, mimetype="application/json")
+        return response
 
 
     @app.route("/mailing_results/recordings")
     def mailing_results_recordings():
         file_path = FileUtil.get_path_to_mailing_results_file("recordings.json")
         data = FileUtil.read_from_json_file(file_path)
-        return data, 200
+        response = Response(response=json.dumps(data, ensure_ascii=False), status=200, mimetype="application/json")
+        return response
 
 
     @app.route("/start_onethread_tests")

@@ -58,7 +58,7 @@ if os.getenv("DEV_MODE") == "0":
     @app.route("/alive")
     def webhook():
         bot.remove_webhook()
-        bot.set_webhook(url="/tgwebhook/"+os.getenv("HOST_ROOT") + os.getenv("BOT_TOKEN"))
+        bot.set_webhook(url=os.getenv("HOST_ROOT") + "/tgwebhook/" + os.getenv("BOT_TOKEN"))
         return "!", 200
 
 

@@ -42,12 +42,25 @@ mailer = Mailer(bot)
 
 
 if os.getenv("DEV_MODE") == "0":
-    @app.route('/' + os.getenv("BOT_TOKEN"), methods=['POST'])
+    @app.route('/', methods=['GET'])
+    def init():
+        return 'Successfully run', 200
+
+
+    @app.route('/tgwebhook/' + os.getenv("BOT_TOKEN"), methods=['POST'])
     def getMessage():
         json_str = request.get_data().decode('UTF-8')
         update = telebot.types.Update.de_json(json_str)
         bot.process_new_updates([update])
         return '', 200
+
+
+    @app.route("/alive")
+    def webhook():
+        bot.remove_webhook()
+        bot.set_webhook(url="/tgwebhook/"+os.getenv("HOST_ROOT") + os.getenv("BOT_TOKEN"))
+        return "!", 200
+
 
 
     @app.route('/zoom_webhook/recordings/', methods=['POST'])  # todo добавить вебхук в zoom
@@ -72,12 +85,6 @@ if os.getenv("DEV_MODE") == "0":
                 mailer.send_reports(lesson_info)
                 mailer.send_recordings_on_lesson_held(lesson_info)
 
-
-    @app.route("/alive")
-    def webhook():
-        bot.remove_webhook()
-        bot.set_webhook(url=os.getenv("HOST_ROOT") + os.getenv("BOT_TOKEN"))
-        return "!", 200
 
 
     @app.route("/mailing_results/balance")

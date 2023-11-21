@@ -31,9 +31,9 @@ def bot_error_handler(bot, loc=None):
                 else:
                     location = func.__name__
 
-                full_error_info = f"Ошибка при обращении пользователя {chat_id}\n\tlocation: {location}\n\terror: {e}\n\ttraceback: {traceback.format_exc()}"
-                Logger.bot_unhandled_error(full_error_info)
-                bot.send_message(os.getenv("DEVELOPER_TG_CHAT_ID"), full_error_info)
+                full_error_info = f"location: {location}\n\terror: {e}\n\ttraceback: {traceback.format_exc()}"
+                Logger.bot_unhandled_error(chat_id, full_error_info)
+                bot.send_message(os.getenv("DEVELOPER_TG_CHAT_ID"), f"Critical error in chat with tg_id={chat_id}")
 
         return wrapper
 

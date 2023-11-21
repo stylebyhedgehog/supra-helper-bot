@@ -3,6 +3,7 @@ import telebot
 from flask import Flask, request, jsonify
 import os
 
+from controllers.bot.admin.auth_handler import register_admin_auth_handlers
 from controllers.bot.admin.authed_parents_handlers import register_authed_parents_handlers
 from controllers.bot.menu_handlers import register_menu_handlers
 from controllers.bot.parent.attendance_handlers import register_attendance_handlers
@@ -28,6 +29,7 @@ bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
 
 
 register_menu_handlers(bot)
+register_admin_auth_handlers(bot)
 register_parent_auth_handlers(bot)
 register_contact_administrator_handlers(bot)
 register_authed_parents_handlers(bot)
@@ -78,6 +80,53 @@ if os.getenv("DEV_MODE") == "0":
         return "!", 200
 
 
+    @app.route("/mailing_results/balance")
+    def mailing_results_balance():
+        file_path = FileUtil.get_path_to_mailing_results_file("balance.json")
+        data = FileUtil.read_from_json_file(file_path)
+        return data, 200
+
+    @app.route("/mailing_results/reports")
+    def mailing_results_reports():
+        file_path = FileUtil.get_path_to_mailing_results_file("reports.json")
+        data = FileUtil.read_from_json_file(file_path)
+        return data, 200
+
+
+    @app.route("/mailing_results/recordings")
+    def mailing_results_recordings():
+        file_path = FileUtil.get_path_to_mailing_results_file("recordings.json")
+        data = FileUtil.read_from_json_file(file_path)
+        return data, 200
+
+
+    @app.route("/start_onethread_tests")
+    def start_onethread_tests():
+        file_path1 = FileUtil.get_path_to_mailing_results_file("recordings.json")
+        file_path2 = FileUtil.get_path_to_mailing_results_file("reports.json")
+        file_path3 = FileUtil.get_path_to_mailing_results_file("balance.json")
+        FileUtil.clear_json(file_path1)
+        FileUtil.clear_json(file_path2)
+        FileUtil.clear_json(file_path3)
+        clear_all_tables()
+        test_manager = TestManager(mailer)
+        test_manager.execute_auth_all_parents_test(TestMode.ONE_THREAD)
+        test_manager.execute_mailing_tests(TestMode.ONE_THREAD)
+
+
+    @app.route("/start_multythread_tests")
+    def start_multythread_tests():
+        file_path1 = FileUtil.get_path_to_mailing_results_file("recordings.json")
+        file_path2 = FileUtil.get_path_to_mailing_results_file("reports.json")
+        file_path3 = FileUtil.get_path_to_mailing_results_file("balance.json")
+        FileUtil.clear_json(file_path1)
+        FileUtil.clear_json(file_path2)
+        FileUtil.clear_json(file_path3)
+        clear_all_tables()
+        test_manager = TestManager(mailer)
+        test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
+        test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
+
     def is_lesson_conducted(json):
         if json["fields_new"]["status"] == 3:
             return True
@@ -92,20 +141,25 @@ if os.getenv("DEV_MODE") == "0":
             return False
 
 
+    if __name__ == '__main__':
+        app.run(port=8080)
+
+
 else:
-    import tracemalloc
-    print("start")
+    clear_all_tables()
+    # import tracemalloc
+    # print("start")
     # clear_all_tables()
-    tracemalloc.start()
-
-    test_manager = TestManager(mailer)
-    test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
-    test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
-
-
-    current, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
-    print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
-    print("end")
-    # bot.polling(none_stop=True)
+    # tracemalloc.start()
+    #
+    # test_manager = TestManager(mailer)
+    # test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
+    # test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
+    #
+    #
+    # current, peak = tracemalloc.get_traced_memory()
+    # tracemalloc.stop()
+    # print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
+    # print("end")
+    bot.polling(none_stop=True)
 

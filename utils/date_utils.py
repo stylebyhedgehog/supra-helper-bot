@@ -1,7 +1,6 @@
 from datetime import timezone, timedelta
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-
 en_month_ru_month = {
     "January": "Январь",
     "February": "Февраль",
@@ -27,14 +26,13 @@ class DateUtil:
         month_list = []
 
         while start_date <= end_date:
-            month_name = start_date.strftime("%B")
+            month_name = en_month_ru_month[start_date.strftime("%B")]
             year_month = start_date.strftime("%Y-%m")
 
-            if start_date.year != end_date.year:
-                month_name += " " + start_date.strftime("%Y")
+            month_name += " " + start_date.strftime("%Y")
 
             month_dict = {
-                "month_name": en_month_ru_month[month_name],
+                "month_name": month_name,
                 "year_month": year_month
             }
 
@@ -104,7 +102,7 @@ class DateUtil:
     @staticmethod
     def utc_to_moscow(input_time_str):
         input_time = datetime.strptime(input_time_str, "%Y-%m-%dT%H:%M:%SZ")
-        utc_offset = timezone(timedelta(hours=3))  # UTC+3 для Москвы #todo учесть что зимой другое
+        utc_offset = timezone(timedelta(hours=3))
         moscow_time = input_time.replace(tzinfo=timezone.utc).astimezone(utc_offset)
         result_str = moscow_time.strftime("%Y-%m-%d")
         return result_str

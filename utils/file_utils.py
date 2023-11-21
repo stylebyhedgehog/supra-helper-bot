@@ -30,6 +30,11 @@ class FileUtil:
                 json.dump(old_list, json_file, indent=2, ensure_ascii=False)
 
     @staticmethod
+    def clear_json(file_path):
+        with open(file_path, 'w', encoding='utf-8') as json_file:
+            json.dump("", json_file, indent=2, ensure_ascii=False)
+
+    @staticmethod
     def read_from_json_file(file_path):
         with FileUtil._lock:
             try:

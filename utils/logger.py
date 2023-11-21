@@ -16,17 +16,18 @@ class Logger:
 
     @staticmethod
     def bot_info(user_tg_id, full_info):
-        text = f"User telegram chat id: {user_tg_id}. Info: {full_info}"
+        text = f"Bot. User telegram chat id: {user_tg_id}. Info: {full_info}"
         logging.info(text)
 
     @staticmethod
     def bot_handled_error(user_tg_id, full_info):
-        text = f"User telegram chat id: {user_tg_id}. Handled Error: {full_info}"
+        text = f"Bot Handled Error. User telegram chat id: {user_tg_id}. Error text: {full_info}"
         logging.warning(text)
 
     @staticmethod
-    def bot_unhandled_error(full_error_info):
-        logging.error(full_error_info)
+    def bot_unhandled_error(user_tg_id, full_error_info):
+        text = f"Bot Unhandled(Critical) Error. User telegram chat id: {user_tg_id}\n\t{full_error_info}"
+        logging.error(text)
 
     @staticmethod
     def mailing_error(full_error_info):

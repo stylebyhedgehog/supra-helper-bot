@@ -134,6 +134,16 @@ if os.getenv("DEV_MODE") == "0":
         test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
         test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
 
+    @app.route("/clear_all")
+    def clear_all():
+        file_path1 = FileUtil.get_path_to_mailing_results_file("recordings.json")
+        file_path2 = FileUtil.get_path_to_mailing_results_file("reports.json")
+        file_path3 = FileUtil.get_path_to_mailing_results_file("balance.json")
+        FileUtil.clear_json(file_path1)
+        FileUtil.clear_json(file_path2)
+        FileUtil.clear_json(file_path3)
+        clear_all_tables()
+
     def is_lesson_conducted(json):
         if json["fields_new"]["status"] == 3:
             return True

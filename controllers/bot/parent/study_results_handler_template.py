@@ -99,16 +99,15 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if data:
             msg = ppm_messages.RESULT(*data)
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
-            Logger.bot_handled_error(message.chat.id,
-                                     f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
+            Logger.bot_info(message.chat.id,
+                            f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} successfully formed")
+
 
         else:
             msg = ppm_messages.ERROR_LESSONS_NOT_FOUND
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
-            Logger.bot_info(message.chat.id,
-                                     f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} successfully formed")
-
-
+            Logger.bot_handled_error(message.chat.id,
+                             f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
 
 
 

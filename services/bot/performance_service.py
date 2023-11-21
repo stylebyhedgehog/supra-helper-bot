@@ -11,9 +11,12 @@ class PerformanceService(StudyResultsService):
         if child_lessons_info:
             lessons_amount = len(child_lessons_info)
             summary_grade = StudyResultsService.calculate_summary_grade(child_lessons_info)
+            attended_lessons_amount = StudyResultsService.calculate_attended_lessons_amount(child_lessons_info)
             topic_performance = StudyResultsService.form_topic_performance(child_lessons_info)
-
-            average_performance = int(summary_grade / lessons_amount)
+            if attended_lessons_amount !=0:
+                average_performance = int(summary_grade / attended_lessons_amount)
+            else:
+                average_performance = 0
             month_name = StudyResultsService.get_month_name(date_y_m)
             return month_name, lessons_amount, average_performance, topic_performance
         return None

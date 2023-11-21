@@ -121,7 +121,6 @@ class RecordingMailerOnLessonHeld:
                 "mailing_info": mailing_info,
                 "mailing_result": children_info
             }
-            logging.info(data)
             FileUtil.add_to_json_file(data, path)
         except Exception as e:
             logging.error(f"Ошибка записи информации о записях в файл {e}")

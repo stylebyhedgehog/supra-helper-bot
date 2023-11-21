@@ -15,7 +15,8 @@ class Administrator(Base):
 
 class Parent(Base):
     __tablename__ = 'parent'
-    telegram_id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    telegram_id = Column(Integer)
     name = Column(String)
     telegram_username = Column(String)
     phone_number = Column(String)
@@ -23,8 +24,8 @@ class Parent(Base):
 
 class Child(Base):
     __tablename__ = 'child'
-    child_alfa_id = Column(Integer, primary_key=True, autoincrement=True)
-    parent_telegram_id = Column(Integer, ForeignKey('parent.telegram_id'))
+    child_alfa_id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('parent.id'))
     child_name = Column(String)
 
 

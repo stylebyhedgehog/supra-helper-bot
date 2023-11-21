@@ -81,10 +81,11 @@ class PPM_CONTACT:
 class PPM_STUDY_RESULTS:
     ERROR_CHILDREN_NOT_FOUND = "Ошибка системы! Не удалось получить информацию об учениках."
     ERROR_GROUPS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о группах."
-    ERROR_LESSONS_NOT_FOUND = "Не удалось получить информацию о занятиях за выбранный Вами период."
-    INFO_CHILD_SELECTION = "Выберите ребенка, у которого хотите проверить посещаемость:"
-    INFO_GROUP_SELECTION = "Выберите группу, относительно которой хотите проверить посещаемость:"
-    INFO_MONTH_SELECTION = "Выберите месяц, за который хотите период посещаемость:"
+    ERROR_MONTHS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о занятиях."
+    ERROR_LESSONS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о занятиях за выбранный Вами период."
+    INFO_CHILD_SELECTION = "Выберите ребенка:"
+    INFO_GROUP_SELECTION = "Выберите группу:"
+    INFO_MONTH_SELECTION = "Выберите месяц:"
     RESULT = None
 
 class PPM_ATTENDANCE(PPM_STUDY_RESULTS):

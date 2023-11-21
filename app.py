@@ -93,14 +93,14 @@ if os.getenv("DEV_MODE") == "0":
 
 
 else:
-    clear_all_tables()
     import tracemalloc
     print("start")
+    # clear_all_tables()
     tracemalloc.start()
 
     test_manager = TestManager(mailer)
-    test_manager.execute_auth_all_parents_test(TestMode.ONE_THREAD)
-    test_manager.execute_mailing_tests(TestMode.ONE_THREAD)
+    test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
+    test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
 
 
     current, peak = tracemalloc.get_traced_memory()

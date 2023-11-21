@@ -5,6 +5,7 @@ from data_storages.db.repositories.administrator_repository import Administrator
 from data_storages.db.repositories.child_repository import ChildRepository
 from data_storages.db.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
+from utils.logger import Logger
 from utils.string_utils import StringUtil
 
 
@@ -38,11 +39,11 @@ class AuthenticationService:
         saved_children_names = []
         if parent_children:
             parent_name = parent_children[0].get("parent_name")
-            ParentRepository.save(parent_telegram_id, parent_name, normalized_phone_number, telegram_username)
+            parent_id = ParentRepository.save(parent_telegram_id, parent_name, normalized_phone_number, telegram_username)
             for parent_child in parent_children:
                 child_id = parent_child.get("child_id")
                 child_name = parent_child.get("child_name")
-                ChildRepository.save(parent_telegram_id, child_id, child_name)
+                ChildRepository.save(parent_id, child_id, child_name)
                 saved_children_names.append(child_name)
             return parent_name, saved_children_names
         else:

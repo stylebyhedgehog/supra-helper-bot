@@ -3,6 +3,7 @@ from telebot import types
 from exceptions.bot_error_handler import bot_error_handler
 from services.bot.authentication_service import AuthenticationService
 from utils.constants.messages import PPM_AUTH, PAM_AUTH
+from utils.logger import Logger
 from utils.string_utils import StringUtil
 
 
@@ -12,6 +13,7 @@ def register_parent_auth_handlers(bot):
     def handle_parent_login(message):
         if AuthenticationService.is_parent_authorized(message.chat.id):
             bot.send_message(message.chat.id, PPM_AUTH.ERROR_ALREADY_AUTHENTICATED)
+            Logger.bot_handled_error(message.chat.id, "location: authentication. Parent already authenticated")
         else:
             markup = types.InlineKeyboardMarkup(row_width=1)
             button1 = types.InlineKeyboardButton(PPM_AUTH.BUTTON_AUTH_METHOD_MANUAL_INPUT, callback_data='auth_by_input')
@@ -38,24 +40,27 @@ def register_parent_auth_handlers(bot):
         contact = message.contact
         phone_number = contact.phone_number
         parent_tg_id = message.chat.id
-        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id, message.from_user.username)
-        if result:
-            parent_name, saved_children_names = result
-            string_children_names = StringUtil.list_to_string(saved_children_names)
-            msg = PPM_AUTH.RESULT(string_children_names)
-        else:
-            msg = PPM_AUTH.ERROR_AUTH_FAILED
-        bot.send_message(message.chat.id, msg)
+        username = message.from_user.username
+        _process_auth_on_phone_number_introduced(message, parent_tg_id, phone_number, username)
 
     @bot_error_handler(bot)
     def process_auth_contact_input_handler(message):
         phone_number = message.text
         parent_tg_id = message.chat.id
-        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id, message.from_user.username)
+        username = message.from_user.username
+        _process_auth_on_phone_number_introduced(message, parent_tg_id, phone_number, username)
+
+    def _process_auth_on_phone_number_introduced(message, parent_tg_id, phone_number, username):
+        result = AuthenticationService.authorize_parent(phone_number, parent_tg_id, username)
         if result:
             parent_name, saved_children_names = result
             string_children_names = StringUtil.list_to_string(saved_children_names)
             msg = PPM_AUTH.RESULT(string_children_names)
+            bot.send_message(message.chat.id, msg)
+            Logger.bot_info(parent_tg_id, f"location: authentication. Parent with phone_number={phone_number} and tg_username={username} successfully authenticated")
+
         else:
             msg = PPM_AUTH.ERROR_AUTH_FAILED
-        bot.send_message(message.chat.id, msg)
+            bot.send_message(message.chat.id, msg)
+            Logger.bot_handled_error(parent_tg_id,
+                                     f"location: authentication. Parent with phone_number={phone_number} and tg_username={username} not authenticated")

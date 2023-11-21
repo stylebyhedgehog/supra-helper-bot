@@ -1,3 +1,5 @@
+import random
+
 from data_storages.db.repositories.lesson_with_absent_child_repository import LessonWithAbsentChildrenRepository
 from tests.mailing.test_mailing import MailingTest
 from utils.date_utils import DateUtil
@@ -23,7 +25,8 @@ class MailingRecordingsOnRecordingCompletedTest(MailingTest):
         return test_list
 
     def _form_test_recording_json(self, lesson):
-        utc_date, utc_time = DateUtil.moscow_to_utc(lesson.start_date + " " + lesson.start_time)
+        seconds = str(random.randint(1, 50))
+        utc_date, utc_time = DateUtil.moscow_to_utc(lesson.start_date + " " + lesson.start_time+f":{seconds}")
         utc_datetime = f"{utc_date}T{utc_time}Z"
         return {
             "payload": {

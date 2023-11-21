@@ -15,9 +15,21 @@ class Logger:
         logging.error(text)
 
     @staticmethod
-    def bot_error(full_error_info):
+    def bot_info(user_tg_id, full_info):
+        text = f"User telegram chat id: {user_tg_id}. Info: {full_info}"
+        logging.info(text)
+
+    @staticmethod
+    def bot_handled_error(user_tg_id, full_info):
+        text = f"User telegram chat id: {user_tg_id}. Handled Error: {full_info}"
+        logging.warning(text)
+
+    @staticmethod
+    def bot_unhandled_error(full_error_info):
         logging.error(full_error_info)
 
     @staticmethod
     def mailing_error(full_error_info):
         logging.error(full_error_info)
+
+

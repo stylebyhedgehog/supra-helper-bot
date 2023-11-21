@@ -7,7 +7,7 @@ class LessonFetcher:
     @staticmethod
     def all():
         url = "https://supra.s20.online/v2api/lesson/index"
-        payload = {"date_from": "2023-11-12", "date_to": "2023-11-20", "lesson_type_id": 2}
+        payload = {"date_from": "2023-10-25", "date_to": "2023-11-20", "lesson_type_id": 2}
         return AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
 
     @staticmethod

@@ -10,19 +10,19 @@ class CPP_MENU:
 
 class CPP_BALANCE:
     BASE = "par_get_bal"
-    S_C = f"{BASE}_select_child"  # Выбор ребенка
+    S_C = f"{BASE}_sel_child"  # Выбор ребенка
 
 class CPP_PERFORMANCE:
     BASE = "par_get_per"
-    S_C = f"{BASE}_select_child"  # Выбор ребенка
-    S_G = f"{BASE}_select_group"  # Выбор группы
-    S_M = f"{BASE}_select_month"  # Выбор месяца
+    S_C = f"{BASE}_sel_child"  # Выбор ребенка
+    S_G = f"{BASE}_sel_group"  # Выбор группы
+    S_M = f"{BASE}_sel_month"  # Выбор месяца
 
 class CPP_ATTENDANCE:
     BASE = "par_get_att"
-    S_C = f"{BASE}_select_child"  # Выбор ребенка
-    S_G = f"{BASE}_select_group"  # Выбор группы
-    S_M = f"{BASE}_select_month"  # Выбор месяца
+    S_C = f"{BASE}_sel_child"  # Выбор ребенка
+    S_G = f"{BASE}_sel_group"  # Выбор группы
+    S_M = f"{BASE}_sel_month"  # Выбор месяца
 
 
 class CAP:

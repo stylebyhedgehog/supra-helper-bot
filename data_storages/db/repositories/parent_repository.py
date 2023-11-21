@@ -10,6 +10,9 @@ class ParentRepository:
             parent = Parent(telegram_id=telegram_id, name=name, phone_number=phone_number, telegram_username=telegram_username)
             session.add(parent)
             session.commit()
+            session.refresh(parent)
+
+            return parent.id
 
     @staticmethod
     def find_by_telegram_id(telegram_id):
@@ -20,7 +23,7 @@ class ParentRepository:
     @staticmethod
     def find_by_child_alfa_id(child_alfa_id):
         with DatabaseManager.get_db() as session:
-            parent = session.query(Parent).join(Child, Parent.telegram_id == Child.parent_telegram_id) \
+            parent = session.query(Parent).join(Child, Parent.id == Child.parent_id) \
                 .filter(Child.child_alfa_id == child_alfa_id).first()
 
             return parent

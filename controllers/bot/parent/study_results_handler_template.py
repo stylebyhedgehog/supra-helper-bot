@@ -4,6 +4,7 @@ from exceptions.bot_error_handler import bot_error_handler
 from services.api.alfa.cgi import CgiDataService
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.messages import PPM_STUDY_RESULTS
+from utils.logger import Logger
 
 
 def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_RESULTS, get_result_function, location):
@@ -15,6 +16,7 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if children is None:
             bot.edit_message_text(ppm_messages.ERROR_CHILDREN_NOT_FOUND,
                                   chat_id=message.chat.id, message_id=message.message_id)
+            Logger.bot_handled_error(message.chat.id, f"location: {location}. Parent's children not found")
             return
 
         children_amount = len(children)
@@ -56,6 +58,7 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if child_groups is None:
             bot.edit_message_text(ppm_messages.ERROR_GROUPS_NOT_FOUND, chat_id=message.chat.id,
                                   message_id=message.message_id)
+            Logger.bot_handled_error(message.chat.id, f"location: {location}. Groups for child with alfa_id={child_alfa_id} not found")
             return
 
         child_groups_amount = len(child_groups)
@@ -75,24 +78,37 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
     def group_selection(child_alfa_id, group_alfa_id, message):
         month_names = CgiDataService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
         markup = InlineKeyboardMarkup(row_width=1)
-        for month in month_names:
-            date_y_m = month['year_month']
-            button = InlineKeyboardButton(month["month_name"],
-                                          callback_data=f"{cpp_steps.S_M}_{child_alfa_id}_{group_alfa_id}_{date_y_m}")
-            markup.add(button)
+        if month_names:
+            for month in month_names:
+                date_y_m = month['year_month']
+                button = InlineKeyboardButton(month["month_name"],
+                                              callback_data=f"{cpp_steps.S_M}_{child_alfa_id}_{group_alfa_id}_{date_y_m}")
+                markup.add(button)
 
-        bot.edit_message_text(ppm_messages.INFO_MONTH_SELECTION,
-                              chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
+            bot.edit_message_text(ppm_messages.INFO_MONTH_SELECTION,
+                                  chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
+        else:
+            bot.edit_message_text(ppm_messages.ERROR_MONTHS_NOT_FOUND, chat_id=message.chat.id,
+                                  message_id=message.message_id)
+            Logger.bot_handled_error(message.chat.id,
+                                     f"location: {location}. Months of education for child with alfa_id={child_alfa_id} in group with alfa_id={group_alfa_id} not found")
 
     @bot_error_handler(bot, location)
     def month_selection(child_alfa_id, child_group_alfa_id, date_y_m, message):
         data = get_result_function(child_alfa_id, child_group_alfa_id, date_y_m)
         if data:
             msg = ppm_messages.RESULT(*data)
+            bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
+            Logger.bot_handled_error(message.chat.id,
+                                     f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
+
         else:
             msg = ppm_messages.ERROR_LESSONS_NOT_FOUND
-        bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
+            bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
+            Logger.bot_info(message.chat.id,
+                                     f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} successfully formed")
 
 
-# Similarly, you can define handlers for performance in the same file
+
+
 

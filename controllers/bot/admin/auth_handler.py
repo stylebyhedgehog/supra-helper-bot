@@ -1,6 +1,7 @@
 from exceptions.bot_error_handler import bot_error_handler
 from services.bot.authentication_service import AuthenticationService
 from utils.constants.messages import PAM_AUTH
+from utils.logger import Logger
 
 
 def register_admin_auth_handlers(bot):
@@ -15,6 +16,13 @@ def register_admin_auth_handlers(bot):
             username = AuthenticationService.authorize_admin(admin_password, message.chat.id, message.from_user.username)
             if username:
                 msg = PAM_AUTH.RESULT(username)
+                bot.send_message(message.chat.id, msg)
+                Logger.bot_info(message.chat.id,
+                                f"location: authentication. Admin with tg_username={username} successfully authenticated")
+
             else:
                 msg = PAM_AUTH.ERROR_WRONG_PASSWORD
-            bot.send_message(message.chat.id, msg)
+                bot.send_message(message.chat.id, msg)
+                Logger.bot_handled_error(message.chat.id,
+                                         f"location: admin_authentication. Admin with tg_username={username} not authenticated")
+

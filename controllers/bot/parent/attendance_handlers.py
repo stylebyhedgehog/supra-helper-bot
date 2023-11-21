@@ -10,5 +10,5 @@ def register_attendance_handlers(bot):
                                     CPP_ATTENDANCE,
                                     PPM_ATTENDANCE,
                                     AttendanceService.get_attendance,
-                            "attendance")
+                                    "attendance")
 

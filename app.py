@@ -146,6 +146,7 @@ if os.getenv("DEV_MODE") == "0":
         FileUtil.clear_json(file_path2)
         FileUtil.clear_json(file_path3)
         clear_all_tables()
+        return jsonify(""), 200
 
     def is_lesson_conducted(json):
         if json["fields_new"]["status"] == 3:

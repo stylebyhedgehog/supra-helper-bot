@@ -23,7 +23,8 @@ class FileUtil:
                     old_list = json.load(json_file)
             except (FileNotFoundError, json.JSONDecodeError):
                 old_list = []
-
+            if len(old_list) == 0:
+                old_list = []
             old_list.append(new_dict)
 
             with open(file_path, 'w', encoding='utf-8') as json_file:
@@ -32,7 +33,7 @@ class FileUtil:
     @staticmethod
     def clear_json(file_path):
         with open(file_path, 'w', encoding='utf-8') as json_file:
-            json.dump("", json_file, indent=2, ensure_ascii=False)
+            json.dump('', json_file, indent=2, ensure_ascii=False)
 
     @staticmethod
     def read_from_json_file(file_path):

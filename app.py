@@ -40,6 +40,13 @@ register_balance_handlers(bot)
 
 mailer = Mailer(bot)
 
+#todo вынести обработчики в отдельный файл
+#todo при получении успеваемости для ая и кк разное содержимое
+#todo записывать логи в файлы
+#todo красивый вывод базовой информации из json
+#todo отловка ошибок для рассылки
+#todo разворачивать бд автоматически, создавать json файлы автоматически
+#todo выяснить в чем проблема при send_recordings_on_recording_completed
 
 if os.getenv("DEV_MODE") == "0":
     @app.route('/', methods=['GET'])
@@ -164,20 +171,20 @@ if os.getenv("DEV_MODE") == "0":
 
 
 else:
-    # clear_all_tables()
-    # import tracemalloc
-    # print("start")
-    # clear_all_tables()
-    # tracemalloc.start()
-    #
-    # test_manager = TestManager(mailer)
+    clear_all_tables()
+    import tracemalloc
+    print("start")
+    clear_all_tables()
+    tracemalloc.start()
+
+    test_manager = TestManager(mailer)
     # test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
-    # test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
-    #
-    #
-    # current, peak = tracemalloc.get_traced_memory()
-    # tracemalloc.stop()
-    # print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
-    # print("end")
-    bot.polling(none_stop=True)
+    test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
+
+
+    current, peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+    print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
+    print("end")
+    # bot.polling(none_stop=True)
 

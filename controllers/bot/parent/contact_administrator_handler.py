@@ -13,9 +13,9 @@ def register_contact_administrator_handlers(bot):
         if administrators:
             admin = administrators[0]
             bot.send_message(message.chat.id, PPM_CONTACT.RESULT(admin.telegram_username))
-            Logger.bot_info(message.chat.id,
-                            f"location: contact_administrator. Contact of admin with tg_username={admin.telegram_username} successfully recieved")
+            Logger.bot_info(message.chat.id, "contact_administrator",
+                            f"Contact of admin with tg_username={admin.telegram_username} successfully recieved")
         else:
             bot.send_message(message.chat.id, PPM_CONTACT.ERROR_ADMIN_NOT_FOUND)
-            Logger.bot_handled_error(message.chat.id,
-                            f"location: contact_administrator. Administrators not found")
+            Logger.bot_handled_error(message.chat.id, "contact_administrator",
+                            f"Administrators not found")

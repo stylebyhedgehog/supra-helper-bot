@@ -17,12 +17,11 @@ def register_admin_auth_handlers(bot):
             if username:
                 msg = PAM_AUTH.RESULT(username)
                 bot.send_message(message.chat.id, msg)
-                Logger.bot_info(message.chat.id,
-                                f"location: authentication. Admin with tg_username={username} successfully authenticated")
+                Logger.bot_info(message.chat.id, "admin_authentication", f"Admin with tg_username={username} successfully authenticated")
 
             else:
                 msg = PAM_AUTH.ERROR_WRONG_PASSWORD
                 bot.send_message(message.chat.id, msg)
-                Logger.bot_handled_error(message.chat.id,
-                                         f"location: admin_authentication. Admin with tg_username={username} not authenticated")
+                Logger.bot_handled_error(message.chat.id, "admin_authentication",
+                                         f"Admin with tg_username={username} not authenticated")
 

@@ -10,7 +10,7 @@ from services.mailing.send_reports import ReportMailer
 class Mailer:
     def __init__(self, bot):
         self.bot = bot
-        self.lock = threading.Lock()
+        # self.lock = threading.Lock()
 
     @mailing_error_handler
     def send_balance(self, lesson_info):

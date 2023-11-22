@@ -1,4 +1,3 @@
-import logging
 import os
 
 from data_storages.db.repositories.absent_child_repository import AbsentChildRepository
@@ -12,6 +11,7 @@ from services.api.zoom.recordings import RecordingsDataService, RecordingFetchin
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
+from utils.logger import Logger
 
 
 class RecordingMailerOnLessonHeld:
@@ -30,6 +30,7 @@ class RecordingMailerOnLessonHeld:
             room_num = RoomDataService.get_room_num_by_id(room_id)
 
             if room_num is None:
+                Logger.mailing_handled_error("mailing_recording_on_lesson_held", f"Room num not specified for lesson with id {lesson_id}")
                 return
 
             resp = RecordingsDataService.by_room_num_group_id_dates_from_to(room_num, group_id, utc_lesson_date, start_time)
@@ -55,6 +56,7 @@ class RecordingMailerOnLessonHeld:
             unique_parents_tg_ids = RecordingMailerOnLessonHeld._get_unique_parents_tg_ids(absent_children)
             for unique_parent_tg_id in unique_parents_tg_ids:
                 bot.send_message(unique_parent_tg_id, recording_info)
+                Logger.mailing_info(unique_parent_tg_id, "mailing_recording_on_lesson_held", "Successfully mailed")
 
     @staticmethod
     def _save_absent_children(absent_children, room_num, start_date, start_time, group_id, group_name, lesson_topic, lesson_id):
@@ -123,7 +125,7 @@ class RecordingMailerOnLessonHeld:
             }
             FileUtil.add_to_json_file(data, path)
         except Exception as e:
-            logging.error(f"Ошибка записи информации о записях в файл {e}")
+            Logger.mailing_handled_error("mailing_recording_on_lesson_held", f"Error on writing in file: {e}")
 
 
 

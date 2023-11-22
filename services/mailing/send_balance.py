@@ -7,6 +7,7 @@ from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
 from utils.constants.messages import PPM_BALANCE_NOTIFICATION_DISPATCHING
 from utils.file_utils import FileUtil
+from utils.logger import Logger
 
 
 class BalanceMailer:
@@ -23,8 +24,10 @@ class BalanceMailer:
 
                     parent = ParentRepository.find_by_child_alfa_id(child_id)
                     balance_info = PPM_BALANCE_NOTIFICATION_DISPATCHING.RESULT(balance, paid_count, name)
-                    BalanceMailer._send_notification_message(parent, balance_info, bot)
                     BalanceMailer._write_in_json(child_id, group_id, date, balance_info, parent)
+                    BalanceMailer._send_notification_message(parent, balance_info, bot)
+            else:
+                Logger.mailing_handled_error("mailing_balance", f"Error on receiving balance of child with alfa_id={child_id}")
 
     @staticmethod
     def _write_in_json(child_id, group_id, date, info, parent):
@@ -43,7 +46,7 @@ class BalanceMailer:
             }
             FileUtil.add_to_json_file(data, path)
         except Exception as e:
-            logging.error(f"Ошибка записи информации о балансе в файл {e}")
+            Logger.mailing_handled_error("mailing_balance", f"Error on writing in file: {e}")
 
     @staticmethod
     def _send_notification_message(parent, info, bot):
@@ -56,3 +59,5 @@ class BalanceMailer:
                                                   url="https://supraschool.ru/indiv")
                 markup.add(button_grp, button_ind)
                 bot.send_message(parent.telegram_id, info, reply_markup=markup)
+                Logger.mailing_info(parent.telegram_id, "mailing_balance", "Successfully mailed")
+

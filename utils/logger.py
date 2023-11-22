@@ -15,22 +15,40 @@ class Logger:
         logging.error(text)
 
     @staticmethod
-    def bot_info(user_tg_id, full_info):
-        text = f"Bot. User telegram chat id: {user_tg_id}. Info: {full_info}"
+    def bot_info(user_tg_id, location, full_info):
+        text = f"Bot. Location: {location}. User telegram chat id: {user_tg_id}. Info: {full_info}"
         logging.info(text)
 
     @staticmethod
-    def bot_handled_error(user_tg_id, full_info):
-        text = f"Bot Handled Error. User telegram chat id: {user_tg_id}. Error text: {full_info}"
+    def bot_handled_error(user_tg_id, location, full_info):
+        text = f"Bot Handled Error. Location: {location}. User telegram chat id: {user_tg_id}. Error text: {full_info}"
         logging.warning(text)
 
     @staticmethod
-    def bot_unhandled_error(user_tg_id, full_error_info):
-        text = f"Bot Unhandled(Critical) Error. User telegram chat id: {user_tg_id}\n\t{full_error_info}"
+    def bot_unhandled_error(user_tg_id, location, error_text, traceback_text):
+        text = f"Bot Unhandled(Critical) Error. Location: {location}"
+        text += f"\nUser telegram chat id: {user_tg_id}"
+        text += f"\nError: {error_text}"
+        text += f"\nTraceback: {traceback_text}"
         logging.error(text)
 
     @staticmethod
-    def mailing_error(full_error_info):
-        logging.error(full_error_info)
+    def mailing_info(user_tg_id, location, full_info):
+        text = f"Mailing. Location: {location}. User telegram chat id: {user_tg_id}. Info: {full_info}"
+        logging.info(text)
+
+    @staticmethod
+    def mailing_handled_error(location, full_info):
+        text = f"Bot Handled Error. Location: {location}. Error text: {full_info}"
+        logging.warning(text)
+
+
+    @staticmethod
+    def mailing_unhandled_error(location, error_text, traceback_text, input_data):
+        text = f"Mailing Unhandled(Critical) Error. Location: {location}"
+        text += f"\nError: {error_text}"
+        text += f"\nInput (lesson/zoom json): {input_data}"
+        text += f"\nTraceback: {traceback_text}"
+        logging.error(text)
 
 

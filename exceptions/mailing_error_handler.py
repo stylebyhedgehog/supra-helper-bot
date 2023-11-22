@@ -14,9 +14,8 @@ def mailing_error_handler(func):
         try:
             return func(self, *args, **kwargs)
         except Exception as e:
-            location = kwargs.get('loc', '') or func.__name__
-            full_error_info = f"Ошибка при рассылке \n\tlocation: {location}\n\terror: {e}\n\ttraceback: {traceback.format_exc()}"
-            Logger.mailing_error(full_error_info)
-            bot.send_message(os.getenv("DEVELOPER_TG_CHAT_ID"), full_error_info)
+            location = func.__name__
+            Logger.mailing_unhandled_error(location, e, traceback.format_exc(), args[0])
+            bot.send_message(os.getenv("DEVELOPER_TG_CHAT_ID"), f"Critical error on mailing, location={location}")
 
     return wrapper

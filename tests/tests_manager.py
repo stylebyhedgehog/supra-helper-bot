@@ -34,6 +34,8 @@ class TestManager:
             mailing_reports.start_test_in_multy_thread()
 
 
+
+
 class TestMode(Enum):
     ONE_THREAD = 1
     MULTY_THREAD = 2

@@ -1,4 +1,3 @@
-import logging
 import os
 
 from data_storages.db.repositories.absent_child_repository import AbsentChildRepository
@@ -8,6 +7,7 @@ from services.api.alfa.customer import CustomerDataService
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
+from utils.logger import Logger
 from utils.string_utils import StringUtil
 
 
@@ -34,6 +34,7 @@ class RecordingMailerOnRecordingCompleted:
             unique_parents_tg_ids = RecordingMailerOnRecordingCompleted._get_unique_parents_tg_ids(absent_children)
             for unique_parent_tg_id in unique_parents_tg_ids:
                 bot.send_message(unique_parent_tg_id, recording_info)
+                Logger.mailing_info(unique_parent_tg_id, "mailing_recording_on_recording_completed", "Successfully mailed")
 
     @staticmethod
     def _get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic):
@@ -90,20 +91,16 @@ class RecordingMailerOnRecordingCompleted:
 
     @staticmethod
     def _extract_zoom_info(zoom_data):
-        try:
-            payload = zoom_data.get("payload", {})
-            object_info = payload.get("object", {})
+        payload = zoom_data.get("payload", {})
+        object_info = payload.get("object", {})
 
-            topic = object_info.get("topic", "")
-            host_email = object_info.get("host_email", "")
-            start_time = object_info.get("start_time", "")
-            share_url = object_info.get("share_url", "")
-            passcode = object_info.get("recording_play_passcode", "")
-            return topic, host_email, start_time, share_url, passcode
+        topic = object_info.get("topic", "")
+        host_email = object_info.get("host_email", "")
+        start_time = object_info.get("start_time", "")
+        share_url = object_info.get("share_url", "")
+        passcode = object_info.get("recording_play_passcode", "")
+        return topic, host_email, start_time, share_url, passcode
 
-        except Exception as e:
-            print(f"Error extracting Zoom info: {str(e)}")
-            return None, None, None, None, None
 
     @staticmethod
     def _write_in_json(group_name, lesson_id, lesson_topic, start_date, start_time, mailing_info,
@@ -122,4 +119,4 @@ class RecordingMailerOnRecordingCompleted:
             }
             FileUtil.add_to_json_file(data, path)
         except Exception as e:
-            logging.error(f"Ошибка записи информации о записях в файл {e}")
+            Logger.mailing_handled_error("mailing_recording_on_recording_completed", f"Error on writing in file: {e}")

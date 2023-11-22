@@ -12,6 +12,7 @@ class MailingRecordingsOnLessonHeldTest(MailingTest):
 
 
 class MailingRecordingsOnRecordingCompletedTest(MailingTest):
+    #todo не работает
     def _threadable_task(self, mailer, json):
         mailer.send_recordings_on_recording_completed(json)
         print(json)
@@ -27,7 +28,7 @@ class MailingRecordingsOnRecordingCompletedTest(MailingTest):
     def _form_test_recording_json(self, lesson):
         seconds = str(random.randint(1, 50))
         utc_date, utc_time = DateUtil.moscow_to_utc(lesson.start_date + " " + lesson.start_time+f":{seconds}")
-        utc_datetime = f"{utc_date}T{utc_time}Z"
+        utc_datetime = f"{utc_date}T{utc_time}:{seconds}Z"
         return {
             "payload": {
                 "account_id": "n9D1u_kRQhe-GBbRTpT4mQ",

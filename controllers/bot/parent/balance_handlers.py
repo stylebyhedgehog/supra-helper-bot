@@ -17,7 +17,7 @@ def register_balance_handlers(bot):
         if children is None:
             bot.edit_message_text(chat_id=message.chat.id, message_id=message.message_id,
                                   text=PPM_BALANCE.ERROR_CHILDREN_NOT_FOUND)
-            Logger.bot_handled_error(message.chat.id, f"location: balance. Parent's children not found")
+            Logger.bot_handled_error(message.chat.id, "balance", f"Parent's children not found")
             return
 
         children_amount = len(children)
@@ -53,9 +53,9 @@ def register_balance_handlers(bot):
                 markup.add(button_grp, button_ind)
             msg = PPM_BALANCE.RESULT(name, balance, paid_count)
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
-            Logger.bot_info(message.chat.id,
-                            f"location: balance. Balance info for child with alfa_id={child_alfa_id} successfully formed")
+            Logger.bot_info(message.chat.id, "balance",
+                            f"Balance info for child with alfa_id={child_alfa_id} successfully formed")
         else:
             msg = PPM_BALANCE.ERROR_UNHANDLED
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
-            Logger.bot_handled_error(message.chat.id, f"location: balance. Balance info for child with alfa_id={child_alfa_id} not formed")
+            Logger.bot_handled_error(message.chat.id,"balance", f"Balance info for child with alfa_id={child_alfa_id} not formed")

@@ -57,10 +57,11 @@ def register_parent_auth_handlers(bot):
             string_children_names = StringUtil.list_to_string(saved_children_names)
             msg = PPM_AUTH.RESULT(string_children_names)
             bot.send_message(message.chat.id, msg)
-            Logger.bot_info(parent_tg_id, f"location: authentication. Parent with phone_number={phone_number} and tg_username={username} successfully authenticated")
+            Logger.bot_info(parent_tg_id,"parent_authentication",
+                            f"Parent with phone_number={phone_number} and tg_username={username} successfully authenticated")
 
         else:
             msg = PPM_AUTH.ERROR_AUTH_FAILED
             bot.send_message(message.chat.id, msg)
-            Logger.bot_handled_error(parent_tg_id,
-                                     f"location: authentication. Parent with phone_number={phone_number} and tg_username={username} not authenticated")
+            Logger.bot_handled_error(parent_tg_id,"parent_authentication",
+                                     f"Parent with phone_number={phone_number} and tg_username={username} not authenticated")

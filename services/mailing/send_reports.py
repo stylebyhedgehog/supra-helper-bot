@@ -1,4 +1,3 @@
-import logging
 import os
 
 from data_storages.db.repositories.parent_repository import ParentRepository
@@ -7,6 +6,7 @@ from services.api.alfa.group import GroupDataService
 from services.bot.report_service import ReportService
 from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
+from utils.logger import Logger
 from utils.string_utils import StringUtil
 
 
@@ -52,11 +52,13 @@ class ReportMailer:
             }
             FileUtil.add_to_json_file(data,path)
         except Exception as e:
-            logging.error(f"Ошибка записи отчета в файл {e}")
+            Logger.mailing_handled_error("mailing_reports", f"Error on writing in file: {e}")
 
     @staticmethod
     def _send_notification_message(parent, info, bot):
         if os.getenv("MAILING_MODE") == 1:
             if parent:
                 bot.send_message(parent.telegram_id, info)
+                Logger.mailing_info(parent.telegram_id, "mailing_reports",
+                                    "Successfully mailed")
 

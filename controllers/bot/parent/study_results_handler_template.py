@@ -16,7 +16,7 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if children is None:
             bot.edit_message_text(ppm_messages.ERROR_CHILDREN_NOT_FOUND,
                                   chat_id=message.chat.id, message_id=message.message_id)
-            Logger.bot_handled_error(message.chat.id, f"location: {location}. Parent's children not found")
+            Logger.bot_handled_error(message.chat.id, location, f"Parent's children not found")
             return
 
         children_amount = len(children)
@@ -58,7 +58,7 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if child_groups is None:
             bot.edit_message_text(ppm_messages.ERROR_GROUPS_NOT_FOUND, chat_id=message.chat.id,
                                   message_id=message.message_id)
-            Logger.bot_handled_error(message.chat.id, f"location: {location}. Groups for child with alfa_id={child_alfa_id} not found")
+            Logger.bot_handled_error(message.chat.id, location, f"Groups for child with alfa_id={child_alfa_id} not found")
             return
 
         child_groups_amount = len(child_groups)
@@ -90,8 +90,8 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         else:
             bot.edit_message_text(ppm_messages.ERROR_MONTHS_NOT_FOUND, chat_id=message.chat.id,
                                   message_id=message.message_id)
-            Logger.bot_handled_error(message.chat.id,
-                                     f"location: {location}. Months of education for child with alfa_id={child_alfa_id} in group with alfa_id={group_alfa_id} not found")
+            Logger.bot_handled_error(message.chat.id, location,
+                                     f"Months of education for child with alfa_id={child_alfa_id} in group with alfa_id={group_alfa_id} not found")
 
     @bot_error_handler(bot, location)
     def month_selection(child_alfa_id, child_group_alfa_id, date_y_m, message):
@@ -99,15 +99,15 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if data:
             msg = ppm_messages.RESULT(*data)
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
-            Logger.bot_info(message.chat.id,
-                            f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} successfully formed")
+            Logger.bot_info(message.chat.id, location,
+                            f"{location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} successfully formed")
 
 
         else:
             msg = ppm_messages.ERROR_LESSONS_NOT_FOUND
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
-            Logger.bot_handled_error(message.chat.id,
-                             f"location: {location}. {location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
+            Logger.bot_handled_error(message.chat.id, location,
+                             f"{location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
 
 
 

@@ -31,11 +31,27 @@
 <body>
     <div class="admin-panel">
         <h2>Панель администратора</h2>
-        <a class="link" href="{{ url_for('mailing_results_balance') }}">Результаты расслыки Информации о балансе</a>
-        <a class="link" href="{{ url_for('mailing_results_reports') }}">Результаты расслыки Отчетов</a>
-        <a class="link" href="{{ url_for('mailing_results_recordings') }}">Результаты расслыки Записей</a>
-        <br><br>
+        <a style="color:green" class="link" href="{{ url_for('mailing_results_balance') }}">Результаты расслыки Информации о балансе</a>
+        <a style="color:green" class="link" href="{{ url_for('mailing_results_reports') }}">Результаты расслыки Отчетов</a>
+        <a style="color:green" class="link" href="{{ url_for('mailing_results_recordings') }}">Результаты расслыки Записей</a>
+        <br>
+        <hr>
+        <br>
+        <a style="color:cornflowerblue" class="link" href="{{ url_for('info_logs') }}">Информационные логи</a>
+        <a style="color:cornflowerblue" class="link" href="{{ url_for('unhandled_errors_logs') }}">Логи критических ошибок</a>
+        <a style="color:cornflowerblue" class="link" href="{{ url_for('handled_errors_logs') }}">Логи обработанных ошибок</a>
+        <br>
+        <hr>
+        <br>
         <a style="color:red" class="link" href="{{ url_for('update_tg_bot_webhook') }}">Обновить Webhook для бота</a>
+        <br>
+        <hr>
+        <br>
+        <a style="color:red" class="link" href="{{ url_for('start_onethread_tests') }}">Запустить однопоточные тесты</a>
+        <a style="color:red" class="link" href="{{ url_for('start_multythread_tests') }}">Запустить многопоточные тесты</a>
+        <a style="color:red" class="link" href="{{ url_for('clear_json_and_db') }}">Очистить таблицы и json файлы</a>
+        <a style="color:red" class="link" href="{{ url_for('clear_logs') }}">Очистить логи</a>
+
     </div>
 </body>
 </html>

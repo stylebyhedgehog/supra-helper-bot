@@ -43,5 +43,5 @@ class DatabaseManager:
         if not cls._db_instance:
             raise Exception("Database not initialized. Call init_db() first.")
         return cls._db_instance.session
-#
+
 

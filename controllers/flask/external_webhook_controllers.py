@@ -1,7 +1,8 @@
 import telebot
-from flask import request, jsonify
+from flask import request, jsonify, render_template_string
 import os
 
+from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.api.alfa.lesson import LessonFetcher
 from utils.encryption import Encryption
 
@@ -15,11 +16,12 @@ def register_external_webhook_controllers(app, bot, mailer):
         return '', 200
 
     @app.route("/update_tg_bot_webhook")
+    @flask_controller_error_handler
     def update_tg_bot_webhook():
         bot.remove_webhook()
         full_url = os.getenv("HOST_ROOT") + "/tg_webhook/" + os.getenv("BOT_TOKEN")
         bot.set_webhook(url=os.getenv("HOST_ROOT") + "/tg_webhook/" + os.getenv("BOT_TOKEN"))
-        return f"<h2>Обновленный url вебхука - {full_url}</h2>", 200
+        return render_template_string(f"<h2>Обновленный url вебхука - {full_url}</h2>")
 
     @app.route('/zoom_webhook/recording_completed/', methods=['POST'])
     def zoom_webhook_recording_completed():

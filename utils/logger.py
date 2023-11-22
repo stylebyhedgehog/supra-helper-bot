@@ -71,8 +71,21 @@ class Logger:
 
         Logger._write_log_in_file(text, "unhandled_errors.txt")
 
+    # FLASK CONTROLLER
+    @staticmethod
+    def flask_controller_unhandled_error(location, error_text, traceback_text):
+        text = f"Flask Controller Unhandled(Critical) Error. Location: {location}"
+        text += f"\nError: {error_text}"
+        text += f"\nTraceback: {traceback_text}"
+        logging.error(text)
+
+        Logger._write_log_in_file(text, "unhandled_errors.txt")
+
     @staticmethod
     def _write_log_in_file(text, filename):
-        text = DateUtil.get_current_moscow_time() + "\n" + text
+        res = f"{10*'-'}{DateUtil.get_current_moscow_time()}{10*'-'}"
+        res += f"\n{text}"
+        res += f"\n{30*'-'}\n"
         file_path = FileUtil.get_path_to_log_file(filename)
-        FileUtil.add_to_txt_file(text, file_path)
+        FileUtil.add_to_txt_file(res, file_path)
+

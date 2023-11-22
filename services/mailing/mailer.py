@@ -1,5 +1,3 @@
-import threading
-
 from exceptions.mailing_error_handler import mailing_error_handler
 from services.mailing.send_balance import BalanceMailer
 from services.mailing.send_recordings_on_lesson_held import RecordingMailerOnLessonHeld

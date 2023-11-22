@@ -12,6 +12,7 @@ from controllers.bot.parent.balance_handlers import register_balance_handlers
 from controllers.bot.parent.contact_administrator_handler import register_contact_administrator_handlers
 from controllers.bot.parent.performance_handlers import register_performance_handlers
 from controllers.flask.admin_panel_controllers import register_admin_panel_controllers
+from controllers.flask.log_controller import register_log_controllers
 from controllers.flask.mailing_result_controllers import register_mailing_results_controllers
 from controllers.flask.external_webhook_controllers import register_external_webhook_controllers
 from controllers.flask.test_controllers import register_test_controllers
@@ -37,13 +38,11 @@ register_balance_handlers(bot)
 
 mailer = Mailer(bot)
 
-#todo вынести обработчики в отдельный файл
 #todo при получении месяцев обучения выводится некорректно
 #todo изменить процесс авторизации родителей
 #todo при получении успеваемости для ая и кк разное содержимое
-#todo красивый вывод базовой информации из json
-#todo разворачивать бд автоматически, создавать json файлы автоматически
-#todo выяснить в чем проблема при send_recordings_on_recording_completed
+#todo разворачивать бд автоматически, создавать json и txt файлы автоматически
+#todo выяснить в чем проблема при send_recordings_on_recording_completed в многопоточной среде
 # todo добавить вебхуки в альфа и зум
 
 if os.getenv("DEV_MODE") == "0":
@@ -52,6 +51,7 @@ if os.getenv("DEV_MODE") == "0":
     register_external_webhook_controllers(app, bot, mailer)
     register_mailing_results_controllers(app)
     register_test_controllers(app, mailer)
+    register_log_controllers(app)
 
 
 else:
@@ -78,7 +78,10 @@ else:
     # print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
     # print("end")
     register_admin_panel_controllers(app)
+    register_external_webhook_controllers(app, bot, mailer)
     register_mailing_results_controllers(app)
+    register_test_controllers(app, mailer)
+    register_log_controllers(app)
     app.run()
 
     # bot.polling(none_stop=True)

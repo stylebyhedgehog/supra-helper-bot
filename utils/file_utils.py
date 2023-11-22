@@ -60,6 +60,11 @@ class FileUtil:
             file_to_write.write(data + '\n')
 
     @staticmethod
+    def clear_txt(file_path):
+        with open(file_path, 'w', encoding='utf-8') as file_to_write:
+            file_to_write.write('')
+
+    @staticmethod
     def read_from_txt_file(file_path):
         with open(file_path, 'r', encoding='utf-8') as file_to_read:
             content = file_to_read.read()

@@ -57,7 +57,7 @@ if os.getenv("DEV_MODE") == "0":
     register_mailing_results_controllers(app)
     register_test_controllers(app, mailer)
     register_log_controllers(app)
-
+    print("поменялось")
 
 else:
     pass

@@ -1,28 +1,40 @@
 import logging
 
+from utils.date_utils import DateUtil
+from utils.file_utils import FileUtil
+
 
 class Logger:
     @staticmethod
-    def api_error(url, payload, params, message):
-        logging.error(f"Api Error\n\tUrl: {url}\n\tpayload: {payload}\n\tparams: {params}\n\tmessage: {message}")
+    def api_handled_error(url, payload, params, message):
+        text = f"Api \n\tUrl: {url}\n\tpayload: {payload}\n\tparams: {params}\n\tmessage: {message}"
+        logging.warning(text)
 
+        Logger._write_log_in_file(text, "handled_errors.txt")
 
     @staticmethod
     def entity_not_found_error(name, **kwargs):
-        text = f"Entity with name = {name} not found\nSearch parameters"
+        text = f"Entity nor found = {name} not found\nSearch parameters"
         for key, value in kwargs.items():
             text += f"\n\t{key} = {value}"
-        logging.error(text)
+        logging.warning(text)
 
+        Logger._write_log_in_file(text, "handled_errors.txt")
+
+    # BOT
     @staticmethod
     def bot_info(user_tg_id, location, full_info):
         text = f"Bot. Location: {location}. User telegram chat id: {user_tg_id}. Info: {full_info}"
         logging.info(text)
 
+        Logger._write_log_in_file(text, "info.txt")
+
     @staticmethod
     def bot_handled_error(user_tg_id, location, full_info):
         text = f"Bot Handled Error. Location: {location}. User telegram chat id: {user_tg_id}. Error text: {full_info}"
         logging.warning(text)
+
+        Logger._write_log_in_file(text, "handled_errors.txt")
 
     @staticmethod
     def bot_unhandled_error(user_tg_id, location, error_text, traceback_text):
@@ -32,16 +44,22 @@ class Logger:
         text += f"\nTraceback: {traceback_text}"
         logging.error(text)
 
+        Logger._write_log_in_file(text, "unhandled_errors.txt")
+
+    # MAILING
     @staticmethod
     def mailing_info(user_tg_id, location, full_info):
         text = f"Mailing. Location: {location}. User telegram chat id: {user_tg_id}. Info: {full_info}"
         logging.info(text)
 
+        Logger._write_log_in_file(text, "info.txt")
+
     @staticmethod
     def mailing_handled_error(location, full_info):
-        text = f"Bot Handled Error. Location: {location}. Error text: {full_info}"
+        text = f"Mailing Handled Error. Location: {location}. Error text: {full_info}"
         logging.warning(text)
 
+        Logger._write_log_in_file(text, "handled_errors.txt")
 
     @staticmethod
     def mailing_unhandled_error(location, error_text, traceback_text, input_data):
@@ -51,4 +69,10 @@ class Logger:
         text += f"\nTraceback: {traceback_text}"
         logging.error(text)
 
+        Logger._write_log_in_file(text, "unhandled_errors.txt")
 
+    @staticmethod
+    def _write_log_in_file(text, filename):
+        text = DateUtil.get_current_moscow_time() + "\n" + text
+        file_path = FileUtil.get_path_to_log_file(filename)
+        FileUtil.add_to_txt_file(text, file_path)

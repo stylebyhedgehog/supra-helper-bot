@@ -113,3 +113,10 @@ class DateUtil:
         utc_date = moscow_datetime.strftime('%Y-%m-%d')
         utc_time = moscow_datetime.strftime('%H:%M')
         return utc_date, utc_time
+
+    @staticmethod
+    def get_current_moscow_time():
+        current_time_utc = datetime.utcnow()
+        moscow_time_difference = timedelta(hours=3)
+        current_time_moscow = current_time_utc + moscow_time_difference
+        return current_time_moscow.strftime('%Y-%m-%d %H:%M:%S')

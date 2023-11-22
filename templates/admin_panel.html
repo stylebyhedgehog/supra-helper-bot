@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        .admin-panel {
+            border: 1px solid #ddd;
+            padding: 15px;
+            background-color: #fff;
+        }
+
+        .link {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-panel">
+        <h2>Панель администратора</h2>
+        <a class="link" href="{{ url_for('mailing_results_balance') }}">Результаты расслыки Информации о балансе</a>
+        <a class="link" href="{{ url_for('mailing_results_reports') }}">Результаты расслыки Отчетов</a>
+        <a class="link" href="{{ url_for('mailing_results_recordings') }}">Результаты расслыки Записей</a>
+        <br><br>
+        <a style="color:red" class="link" href="{{ url_for('update_tg_bot_webhook') }}">Обновить Webhook для бота</a>
+    </div>
+</body>
+</html>

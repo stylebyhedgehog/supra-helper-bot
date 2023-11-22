@@ -1,0 +1,18 @@
+2023-11-22 12:35:36
+Entity nor found = Room (Room num) not found
+Search parameters
+	alfa_room_id = None
+2023-11-22 12:35:36
+Mailing Handled Error. Location: mailing_recording_on_lesson_held. Error text: Room num not specified for lesson with id 28482
+2023-11-22 12:37:14
+Entity nor found = Room (Room num) not found
+Search parameters
+	alfa_room_id = None
+2023-11-22 12:37:14
+Mailing Handled Error. Location: mailing_recording_on_lesson_held. Error text: Room num not specified for lesson with id 26615
+2023-11-22 12:37:41
+Entity nor found = Room (Room num) not found
+Search parameters
+	alfa_room_id = None
+2023-11-22 12:37:41
+Mailing Handled Error. Location: mailing_recording_on_lesson_held. Error text: Room num not specified for lesson with id 25483

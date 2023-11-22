@@ -31,6 +31,8 @@ token.txt
 *.log
 *.sql
 *.sqlite
+*.db
+data_storages/db/sqlite.db
 
 # OS generated files
 .DS_Store
@@ -42,3 +44,4 @@ ehthumbs.db
 Thumbs.db
 
 .env
+

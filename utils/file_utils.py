@@ -21,6 +21,11 @@ class FileUtil:
         current_directory = os.path.dirname(os.path.abspath(__file__))
         return os.path.join(current_directory, f"../data_storages/files/logs/{filename}")
 
+    @staticmethod
+    def get_path_to_sql_init():
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        return os.path.join(current_directory, f"../data_storages/db/schema.sql")
+
     # JSON FILES
     @staticmethod
     def add_to_json_file(new_dict, file_path):

@@ -3,6 +3,8 @@ import telebot
 from flask import Flask
 import os
 
+from sqlalchemy import text
+
 from controllers.bot.admin.auth_handler import register_admin_auth_handlers
 from controllers.bot.admin.authed_parents_handlers import register_authed_parents_handlers
 from controllers.bot.menu_handlers import register_menu_handlers
@@ -26,6 +28,9 @@ from utils.file_utils import FileUtil
 
 load_dotenv()
 DatabaseManager.init_db('sqlite:///' + FileUtil.get_path_to_db())
+
+
+
 app = Flask(__name__)
 bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
 
@@ -55,6 +60,7 @@ if os.getenv("DEV_MODE") == "0":
 
 
 else:
+    pass
     # import tracemalloc
     # print("start")
     #
@@ -86,5 +92,5 @@ else:
     # bot.stop_bot()
     # bot.remove_webhook()
     # clear_all_tables()
-    bot.polling(none_stop=True)
+    # bot.polling(none_stop=True)
 

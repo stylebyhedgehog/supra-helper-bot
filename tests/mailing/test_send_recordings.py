@@ -12,7 +12,7 @@ class MailingRecordingsOnLessonHeldTest(MailingTest):
 
 
 class MailingRecordingsOnRecordingCompletedTest(MailingTest):
-    #todo не работает
+    #todo не работает корректно
     def _threadable_task(self, mailer, json):
         mailer.send_recordings_on_recording_completed(json)
         print(json)

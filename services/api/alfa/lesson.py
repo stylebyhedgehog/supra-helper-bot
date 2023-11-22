@@ -23,6 +23,11 @@ class LessonFetcher:
         payload = {"id": lesson_id}
         return AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
 
+    @staticmethod
+    def last_by_group_id(group_alfa_id):
+        url = "https://supra.s20.online/v2api/lesson/index"
+        payload = {"group_id": group_alfa_id}
+        return AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
 
 class LessonDataService:
 
@@ -65,4 +70,11 @@ class LessonDataService:
                     absent_children.append({"child_id": child_info.get("customer_id")})
             if len(absent_children) > 0:
                 return absent_children
+        return None
+
+    @staticmethod
+    def get_subject_id_by_group_id(group_id):
+        lesson = LessonFetcher.last_by_group_id(group_id)
+        if lesson:
+            return lesson.get("subject_id")
         return None

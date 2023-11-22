@@ -52,7 +52,7 @@ class AlfaApiTemplate:
 
                 response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
                 if not response_data or len(response_data.get("items")) == 0:
-                    Logger.api_error(url=url, payload=payload, params=params, message="Api responded with empty body")
+                    Logger.api_handled_error(url=url, payload=payload, params=params, message="Api responded with empty body")
                     return None
                 yield from response_data.get("items", [])
 
@@ -68,7 +68,7 @@ class AlfaApiTemplate:
             response_data = AlfaApiTemplate._make_authenticated_request(url=url, json_data=payload, params=params)
 
             if not response_data or len(response_data.get("items", [])) == 0:
-                Logger.api_error(url=url, payload=payload, params=params, message="Api responded with empty body")
+                Logger.api_handled_error(url=url, payload=payload, params=params, message="Api responded with empty body")
                 return None
 
             items = response_data.get("items", [])

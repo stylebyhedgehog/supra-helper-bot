@@ -6,7 +6,7 @@ class GroupFetcher:
     @staticmethod
     def by_id(group_id):
         url = "https://supra.s20.online/v2api/group/index"
-        payload = {"id": group_id, "removed": 3}
+        payload = {"id": group_id, "removed": 1} #todo мб removed - 3
         return AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
 
 

@@ -1,0 +1,61 @@
+----------2023-11-22 16:43:42----------
+Bot Unhandled(Critical) Error. Location: performancemonth_selection
+User telegram chat id: 5891891154
+Error: StudyResultsService.form_topic_performance() takes 1 positional argument but 2 were given
+Traceback: Traceback (most recent call last):
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\exceptions\bot_error_handler.py", line 14, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\controllers\bot\parent\study_results_handler_template.py", line 98, in month_selection
+    data = get_result_function(child_alfa_id, child_group_alfa_id, date_y_m)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\services\bot\performance_service.py", line 22, in get_performance
+    topic_performance = PerformanceService.form_topic_performance(child_group_alfa_id, child_lessons_info)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: StudyResultsService.form_topic_performance() takes 1 positional argument but 2 were given
+
+------------------------------
+
+----------2023-11-22 17:07:21----------
+Bot Unhandled(Critical) Error. Location: performancemonth_selection
+User telegram chat id: 5891891154
+Error: 'list' object has no attribute 'get'
+Traceback: Traceback (most recent call last):
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\exceptions\bot_error_handler.py", line 14, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\controllers\bot\parent\study_results_handler_template.py", line 98, in month_selection
+    data = get_result_function(child_alfa_id, child_group_alfa_id, date_y_m)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\services\bot\performance_service.py", line 25, in get_performance
+    subject_name = SubjectDataService.get_subject_name(child_lessons_info.get("subject_id"))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'get'
+
+------------------------------
+
+----------2023-11-22 17:34:45----------
+Bot Unhandled(Critical) Error. Location: performancegroup_selection
+User telegram chat id: 5891891154
+Error: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message text is empty
+Traceback: Traceback (most recent call last):
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\exceptions\bot_error_handler.py", line 14, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\Desktop\portfolio\Python\SupraHelperBot\controllers\bot\parent\study_results_handler_template.py", line 85, in group_selection
+    bot.edit_message_text(ppm_messages.INFO_NOT_AVAILABLE,
+  File "C:\Users\ChipChopa\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\__init__.py", line 3839, in edit_message_text
+    result = apihelper.edit_message_text(self.token, text, chat_id, message_id, inline_message_id, parse_mode,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 1327, in edit_message_text
+    return _make_request(token, method_url, params=payload, method='post')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 162, in _make_request
+    json_result = _check_result(method_name, result)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\ChipChopa\AppData\Local\Programs\Python\Python311\Lib\site-packages\telebot\apihelper.py", line 189, in _check_result
+    raise ApiTelegramException(method_name, result, result_json)
+telebot.apihelper.ApiTelegramException: A request to the Telegram API was unsuccessful. Error code: 400. Description: Bad Request: message text is empty
+
+------------------------------
+

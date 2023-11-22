@@ -3,11 +3,15 @@ from data_storages.db.repositories.child_repository import ChildRepository
 from exceptions.bot_error_handler import bot_error_handler
 from services.api.alfa.cgi import CgiDataService
 from services.api.alfa.customer import CustomerDataService
+from services.api.alfa.lesson import LessonDataService
+from services.api.alfa.subject import SubjectDataService
 from utils.constants.messages import PPM_STUDY_RESULTS
 from utils.logger import Logger
+from utils.string_utils import StringUtil
 
 
-def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_RESULTS, get_result_function, location):
+def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM_STUDY_RESULTS, get_result_function,
+                                    location):
     @bot.message_handler(func=lambda message: message.text.lower() == menu_text.lower())
     @bot_error_handler(bot, location)
     def main_handler(message):
@@ -58,7 +62,8 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
         if child_groups is None:
             bot.edit_message_text(ppm_messages.ERROR_GROUPS_NOT_FOUND, chat_id=message.chat.id,
                                   message_id=message.message_id)
-            Logger.bot_handled_error(message.chat.id, location, f"Groups for child with alfa_id={child_alfa_id} not found")
+            Logger.bot_handled_error(message.chat.id, location,
+                                     f"Groups for child with alfa_id={child_alfa_id} not found")
             return
 
         child_groups_amount = len(child_groups)
@@ -76,6 +81,10 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
 
     @bot_error_handler(bot, location)
     def group_selection(child_alfa_id, group_alfa_id, message):
+        if not _is_available(group_alfa_id, location):
+            bot.edit_message_text(ppm_messages.INFO_NOT_AVAILABLE,
+                                  chat_id=message.chat.id, message_id=message.message_id)
+            return
         month_names = CgiDataService.get_customer_studying_in_group_months(group_alfa_id, child_alfa_id)
         markup = InlineKeyboardMarkup(row_width=1)
         if month_names:
@@ -107,7 +116,15 @@ def register_study_results_handlers(bot, menu_text, cpp_steps, ppm_messages: PPM
             msg = ppm_messages.ERROR_LESSONS_NOT_FOUND
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=None)
             Logger.bot_handled_error(message.chat.id, location,
-                             f"{location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
+                                     f"{location} info for child with alfa_id={child_alfa_id} in group with alfa_id={child_group_alfa_id} by period {date_y_m} not formed")
 
+    def _is_available(group_alfa_id, loc):  # check availability to watch performance based on course name
+        if loc == "performance":
+            subject_id = LessonDataService.get_subject_id_by_group_id(group_alfa_id)
+            if subject_id:
+                full_subject_name = SubjectDataService.get_subject_name(subject_id)
+                course_name, subject_name = StringUtil.extract_course_subject(full_subject_name)
+                if StringUtil.is_english_course(course_name):
+                    return False
 
-
+        return True

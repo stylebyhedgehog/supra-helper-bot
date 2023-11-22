@@ -86,6 +86,7 @@ class PPM_STUDY_RESULTS:
     INFO_CHILD_SELECTION = "Выберите ребенка:"
     INFO_GROUP_SELECTION = "Выберите группу:"
     INFO_MONTH_SELECTION = "Выберите месяц:"
+    INFO_NOT_AVAILABLE = None
     RESULT = None
 
 class PPM_ATTENDANCE(PPM_STUDY_RESULTS):
@@ -98,6 +99,7 @@ class PPM_ATTENDANCE(PPM_STUDY_RESULTS):
 
 
 class PPM_PERFORMANCE(PPM_STUDY_RESULTS):
+    INFO_NOT_AVAILABLE = "Функция проверки успеваемости недоступна для групп по Английскому языку"
     RESULT = lambda month_name, lessons_amount, average_performance, topic_performance:\
         f"""
 За выбранный Вами период ({month_name}) у нас прошло {lessons_amount} занятий .

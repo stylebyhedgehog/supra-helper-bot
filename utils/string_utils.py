@@ -58,6 +58,13 @@ class StringUtil:
         course_name, subject_name = full_name.split(":")
         return StringUtil.remove_spaces(course_name), StringUtil.remove_spaces(subject_name)
 
+    @staticmethod
+    def is_english_course(course_name):
+        return course_name == "АЯ"
+
+    @staticmethod
+    def is_comp_course(course_name):
+        return course_name == "КК"
 
     @staticmethod
     def remove_spaces(string):

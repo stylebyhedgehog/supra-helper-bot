@@ -120,3 +120,18 @@ class DateUtil:
         moscow_time_difference = timedelta(hours=3)
         current_time_moscow = current_time_utc + moscow_time_difference
         return current_time_moscow.strftime('%Y-%m-%d %H:%M:%S')
+
+    @staticmethod
+    def get_current_moscow_date_y_m():
+        current_time_utc = datetime.utcnow()
+        moscow_time_difference = timedelta(hours=3)
+        current_time_moscow = current_time_utc + moscow_time_difference
+        return current_time_moscow.strftime('%Y-%m')
+    @staticmethod
+    def earlier_date(date_str1, date_str2):
+        date_format = "%Y-%m"
+
+        date1 = datetime.strptime(date_str1, date_format)
+        date2 = datetime.strptime(date_str2, date_format)
+
+        return min(date1, date2).strftime(date_format)

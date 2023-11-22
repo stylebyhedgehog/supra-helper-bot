@@ -18,6 +18,8 @@ from controllers.flask.external_webhook_controllers import register_external_web
 from controllers.flask.test_controllers import register_test_controllers
 
 from data_storages.db.core import DatabaseManager
+from services.admin_service import clear_all_tables
+from services.api.alfa.cgi import CgiDataService
 from services.mailing.mailer import Mailer
 from utils.file_utils import FileUtil
 
@@ -38,12 +40,10 @@ register_balance_handlers(bot)
 
 mailer = Mailer(bot)
 
-#todo при получении месяцев обучения выводится некорректно
 #todo изменить процесс авторизации родителей
-#todo при получении успеваемости для ая и кк разное содержимое
 #todo разворачивать бд автоматически, создавать json и txt файлы автоматически
 #todo выяснить в чем проблема при send_recordings_on_recording_completed в многопоточной среде
-# todo добавить вебхуки в альфа и зум
+#todo добавить вебхуки в альфа и зум
 
 if os.getenv("DEV_MODE") == "0":
 
@@ -77,12 +77,14 @@ else:
     # tracemalloc.stop()
     # print(f"Current memory usage is {current / 10 ** 6}MB; Peak was {peak / 10 ** 6}MB")
     # print("end")
-    register_admin_panel_controllers(app)
-    register_external_webhook_controllers(app, bot, mailer)
-    register_mailing_results_controllers(app)
-    register_test_controllers(app, mailer)
-    register_log_controllers(app)
-    app.run()
-
-    # bot.polling(none_stop=True)
+    # register_admin_panel_controllers(app)
+    # register_external_webhook_controllers(app, bot, mailer)
+    # register_mailing_results_controllers(app)
+    # register_test_controllers(app, mailer)
+    # register_log_controllers(app)
+    # app.run()
+    # bot.stop_bot()
+    # bot.remove_webhook()
+    # clear_all_tables()
+    bot.polling(none_stop=True)
 

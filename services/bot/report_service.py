@@ -28,12 +28,12 @@ class ReportService(StudyResultsService):
                      subject_name, course_name):
 
         report = None
-        if course_name == "АЯ":
+        if StringUtil.is_english_course(course_name):
             res = ReportService._form_monthly_report_body_for_ec(child_id, group_id, date_y_m)
             lessons_amount, attended_lessons_amount, average_attendance = res
             report = PPM_REPORT_DISPATCHING.RESULT_EC(month_name, lessons_amount, average_attendance,
                                                       attended_lessons_amount, teacher_fb)
-        elif course_name == "КК":
+        elif StringUtil.is_comp_course(course_name):
             res = ReportService._form_report_body_for_cc(child_id, group_id, date_y_m)
             lessons_amount, attended_lessons_amount, average_attendance, topic_performance = res
             report = PPM_REPORT_DISPATCHING.RESULT_CC(month_name, lessons_amount, subject_name,

@@ -41,4 +41,147 @@ Traceback: Traceback (most recent call last):
     session_identity_map._add_unpresent(state, identitykey)
   File "C:\Users\ChipChopa\AppData\Local\Programs\Python\Python311\Lib\site-packages\sqlalchemy\orm\identity.py", line 297, in _killed
     raise sa_exc.InvalidRequestError(
-sqlalchemy.exc.InvalidRequestError: Object <LessonWithAbsentChildren at 0x1fcf82b18d0> cannot be converted to 'persistent' state, as this identity map is no longer valid.  Has the owning Session been closed? (Background on this error at: https://sqlalche.me/e/20/lkrp)
+sqlalchemy.exc.InvalidRequestError: Object <LessonWithAbsentChildren at 0x1fcf82b18d0> cannot be converted to 'persistent' state, as this identity map is no longer valid.  Has the owning Session been closed? (Background on this error at: https://sqlalche.me/e/20/lkrp)----------2023-11-22 16:02:03----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+7(926)579-55-22 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 16:03:27----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:03:48----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:04:06----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:04:17----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:04:23----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:04:37----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:04:46----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:05:20----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:05:22----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3526 successfully formed
+------------------------------
+
+----------2023-11-22 16:22:52----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3526 in group with alfa_id=84 by period 2023-07 successfully formed
+------------------------------
+
+----------2023-11-22 16:22:59----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3526 in group with alfa_id=84 by period 2023-06 successfully formed
+------------------------------
+
+----------2023-11-22 16:28:23----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3526 in group with alfa_id=84 by period 2023-04 successfully formed
+------------------------------
+
+----------2023-11-22 16:28:31----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3526 in group with alfa_id=140 by period 2023-11 successfully formed
+------------------------------
+
+----------2023-11-22 16:28:36----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3526 in group with alfa_id=140 by period 2023-08 successfully formed
+------------------------------
+
+----------2023-11-22 16:28:47----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3526 in group with alfa_id=140 by period 2023-08 successfully formed
+------------------------------
+
+----------2023-11-22 16:30:01----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+7(926)706-06-98 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 16:30:04----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=3243 successfully formed
+------------------------------
+
+----------2023-11-22 16:30:14----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3243 in group with alfa_id=81 by period 2022-10 successfully formed
+------------------------------
+
+----------2023-11-22 16:30:22----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3243 in group with alfa_id=187 by period 2023-11 successfully formed
+------------------------------
+
+----------2023-11-22 16:30:30----------
+Bot. Location: attendance. User telegram chat id: 5891891154. Info: attendance info for child with alfa_id=3243 in group with alfa_id=127 by period 2023-08 successfully formed
+------------------------------
+
+----------2023-11-22 16:30:42----------
+Bot. Location: attendance. User telegram chat id: 5891891154. Info: attendance info for child with alfa_id=3243 in group with alfa_id=127 by period 2023-10 successfully formed
+------------------------------
+
+----------2023-11-22 16:43:33----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+7(926)706-06-98 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 16:44:28----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+7(926)706-06-98 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 16:44:36----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3243 in group with alfa_id=127 by period 2023-09 successfully formed
+------------------------------
+
+----------2023-11-22 16:48:55----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+90(538)051-6692 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 16:49:03----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=4467 in group with alfa_id=161 by period 2023-11 successfully formed
+------------------------------
+
+----------2023-11-22 17:07:46----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=4467 in group with alfa_id=161 by period 2023-11 successfully formed
+------------------------------
+
+----------2023-11-22 17:36:59----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+7(926)706-06-98 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 17:37:08----------
+Bot. Location: performance. User telegram chat id: 5891891154. Info: performance info for child with alfa_id=3243 in group with alfa_id=127 by period 2023-09 successfully formed
+------------------------------
+
+----------2023-11-22 17:37:13----------
+Bot. Location: attendance. User telegram chat id: 5891891154. Info: attendance info for child with alfa_id=3243 in group with alfa_id=127 by period 2023-09 successfully formed
+------------------------------
+
+----------2023-11-22 17:37:36----------
+Bot. Location: parent_authentication. User telegram chat id: 5891891154. Info: Parent with phone_number=+90(538)051-6692 and tg_username=f0gdealer successfully authenticated
+------------------------------
+
+----------2023-11-22 17:37:44----------
+Bot. Location: attendance. User telegram chat id: 5891891154. Info: attendance info for child with alfa_id=5070 in group with alfa_id=159 by period 2023-11 successfully formed
+------------------------------
+
+----------2023-11-22 17:37:48----------
+Bot. Location: attendance. User telegram chat id: 5891891154. Info: attendance info for child with alfa_id=4467 in group with alfa_id=161 by period 2023-10 successfully formed
+------------------------------
+
+----------2023-11-22 17:39:37----------
+Bot. Location: attendance. User telegram chat id: 5891891154. Info: attendance info for child with alfa_id=5070 in group with alfa_id=159 by period 2023-11 successfully formed
+------------------------------
+
+----------2023-11-22 17:39:41----------
+Bot. Location: balance. User telegram chat id: 5891891154. Info: Balance info for child with alfa_id=5070 successfully formed
+------------------------------
+

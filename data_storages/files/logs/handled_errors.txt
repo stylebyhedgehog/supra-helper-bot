@@ -16,3 +16,7 @@ Search parameters
 	alfa_room_id = None
 2023-11-22 12:37:41
 Mailing Handled Error. Location: mailing_recording_on_lesson_held. Error text: Room num not specified for lesson with id 25483
+----------2023-11-22 16:44:09----------
+Bot Handled Error. Location: performance. User telegram chat id: 5891891154. Error text: Parent's children not found
+------------------------------
+

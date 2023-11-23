@@ -1,6 +1,3 @@
-import logging
-
-from services.api.alfa.lesson import LessonDataService
 from utils.date_utils import DateUtil
 
 

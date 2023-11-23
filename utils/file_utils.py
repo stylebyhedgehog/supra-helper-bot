@@ -74,3 +74,5 @@ class FileUtil:
         with open(file_path, 'r', encoding='utf-8') as file_to_read:
             content = file_to_read.read()
         return content
+
+

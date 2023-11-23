@@ -1,5 +1,3 @@
-import logging
-
 from data_storages.db.core import DatabaseManager
 from data_storages.db.models import Child, Parent
 
@@ -28,3 +26,19 @@ class ChildRepository:
         with DatabaseManager.get_db() as session:
             children = session.query(Child).all()
             return children
+
+    @staticmethod
+    def delete_by_parent_tg_id(parent_telegram_id):
+        with DatabaseManager.get_db() as session:
+            parent = session.query(Parent).filter_by(telegram_id=parent_telegram_id).first()
+
+            if parent:
+                children = session.query(Child).filter_by(parent_id=parent.id).all()
+                for child in children:
+                    session.delete(child)
+
+                session.commit()
+
+                return True
+            else:
+                return False

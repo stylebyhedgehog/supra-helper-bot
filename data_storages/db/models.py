@@ -9,7 +9,7 @@ class Base(DeclarativeBase):
 
 class Administrator(Base):
     __tablename__ = 'administrator'
-    telegram_id = Column(Integer, primary_key=True)
+    telegram_id = Column(Integer, primary_key=True, autoincrement=False)
     telegram_username = Column(String)
 
 
@@ -24,14 +24,14 @@ class Parent(Base):
 
 class Child(Base):
     __tablename__ = 'child'
-    child_alfa_id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('parent.id'))
+    child_alfa_id = Column(Integer, primary_key=True, autoincrement=False)
+    parent_id = Column(Integer, ForeignKey('parent.id', ondelete='CASCADE'))
     child_name = Column(String)
 
 
 class LessonWithAbsentChildren(Base):
     __tablename__ = 'lesson_with_absent_children'
-    lesson_id = Column(Integer, primary_key=True)
+    lesson_id = Column(Integer, primary_key=True, autoincrement=False)
     topic = Column(String)
     room_num = Column(Integer)
     start_date = Column(String)

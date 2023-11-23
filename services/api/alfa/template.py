@@ -1,6 +1,5 @@
 import os
 import threading
-
 import requests
 
 from utils.logger import Logger
@@ -32,10 +31,10 @@ class AlfaApiTemplate:
                 return AlfaApiTemplate._make_authenticated_request(url=url, json_data=json_data,
                                                                    params=params, max_retries=max_retries - 1)
             else:
-                Logger.api_error(url=url, payload=None, params=params, message="Unable to authenticate after 3 retries")
+                Logger.api_handled_error(url=url, payload=None, params=params, message="Unable to authenticate after 3 retries")
                 return None
         else:
-            Logger.api_error(url=url, payload=None, params=params, message="Unacceptable Error")
+            Logger.api_handled_error(url=url, payload=None, params=params, message="Unacceptable Error")
             return None
 
     @staticmethod

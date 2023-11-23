@@ -1,5 +1,3 @@
-import os
-
 from telebot import types
 
 from exceptions.bot_error_handler import bot_error_handler
@@ -12,7 +10,7 @@ def register_menu_handlers(bot):
     @bot.message_handler(commands=['start', 'help'])
     @bot_error_handler(bot)
     def handle_help_parent(message):
-        if AuthenticationService.is_parent_authorized(message.chat.id):
+        if AuthenticationService.is_parent_with_tg_id_authorized(message.chat.id):
             bot.send_message(message.chat.id, PPM_MENU.INFO_POST_AUTH, reply_markup=parent_menu())
         else:
             bot.send_message(message.chat.id, PPM_MENU.INFO_PRE_AUTH)

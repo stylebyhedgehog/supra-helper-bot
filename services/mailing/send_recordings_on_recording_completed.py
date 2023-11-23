@@ -26,6 +26,7 @@ class RecordingMailerOnRecordingCompleted:
                                                               lesson.start_time)
         RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info)
         RecordingMailerOnRecordingCompleted._write_in_json_successful_response(absent_children, lesson, mailing_info)
+        AbsentChildRepository.delete_all_by_lesson_with_absent_child_id(lesson.lesson_id)
         LessonWithAbsentChildrenRepository.delete_by_lesson_id(lesson.lesson_id)
 
     @staticmethod

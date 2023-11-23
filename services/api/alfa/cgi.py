@@ -1,5 +1,3 @@
-from datetime import datetime
-
 from services.api.alfa.group import GroupFetcher
 from services.api.alfa.template import AlfaApiTemplate
 from utils.logger import Logger

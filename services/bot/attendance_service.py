@@ -1,5 +1,3 @@
-import logging
-
 from services.api.alfa.lesson import LessonDataService
 from services.bot.study_results_service import StudyResultsService
 

@@ -1,5 +1,4 @@
 from services.api.alfa.template import AlfaApiTemplate
-from utils.logger import Logger
 
 
 class RoomFetcher:
@@ -17,5 +16,4 @@ class RoomDataService:
         for room in data:
             if room.get("id") == room_id:
                 return int(room.get("name")[1:])
-        Logger.entity_not_found_error("Room (Room num)", alfa_room_id=room_id)
         return None

@@ -10,7 +10,7 @@ def register_authed_parents_handlers(bot):
         parents = ParentRepository.find_all()
         res = "Список авторизованных в системе родителей"
         if len(parents) == 0:
-            res+= " пуст"
+            res += " пуст"
         for parent in parents:
             res += f"\n{parent.name} - {parent.phone_number} - @{parent.telegram_username}"
         bot.send_message(call.message.chat.id, res)

@@ -21,6 +21,12 @@ class ParentRepository:
             return parent
 
     @staticmethod
+    def find_by_phone_number(phone_number):
+        with DatabaseManager.get_db() as session:
+            parent = session.query(Parent).filter_by(phone_number=phone_number).first()
+            return parent
+
+    @staticmethod
     def find_by_child_alfa_id(child_alfa_id):
         with DatabaseManager.get_db() as session:
             parent = session.query(Parent).join(Child, Parent.id == Child.parent_id) \
@@ -33,3 +39,15 @@ class ParentRepository:
         with DatabaseManager.get_db() as session:
             parents = session.query(Parent).all()
             return parents
+
+    @staticmethod
+    def delete_by_telegram_id(telegram_id):
+        with DatabaseManager.get_db() as session:
+            parent = session.query(Parent).filter_by(telegram_id=telegram_id).first()
+
+            if parent:
+                session.delete(parent)
+                session.commit()
+                return True
+            else:
+                return False

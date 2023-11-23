@@ -8,15 +8,18 @@ class CPP_MENU:
         [ATTENDANCE, CONTACT]
     ]
 
+
 class CPP_BALANCE:
     BASE = "par_get_bal"
     S_C = f"{BASE}_sel_child"  # Выбор ребенка
+
 
 class CPP_PERFORMANCE:
     BASE = "par_get_per"
     S_C = f"{BASE}_sel_child"  # Выбор ребенка
     S_G = f"{BASE}_sel_group"  # Выбор группы
     S_M = f"{BASE}_sel_month"  # Выбор месяца
+
 
 class CPP_ATTENDANCE:
     BASE = "par_get_att"

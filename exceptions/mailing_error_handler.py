@@ -1,8 +1,6 @@
-import inspect
 import os
 import traceback
 from functools import wraps
-from telebot.types import Message, CallbackQuery
 from utils.logger import Logger
 
 

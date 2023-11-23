@@ -23,3 +23,14 @@ class AbsentChildRepository:
 
             return absent_children
 
+    @staticmethod
+    def delete_all_by_lesson_with_absent_child_id(lesson_with_absent_children_id):
+        with DatabaseManager.get_db() as session:
+            absent_children = session.query(AbsentChild).filter_by(
+                lesson_with_absent_children_id=lesson_with_absent_children_id
+            ).all()
+
+            for absent_child in absent_children:
+                session.delete(absent_child)
+
+            session.commit()

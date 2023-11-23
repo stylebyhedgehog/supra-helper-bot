@@ -43,5 +43,10 @@ data_storages/db/sqlite.db
 ehthumbs.db
 Thumbs.db
 
+# Env vars
 .env
+
+# Logs txts and mailing results
+data_storages/files/logs/*
+data_storages/files/mailing_results/*
 

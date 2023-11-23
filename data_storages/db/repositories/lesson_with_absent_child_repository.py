@@ -5,6 +5,7 @@ from data_storages.db.models import LessonWithAbsentChildren
 class LessonWithAbsentChildrenRepository:
     @staticmethod
     def save(lesson_id, topic, room_num, start_date, start_time, group_id, group_name):
+
         with DatabaseManager.get_db() as session:
             lesson = LessonWithAbsentChildren(
                 lesson_id=lesson_id,

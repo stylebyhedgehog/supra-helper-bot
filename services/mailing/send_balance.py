@@ -1,4 +1,3 @@
-import logging
 import os
 
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton

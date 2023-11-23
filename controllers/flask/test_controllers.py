@@ -1,4 +1,4 @@
-from flask import jsonify, render_template_string
+from flask import render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.admin_service import clear_all_tables

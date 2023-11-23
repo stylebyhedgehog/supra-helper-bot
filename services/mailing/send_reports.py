@@ -61,4 +61,3 @@ class ReportMailer:
                 bot.send_message(parent.telegram_id, info)
                 Logger.mailing_info(parent.telegram_id, "mailing_reports",
                                     "Successfully mailed")
-

@@ -57,6 +57,9 @@ if os.getenv("DEV_MODE") == "0":
     register_test_controllers(app, mailer)
     register_log_controllers(app)
 
+    if __name__ == '__main__':
+        app.run(port=5000)
+
 else:
     # # test_manager.execute_auth_all_parents_test(TestMode.MULTY_THREAD)
     #

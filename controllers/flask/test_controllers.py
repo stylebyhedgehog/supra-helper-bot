@@ -1,7 +1,7 @@
 from flask import render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
-from services.admin_service import clear_all_tables
+from services.admin_service import clear_all_tables, clear_mailing_results
 from tests.tests_manager import TestManager, TestMode
 from utils.file_utils import FileUtil
 
@@ -33,10 +33,5 @@ def register_test_controllers(app, mailer):
         return render_template_string("<h1>Все json файлы (balance, reports, recordings) и бд очищены</h1>")
 
     def _clear_files_and_db():
-        file_path1 = FileUtil.get_path_to_mailing_results_file("recordings.json")
-        file_path2 = FileUtil.get_path_to_mailing_results_file("reports.json")
-        file_path3 = FileUtil.get_path_to_mailing_results_file("balance.json")
-        FileUtil.clear_json(file_path1)
-        FileUtil.clear_json(file_path2)
-        FileUtil.clear_json(file_path3)
+        clear_mailing_results()
         clear_all_tables()

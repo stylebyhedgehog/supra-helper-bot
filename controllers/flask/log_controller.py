@@ -1,6 +1,7 @@
 from flask import render_template, render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
+from services.admin_service import clear_logs
 from utils.file_utils import FileUtil
 
 
@@ -28,11 +29,6 @@ def register_log_controllers(app):
 
     @app.route("/clear_logs")
     @flask_controller_error_handler
-    def clear_logs():
-        file_path1 = FileUtil.get_path_to_log_file("unhandled_errors.txt")
-        file_path2 = FileUtil.get_path_to_log_file("handled_errors.txt")
-        file_path3 = FileUtil.get_path_to_log_file("info.txt")
-        FileUtil.clear_txt(file_path1)
-        FileUtil.clear_txt(file_path2)
-        FileUtil.clear_txt(file_path3)
+    def clear_logs_handler():
+        clear_logs()
         return render_template_string("<h1>Все логи очищены</h1>")

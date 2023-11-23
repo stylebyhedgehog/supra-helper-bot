@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, inspect, MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
 from data_storages.db.models import Base
 
@@ -27,3 +27,20 @@ class DatabaseManager:
         if not cls._db_instance:
             raise Exception("Database not initialized. Call init_db() first.")
         return cls._db_instance.Session()
+
+    @classmethod
+    def get_all_records(cls):
+        if not cls._db_instance:
+            raise Exception("Database not initialized. Call init_db() first.")
+
+        session = cls._db_instance.Session()
+        result = {}
+
+        metadata = MetaData()
+        metadata.reflect(bind=session.get_bind())
+
+        for table in metadata.tables.values():
+            records = session.query(table).all()
+            result[table.name] = records
+
+        return result

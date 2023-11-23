@@ -1,5 +1,6 @@
-from flask import render_template_string
+from flask import render_template_string, render_template
 
+from data_storages.db.core import DatabaseManager
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.admin_service import clear_all_tables, clear_mailing_results
 from tests.tests_manager import TestManager, TestMode
@@ -35,3 +36,11 @@ def register_test_controllers(app, mailer):
     def _clear_files_and_db():
         clear_mailing_results()
         clear_all_tables()
+
+    @app.route('/show_db')
+    def show_all_records():
+        try:
+            all_records = DatabaseManager.get_all_records()
+            return render_template('show_db.html', all_records=all_records)
+        except Exception as e:
+            return f"Error: {str(e)}"

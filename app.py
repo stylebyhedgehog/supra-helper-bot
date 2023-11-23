@@ -66,5 +66,11 @@ else:
     # clear_all_tables()
     # clear_mailing_results()
     # clear_logs()
+    # register_admin_panel_controllers(app)
+    # register_external_webhook_controllers(app, bot, mailer)
+    # register_mailing_results_controllers(app)
+    # register_test_controllers(app, mailer)
+    # register_log_controllers(app)
+    # app.run()
     bot.polling(none_stop=True)
 

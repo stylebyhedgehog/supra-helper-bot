@@ -18,16 +18,17 @@ class RecordingMailerOnRecordingCompleted:
         moscow_date_y_m_d = DateUtil.utc_to_moscow(start_time)
         group_id = StringUtil.extract_number_in_brackets(zoom_topic)
         room_num = StringUtil.extract_number_from_email(host_email)
-        lesson, absent_children = RecordingMailerOnRecordingCompleted._get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic)
-
-        recording_url = f"{share_url}?pwd={passcode}"
-        mailing_info = PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT(lesson.topic, recording_url, lesson.group_name,
-                                                              lesson.start_date,
-                                                              lesson.start_time)
-        RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info)
-        RecordingMailerOnRecordingCompleted._write_in_json_successful_response(absent_children, lesson, mailing_info)
-        AbsentChildRepository.delete_all_by_lesson_with_absent_child_id(lesson.lesson_id)
-        LessonWithAbsentChildrenRepository.delete_by_lesson_id(lesson.lesson_id)
+        res = RecordingMailerOnRecordingCompleted._get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic)
+        if res:
+            lesson, absent_children = res
+            recording_url = f"{share_url}?pwd={passcode}"
+            mailing_info = PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT(lesson.topic, recording_url, lesson.group_name,
+                                                                  lesson.start_date,
+                                                                  lesson.start_time)
+            RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info)
+            RecordingMailerOnRecordingCompleted._write_in_json_successful_response(absent_children, lesson, mailing_info)
+            AbsentChildRepository.delete_all_by_lesson_with_absent_child_id(lesson.lesson_id)
+            LessonWithAbsentChildrenRepository.delete_by_lesson_id(lesson.lesson_id)
 
     @staticmethod
     def _send_recording_info_to_parents(bot, absent_children, recording_info):
@@ -46,6 +47,7 @@ class RecordingMailerOnRecordingCompleted:
             if lesson.start_time in zoom_topic:
                 children = AbsentChildRepository.find_by_lesson_with_absent_children_id(lesson.lesson_id)
                 return lesson, children
+        return None
 
     @staticmethod
     def _write_in_json_successful_response(absent_children, lesson, mailing_info):

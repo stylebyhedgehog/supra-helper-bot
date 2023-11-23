@@ -43,10 +43,11 @@ class RecordingMailerOnRecordingCompleted:
         group_lessons_with_abs_children_on_day = LessonWithAbsentChildrenRepository.find_by_group_id_and_room_num_and_date(
             group_id, room_num,
             moscow_date_y_m_d)
-        for lesson in group_lessons_with_abs_children_on_day:
-            if lesson.start_time in zoom_topic:
-                children = AbsentChildRepository.find_by_lesson_with_absent_children_id(lesson.lesson_id)
-                return lesson, children
+        if group_lessons_with_abs_children_on_day:
+            for lesson in group_lessons_with_abs_children_on_day:
+                if lesson.start_time in zoom_topic:
+                    children = AbsentChildRepository.find_by_lesson_with_absent_children_id(lesson.lesson_id)
+                    return lesson, children
         return None
 
     @staticmethod

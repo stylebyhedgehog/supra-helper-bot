@@ -160,6 +160,7 @@ class PPM_ZOOM_RECORDINGS_DISPATCHING:
 Ссылка на запись: {recording_url}
         """
 
+
 # Сообщения бота при выполнении активности "Рассылка информации о необходимости пополнить баланс"
 class PPM_BALANCE_NOTIFICATION_DISPATCHING:
     RESULT = lambda balance, paid_count, child_name: \

@@ -5,6 +5,7 @@ import os
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.api.alfa.lesson import LessonFetcher
 from utils.encryption import Encryption
+from utils.logger import Logger
 
 
 def register_external_webhook_controllers(app, bot, mailer):
@@ -27,9 +28,14 @@ def register_external_webhook_controllers(app, bot, mailer):
     def zoom_webhook_recording_completed():
         if request.method == "POST":
             if request.json["event"] == "endpoint.url_validation":
+                Logger.webhook_call_info("Zoom", "zoom_webhook_recording_completed", "zoom validation", "Zoom request for validation")
                 res = Encryption.generate_encrypted_token(request.json, os.getenv("ZOOM_SECRET"))
                 return jsonify(res), 200
             elif request.json["event"] == "recording.completed":
+                object_id = request.json.get('payload').get('object').get('id')
+                object_topic = request.json.get('payload').get('object').get('topic')
+                Logger.webhook_call_info("Zoom", "zoom_webhook_recording_completed", "recording completed",
+                                         f"Zoom request with recording data. Id: {object_id}, Meeting Topic: {object_topic}")
                 mailer.send_recordings_on_recording_completed(request.json)
         return jsonify(""), 200
 
@@ -38,6 +44,8 @@ def register_external_webhook_controllers(app, bot, mailer):
         data = request.json
         if is_lesson_conducted(data) and is_lesson_type_eq_group(data):
             lesson_id = data["entity_id"]
+            Logger.webhook_call_info("Alfa.crm", "alfa_webhook_lesson_changed", "lesson conducted",
+                                     f"Alfa.crm request with lesson data. Lesson id: {lesson_id}")
             lesson_info = LessonFetcher.by_lesson_id(lesson_id)
             if lesson_info:
                 mailer.send_balance(lesson_info)

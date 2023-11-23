@@ -46,6 +46,14 @@ class Logger:
 
         Logger._write_log_in_file(text, "unhandled_errors.txt")
 
+    # EXTERNAL SERVICES WEBHOOK CALL
+    @staticmethod
+    def webhook_call_info(external_api_name, location, call_reason, full_info):
+        text = f"Webhook call. External api name: {external_api_name}. Location: {location}. Call Reason: {call_reason}. Info: {full_info}"
+        logging.info(text)
+
+        Logger._write_log_in_file(text, "info.txt")
+
     # MAILING
     @staticmethod
     def mailing_info(user_tg_id, location, full_info):

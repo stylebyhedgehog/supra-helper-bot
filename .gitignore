@@ -48,5 +48,7 @@ Thumbs.db
 
 # Logs txts and mailing results
 data_storages/files/logs/*
-data_storages/files/mailing_results/*
+!data_storages/files/logs/.gitkeep
 
+data_storages/files/mailing_results/*
+!data_storages/files/mailing_results/.gitkeep

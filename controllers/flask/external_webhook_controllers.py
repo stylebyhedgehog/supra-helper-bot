@@ -39,7 +39,7 @@ def register_external_webhook_controllers(app, bot, mailer):
                 mailer.send_recordings_on_recording_completed(request.json)
         return jsonify(""), 200
 
-    @app.route('/alfa_webhook/lesson_changed/', methods=["POST"])
+    @app.route('/alfa_webhook/lesson_changed', methods=["POST"])
     def alfa_webhook_lesson_changed():
         data = request.json
         if is_lesson_conducted(data) and is_lesson_type_eq_group(data):

@@ -38,6 +38,7 @@ class LessonDataService:
         result = []
         for lesson in lessons:
             lesson_topic = lesson.get("topic")
+            lesson_date = lesson.get("date")
             for child_info in lesson.get("details"):
                 if child_info.get("customer_id") == child_alfa_id:
                     grade = child_info.get("grade", 0)
@@ -46,6 +47,7 @@ class LessonDataService:
                     else:
                         grade_value = 0
                     child_lesson_info = {
+                        "date": lesson_date,
                         "topic": lesson_topic,
                         "is_attend": child_info.get("is_attend"),
                         "grade": grade_value,

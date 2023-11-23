@@ -22,10 +22,28 @@ class FileUtil:
         return os.path.join(current_directory, f"../data_storages/files/logs/{filename}")
 
     @staticmethod
-    def get_path_to_sql_init():
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-        return os.path.join(current_directory, f"../data_storages/db/schema.sql")
+    def create_log_and_mailing_results_files():
+        # Define file paths
+        log_files = ["handled_errors.txt", "unhandled_errors.txt", "info.txt"]
+        mailing_files = ["balance.json", "recordings.json", "reports.json"]
 
+        # Create log files if not exists
+        for log_file in log_files:
+            log_path = FileUtil.get_path_to_log_file(log_file)
+            if not os.path.exists(log_path):
+                with open(log_path, 'w') as file:
+                    file.write("")
+
+        # Create mailing result files if not exists
+        for mailing_file in mailing_files:
+            mailing_path = FileUtil.get_path_to_mailing_results_file(mailing_file)
+            if not os.path.exists(mailing_path):
+                if mailing_file.endswith('.json'):
+                    with open(mailing_path, 'w') as file:
+                        json.dump({}, file)
+                else:
+                    with open(mailing_path, 'w') as file:
+                        file.write("")
     # JSON FILES
     @staticmethod
     def add_to_json_file(new_dict, file_path):

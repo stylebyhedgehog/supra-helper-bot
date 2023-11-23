@@ -1,0 +1,54 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# PyCharm
+.idea/
+
+# Flask
+instance/
+.webassets-cache
+
+# Telebot
+token.txt
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+*.db
+data/db/sqlite.db
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Env vars
+.env
+
+# Logs txts and mailing results
+data/logs/*
+!data/logs/.gitkeep
+
+data/mailing_results/*
+!data/mailing_results/.gitkeep

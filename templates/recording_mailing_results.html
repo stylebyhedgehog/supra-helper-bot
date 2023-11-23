@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+        a{
+            color:black;
+            text-decoration: none;
+        }
+
+        .record-entry {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+
+       .group-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .reason-mailing {
+            font-size: 16px;
+        }
+
+        .lesson-topic {
+            font-size: 16px;
+        }
+
+        .lesson-datetime {
+            font-size: 16px;
+        }
+
+        .mailing-info {
+            font-size: 16px;
+        }
+        .for-copy{
+            white-space: pre-wrap; /* сохраняет пробелы и переносы строк */
+        }
+        .copy-button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+        }
+        .child-status {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h2><a href="{{ url_for("admin_panel") }}">Назад</a></h2>
+    <h2>Результаты рассылки Записей</h2>
+    {% for entry in data %}
+    <div class="record-entry">
+        <div class="group-name">{{ entry['group_name'] }}</div>
+        <div class="reason-mailing"><b>Причина отправки:</b>{{ entry['reason_mailing'] }}</div>
+        <div class="lesson-topic"><b>Тема занятия:</b> {{ entry['lesson_topic'] }}</div>
+        <div class="lesson-datetime"><b>Дата и время занятия:</b> {{ entry['lesson_datetime'] }}</div>
+        <div class="mailing-info">
+            <b>Сообщение для отправки:</b>
+            <button class="copy-button" onclick="copyToClipboard(this)">Копировать</button>
+            <div class="for-copy">{{ entry['mailing_info'] }}</div>
+        </div>
+
+        <div class="child-status">
+            <b>Результаты рассылки (Имя пропустившего занятие ребенка - статус отправки записи:</b>
+            {% for result in entry['mailing_result'] %}
+                <div><b>&emsp;&emsp;Имя ребенка:</b> {{ result['child_name'] }} - {{ result['status'] }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <script>
+        function copyToClipboard(button) {
+            var forCopyElement = button.closest('.mailing-info').querySelector('.for-copy');
+            var textToCopy = forCopyElement.textContent || forCopyElement.innerText;
+
+            navigator.clipboard.writeText(textToCopy);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 20px;
+        }
+
+        a{
+            color:black;
+            text-decoration: none;
+        }
+
+        .report-entry {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+
+        .group-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .child-name {
+            font-size: 16px;
+        }
+
+        .date {
+            font-size: 16px;
+        }
+
+        .report {
+            font-size: 16px;
+        }
+        .for-copy{
+            white-space: pre-wrap; /* сохраняет пробелы и переносы строк */
+        }
+        .copy-button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .status {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2><a href="{{ url_for("admin_panel") }}">Назад</a></h2>
+    <h2>Результаты расслыки Информации о балансе</h2>
+    {% for entry in data %}
+    <div class="report-entry">
+        <div class="group-name">{{ entry['group_name'] }}</div>
+        <div class="child-name"><b>Имя ребенка:</b> {{ entry['child_name'] }}</div>
+        <div class="date"><b>Дата занятия:</b> {{ entry['date'] }} (Дата занятия, после которого осуществилась проверка баланса)</div>
+        <div class="report">
+            <b>Сообщение для отправки:</b>
+            <button class="copy-button" onclick="copyToClipboard(this)">Копировать</button>
+            <div class="for-copy">{{ entry['report'] }}</div>
+        </div>
+        <div class="status"><b>Статус отправки:</b> {{ entry['status'] }}</div>
+    </div>
+    {% endfor %}
+
+    <script>
+        function copyToClipboard(button) {
+            var forCopyElement = button.closest('.report').querySelector('.for-copy');
+            var textToCopy = forCopyElement.textContent || forCopyElement.innerText;
+
+            navigator.clipboard.writeText(textToCopy);
+        }
+    </script>
+</body>
+</html>

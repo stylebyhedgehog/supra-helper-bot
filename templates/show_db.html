@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Database Records</title>
+</head>
+<body>
+  <h1>Database Records</h1>
+  {% for table_name, records in all_records.items() %}
+    <h2>{{ table_name }}</h2>
+    <ul>
+      {% for record in records %}
+        <li>{{ record }}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+</body>
+</html>

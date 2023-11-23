@@ -75,5 +75,6 @@ else:
     # register_test_controllers(app, mailer)
     # register_log_controllers(app)
     # app.run()
-    bot.polling(none_stop=True)
+    # bot.polling(none_stop=True)
+    pass
 

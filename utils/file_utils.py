@@ -10,21 +10,21 @@ class FileUtil:
     def get_path_to_db():
         current_directory = os.path.dirname(os.path.abspath(__file__))
         if os.getenv("HOSTING") == "AMVERA":
-            return os.path.join(current_directory, "../data/sqlite.db")
+            return "/data/sqlite.db"
         return os.path.join(current_directory, "../data/db/sqlite.db")
 
     @staticmethod
     def get_path_to_mailing_results_file(filename):
         current_directory = os.path.dirname(os.path.abspath(__file__))
         if os.getenv("HOSTING") == "AMVERA":
-            return os.path.join(current_directory, f"../data/{filename}")
+            return f"/data/{filename}"
         return os.path.join(current_directory, f"../data/mailing_results/{filename}")
 
     @staticmethod
     def get_path_to_log_file(filename):
         current_directory = os.path.dirname(os.path.abspath(__file__))
         if os.getenv("HOSTING") == "AMVERA":
-            return os.path.join(current_directory, f"../data/{filename}")
+            return f"/data/{filename}"
         return os.path.join(current_directory, f"../data/logs/{filename}")
 
     @staticmethod

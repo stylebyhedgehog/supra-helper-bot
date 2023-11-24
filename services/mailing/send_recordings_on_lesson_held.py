@@ -52,7 +52,7 @@ class RecordingMailerOnLessonHeld:
 
     @staticmethod
     def _send_recording_info_to_parents(bot, absent_children, recording_info):
-        if os.getenv("MAILING_MODE") == 1:
+        if os.getenv("MAILING_MODE") == "1":
             unique_parents_tg_ids = RecordingMailerOnLessonHeld._get_unique_parents_tg_ids(absent_children)
             for unique_parent_tg_id in unique_parents_tg_ids:
                 bot.send_message(unique_parent_tg_id, recording_info)

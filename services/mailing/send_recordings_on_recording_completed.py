@@ -1,5 +1,7 @@
 import os
 
+from dotenv import load_dotenv
+
 from db_func.repositories.absent_child_repository import AbsentChildRepository
 from db_func.repositories.lesson_with_absent_child_repository import LessonWithAbsentChildrenRepository
 from db_func.repositories.parent_repository import ParentRepository
@@ -32,7 +34,7 @@ class RecordingMailerOnRecordingCompleted:
 
     @staticmethod
     def _send_recording_info_to_parents(bot, absent_children, recording_info):
-        if os.getenv("MAILING_MODE") == 1:
+        if os.getenv("MAILING_MODE") == "1":
             unique_parents_tg_ids = RecordingMailerOnRecordingCompleted._get_unique_parents_tg_ids(absent_children)
             for unique_parent_tg_id in unique_parents_tg_ids:
                 bot.send_message(unique_parent_tg_id, recording_info)
@@ -124,3 +126,4 @@ class RecordingMailerOnRecordingCompleted:
             FileUtil.add_to_json_file(data, path)
         except Exception as e:
             Logger.mailing_handled_error("mailing_recording_on_recording_completed", f"Error on writing in file: {e}")
+

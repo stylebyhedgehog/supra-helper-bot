@@ -56,7 +56,7 @@ class ReportMailer:
 
     @staticmethod
     def _send_notification_message(parent, info, bot):
-        if os.getenv("MAILING_MODE") == 1:
+        if os.getenv("MAILING_MODE") == "1":
             if parent:
                 bot.send_message(parent.telegram_id, info)
                 Logger.mailing_info(parent.telegram_id, "mailing_reports",

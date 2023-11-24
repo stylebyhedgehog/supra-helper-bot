@@ -49,7 +49,7 @@ class BalanceMailer:
 
     @staticmethod
     def _send_notification_message(parent, info, bot):
-        if os.getenv("MAILING_MODE") == 1:
+        if os.getenv("MAILING_MODE") == "1":
             if parent:
                 markup = InlineKeyboardMarkup(row_width=1)
                 button_grp = InlineKeyboardButton(text="Пополнить баланс (Групповой формат)",

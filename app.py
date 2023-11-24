@@ -27,7 +27,11 @@ load_dotenv()
 # Initialize db. If where are no db file it will be created with all tables from models
 DatabaseManager.init_db('sqlite:///' + FileUtil.get_path_to_db())
 app = Flask(__name__)
-bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
+
+if os.getenv("DEV_MODE") == "1":
+    bot = telebot.TeleBot(os.getenv("DEV_BOT_TOKEN"), threaded=False)
+else:
+    bot = telebot.TeleBot(os.getenv("BOT_TOKEN"), threaded=False)
 # Create log files and mailing_results files if not exists
 FileUtil.create_log_and_mailing_results_files()
 

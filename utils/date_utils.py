@@ -18,6 +18,14 @@ en_month_ru_month = {
 
 
 class DateUtil:
+
+    @staticmethod
+    def _get_current_moscow_time():
+        current_time_utc = datetime.utcnow()
+        moscow_time_difference = timedelta(hours=3)
+        current_time_moscow = current_time_utc + moscow_time_difference
+        return current_time_moscow
+
     @staticmethod
     def generate_month_names(start_date_str, end_date_str):
         start_date = datetime.strptime(start_date_str, "%Y-%m")
@@ -72,11 +80,13 @@ class DateUtil:
         return next_month_date.strftime("%Y-%m")
 
     @staticmethod
-    def get_next_date(input_date_str):
-        input_date = datetime.strptime(input_date_str, "%Y-%m-%d")
-        next_date = input_date + timedelta(days=1)
-        next_date_str = next_date.strftime("%Y-%m-%d")
-        return next_date_str
+    def get_date_week_ago_and_current():
+        current_time_moscow = DateUtil._get_current_moscow_time()
+        last_week_date = current_time_moscow - timedelta(weeks=1)
+
+        last_week_date_str = last_week_date.strftime('%Y-%m-%d')
+        current_date_str = current_time_moscow.strftime('%Y-%m-%d')
+        return last_week_date_str, current_date_str
 
     @staticmethod
     def normalize_date(date_str):
@@ -115,10 +125,8 @@ class DateUtil:
         return utc_date, utc_time
 
     @staticmethod
-    def get_current_moscow_time():
-        current_time_utc = datetime.utcnow()
-        moscow_time_difference = timedelta(hours=3)
-        current_time_moscow = current_time_utc + moscow_time_difference
+    def get_current_moscow_time_as_str():
+        current_time_moscow = DateUtil._get_current_moscow_time()
         return current_time_moscow.strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
@@ -135,3 +143,5 @@ class DateUtil:
         date2 = datetime.strptime(date_str2, date_format)
 
         return min(date1, date2).strftime(date_format)
+
+

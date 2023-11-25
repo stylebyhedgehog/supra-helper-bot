@@ -5,7 +5,7 @@ from services.bot.study_results_service import StudyResultsService
 class PerformanceService(StudyResultsService):
     @staticmethod
     def get_performance(child_alfa_id, child_group_alfa_id, date_y_m):
-        child_lessons_info = LessonDataService.get_child_lessons_info(child_alfa_id, child_group_alfa_id, date_y_m)
+        child_lessons_info = LessonDataService.get_child_lessons_info_for_month(child_alfa_id, child_group_alfa_id, date_y_m)
         if child_lessons_info:
             lessons_amount = len(child_lessons_info)
             summary_grade = StudyResultsService.calculate_summary_grade(child_lessons_info)

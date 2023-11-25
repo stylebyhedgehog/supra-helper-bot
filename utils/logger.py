@@ -91,7 +91,7 @@ class Logger:
 
     @staticmethod
     def _write_log_in_file(text, filename):
-        res = f"{10*'-'}{DateUtil.get_current_moscow_time()}{10*'-'}"
+        res = f"{10*'-'}{DateUtil.get_current_moscow_time_as_str()}{10 * '-'}"
         res += f"\n{text}"
         res += f"\n{30*'-'}\n"
         file_path = FileUtil.get_path_to_log_file(filename)

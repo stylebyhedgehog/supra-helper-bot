@@ -32,9 +32,32 @@ class LessonFetcher:
 class LessonDataService:
 
     @staticmethod
-    def get_child_lessons_info(child_alfa_id, group_alfa_id, date_from):
-        lessons = LessonFetcher.by_child_id_group_id_period(child_alfa_id, group_alfa_id, date_from,
-                                                            DateUtil.next_month(date_from))
+    def get_child_lessons_info_for_week(child_alfa_id, group_alfa_id):
+        last_week_date_str, current_date_str = DateUtil.get_date_week_ago_and_current()
+        lessons = LessonFetcher.by_child_id_group_id_period(child_alfa_id, group_alfa_id, last_week_date_str, current_date_str)
+        result = []
+        for lesson in lessons:
+            lesson_topic = lesson.get("topic")
+            lesson_date = lesson.get("date")
+            lesson_id = lesson.get("id")
+            for child_info in lesson.get("details"):
+                if child_info.get("customer_id") == child_alfa_id:
+                    child_lesson_info = {
+                        "id": lesson_id,
+                        "date": lesson_date,
+                        "topic": lesson_topic
+                    }
+                    result.append(child_lesson_info)
+        if len(result) > 0:
+            return result
+        else:
+            Logger.entity_not_found_error("Lesson (Study Results)", alfa_child_id=child_alfa_id, alfa_group_id=group_alfa_id)
+            return None
+
+    @staticmethod
+    def get_child_lessons_info_for_month(child_alfa_id, group_alfa_id, date_y_m):
+        lessons = LessonFetcher.by_child_id_group_id_period(child_alfa_id, group_alfa_id, date_y_m,
+                                                            DateUtil.next_month(date_y_m))
         result = []
         for lesson in lessons:
             lesson_topic = lesson.get("topic")
@@ -58,7 +81,7 @@ class LessonDataService:
             return result
         else:
             Logger.entity_not_found_error("Lesson (Study Results)", alfa_child_id=child_alfa_id, alfa_group_id=group_alfa_id,
-                                          date_from=date_from)
+                                          date_y_m=date_y_m)
             return None
 
     @staticmethod

@@ -6,7 +6,7 @@ class AttendanceService(StudyResultsService):
 
     @staticmethod
     def get_attendance(child_alfa_id, child_group_alfa_id, date_y_m):
-        child_lessons_info = LessonDataService.get_child_lessons_info(child_alfa_id, child_group_alfa_id, date_y_m)
+        child_lessons_info = LessonDataService.get_child_lessons_info_for_month(child_alfa_id, child_group_alfa_id, date_y_m)
         if child_lessons_info:
             lessons_amount = len(child_lessons_info)
             attended_lessons_amount = StudyResultsService.calculate_attended_lessons_amount(child_lessons_info)

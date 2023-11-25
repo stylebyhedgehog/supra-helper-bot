@@ -6,11 +6,12 @@ import os
 from controllers.bot.admin.auth_handler import register_admin_auth_handlers
 from controllers.bot.admin.authed_parents_handlers import register_authed_parents_handlers
 from controllers.bot.menu_handlers import register_menu_handlers
-from controllers.bot.parent.attendance_handlers import register_attendance_handlers
+from controllers.bot.parent.attendance_handlers import  AttendanceHandler
 from controllers.bot.parent.auth_handlers import register_parent_auth_handlers
 from controllers.bot.parent.balance_handlers import register_balance_handlers
 from controllers.bot.parent.contact_administrator_handler import register_contact_administrator_handlers
-from controllers.bot.parent.performance_handlers import register_performance_handlers
+from controllers.bot.parent.performance_handlers import  PerformanceHandler
+from controllers.bot.parent.recordings_handler import RecordingsHandler
 from controllers.flask.admin_panel_controllers import register_admin_panel_controllers
 from controllers.flask.log_controller import register_log_controllers
 from controllers.flask.mailing_result_controllers import register_mailing_results_controllers
@@ -40,8 +41,9 @@ register_admin_auth_handlers(bot)
 register_parent_auth_handlers(bot)
 register_contact_administrator_handlers(bot)
 register_authed_parents_handlers(bot)
-register_performance_handlers(bot)
-register_attendance_handlers(bot)
+per = PerformanceHandler(bot)
+att = AttendanceHandler(bot)
+rec = RecordingsHandler(bot)
 register_balance_handlers(bot)
 
 mailer = Mailer(bot)
@@ -83,6 +85,5 @@ else:
     # register_test_controllers(app, mailer)
     # register_log_controllers(app)
     # app.run()
-    # bot.polling(none_stop=True)
-    pass
+    bot.polling(none_stop=True)
 

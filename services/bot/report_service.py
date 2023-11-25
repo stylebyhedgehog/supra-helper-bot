@@ -43,7 +43,7 @@ class ReportService(StudyResultsService):
 
     @staticmethod
     def _form_report_body_for_cc(child_alfa_id, child_group_alfa_id, date_y_m):
-        child_lessons_info = LessonDataService.get_child_lessons_info(child_alfa_id, child_group_alfa_id, date_y_m)
+        child_lessons_info = LessonDataService.get_child_lessons_info_for_month(child_alfa_id, child_group_alfa_id, date_y_m)
 
         lessons_amount = len(child_lessons_info)
         attended_lessons_amount = StudyResultsService.calculate_attended_lessons_amount(child_lessons_info)
@@ -54,7 +54,7 @@ class ReportService(StudyResultsService):
 
     @staticmethod
     def _form_monthly_report_body_for_ec(child_alfa_id, child_group_alfa_id, date_y_m):
-        child_lessons_info = LessonDataService.get_child_lessons_info(child_alfa_id, child_group_alfa_id, date_y_m)
+        child_lessons_info = LessonDataService.get_child_lessons_info_for_month(child_alfa_id, child_group_alfa_id, date_y_m)
 
         lessons_amount = len(child_lessons_info)
         attended_lessons_amount = StudyResultsService.calculate_attended_lessons_amount(child_lessons_info)

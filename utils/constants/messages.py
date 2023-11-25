@@ -79,14 +79,27 @@ class PPM_CONTACT:
     # Результат в положительном случае потока события
     RESULT = lambda admin_username: f"Аккаунт администратора: @{admin_username}"
 
-
-class PPM_STUDY_RESULTS:
+class PPM_CHILD_GROUP_SELECTION:
     ERROR_CHILDREN_NOT_FOUND = "Ошибка системы! Не удалось получить информацию об учениках."
     ERROR_GROUPS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о группах."
-    ERROR_MONTHS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о занятиях."
-    ERROR_LESSONS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о занятиях за выбранный Вами период."
     INFO_CHILD_SELECTION = "Выберите ребенка:"
     INFO_GROUP_SELECTION = "Выберите группу:"
+
+
+class PPM_RECORDINGS(PPM_CHILD_GROUP_SELECTION):
+    ERROR_LESSONS_NOT_FOUND = "Ошибка системы! Не найдены занятия, для которых можно получить записи."
+    ERROR_RECORDING_NOT_FOUND = "Ошибка системы! Не удалось найти запись для выбранного Вами занятия."
+    INFO_LESSON_SELECTION = "Выберите занятие, для которого хотите получить запись:"
+    RESULT = lambda recording_url, group_name, datetime, lesson_topic: \
+    f"""
+Запись занятия от {datetime}
+Тема занятия: {lesson_topic}
+Ссылка: {recording_url}
+    """
+
+class PPM_STUDY_RESULTS(PPM_CHILD_GROUP_SELECTION):
+    ERROR_MONTHS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о занятиях."
+    ERROR_LESSONS_NOT_FOUND = "Ошибка системы! Не удалось получить информацию о занятиях за выбранный Вами период."
     INFO_MONTH_SELECTION = "Выберите месяц:"
     INFO_NOT_AVAILABLE = None
     RESULT = None

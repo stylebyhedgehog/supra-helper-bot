@@ -75,11 +75,12 @@ mailer = Mailer(bot)
 
 if os.getenv("DEV_MODE") == "0":
 
-    register_admin_panel_controllers(app)
     register_external_webhook_controllers(app, bot, mailer)
     register_mailing_results_controllers(app)
     register_test_controllers(app, mailer)
     register_log_controllers(app)
+    register_admin_panel_controllers(app)
+
     if __name__ == '__main__':
         app.run(port=5000)
 
@@ -111,6 +112,6 @@ else:
     # register_log_controllers(app)
     # if __name__ == '__main__':
     #     app.run(port=5000)
-
-    bot.polling(none_stop=True)
+    pass
+    # bot.polling(none_stop=True)
 

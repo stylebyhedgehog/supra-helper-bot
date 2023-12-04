@@ -27,6 +27,14 @@ def register_log_controllers(app):
         data = FileUtil.read_from_txt_file(file_path)
         return render_template("logs.html", data=data, title="Логи обработанных ошибок")
 
+
+    @app.route("/logs/mailing_recording_proces")
+    @flask_controller_error_handler
+    def mailing_recording_process_logs():
+        file_path = FileUtil.get_path_to_log_file("info_recording_complete.txt")
+        data = FileUtil.read_from_txt_file(file_path)
+        return render_template("logs.html", data=data, title="Логи процесса отправки записей после готовности")
+
     @app.route("/clear_logs")
     @flask_controller_error_handler
     def clear_logs_handler():

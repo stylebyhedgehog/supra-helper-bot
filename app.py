@@ -21,6 +21,7 @@ from controllers.flask.test_controllers import register_test_controllers
 from db_func.core import DatabaseManager
 from services.admin_service import clear_all_tables, clear_mailing_results, clear_logs
 from services.mailing.mailer import Mailer
+from services.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
 from utils.file_utils import FileUtil
 
 
@@ -112,6 +113,9 @@ else:
     # register_log_controllers(app)
     # if __name__ == '__main__':
     #     app.run(port=5000)
+    #
+    x = RecordingMailerOnRecordingCompleted.get_lesson_id_by_group_id_date_zoom_topic(145, "2023-12-04", "Веб-программирование frontend_2 пн/ср 19:30 [145]")
+    print(x)
     pass
     # bot.polling(none_stop=True)
 

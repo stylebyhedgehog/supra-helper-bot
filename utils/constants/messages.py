@@ -202,11 +202,28 @@ class PPM_ZOOM_RECORDINGS_DISPATCHING:
 
 # Сообщения бота при выполнении активности "Рассылка информации о необходимости пополнить баланс"
 class PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING:
-    #todo уточнить по поводу случая с двумя привязанными детьми
-    RESULT = lambda balance, paid_count, child_name: \
+    RESULT_ONE_REMAINS = lambda balance, paid_count, child_name: \
+    f"""
+Хорошего дня!
+
+💵  Напоминаем, что на балансе ученика {child_name} осталось 1 занятие. 
+
+Пополнить баланс вы можете по ссылке:
+Групповой формат: https://supraschool.ru/payment2023
+Индивидуальный формат: https://supraschool.ru/indiv
+    """
+
+    RESULT_ZERO_REMAINS = lambda balance, paid_count, child_name: \
         f"""
-У {child_name} на текущий момент осталось {paid_count} занятий.
+Хорошего дня!
+
+💵  Напоминаем, что на балансе ученика {child_name} осталось 0 занятиЙ. 
+
+Пополнить баланс вы можете по ссылке:
+Групповой формат: https://supraschool.ru/payment2023
+Индивидуальный формат: https://supraschool.ru/indiv
         """
+
 
 class PPM_BALANCE_PAYMENT_NOTIFICATION_DISPATCHING:
     RESULT = lambda balance, paid_count, child_name: \

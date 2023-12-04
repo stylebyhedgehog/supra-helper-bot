@@ -24,7 +24,10 @@ class BalanceMailer:
                     date = lesson_info.get("date")
 
                     parent = ParentRepository.find_by_child_alfa_id(child_id)
-                    balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT(balance, paid_count, name)
+                    if paid_count == 1:
+                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ONE_REMAINS(balance, paid_count, name)
+                    else:
+                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ZERO_REMAINS(balance, paid_count, name)
                     BalanceMailer._write_in_json(child_id, group_id, date, balance_info, parent)
                     BalanceMailer._send_notification_message(parent, balance_info, bot)
             else:

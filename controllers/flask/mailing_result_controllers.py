@@ -1,6 +1,7 @@
-from flask import render_template, jsonify
+from flask import render_template, jsonify, render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
+from services.admin_service import clear_mailing_results
 from utils.file_utils import FileUtil
 
 
@@ -40,3 +41,10 @@ def register_mailing_results_controllers(app):
         file_path = FileUtil.get_path_to_mailing_results_file("temp_on_participation.json")
         data = FileUtil.read_from_json_file(file_path)
         return jsonify(data), 200
+
+
+    @app.route("/clear_mailing_results")
+    @flask_controller_error_handler
+    def clear_mailing_results_handler():
+        clear_mailing_results()
+        return render_template_string("<h1>Все mailing_results файлы очищены</h1>")

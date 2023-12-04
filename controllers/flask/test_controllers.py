@@ -26,15 +26,14 @@ def register_test_controllers(app, mailer):
         test_manager.execute_mailing_tests(TestMode.MULTY_THREAD)
         return render_template_string("<h1>Многопоточный тест завершен. Пользоватли авторизованы, рассылка имитирована</h1>")
 
-    @app.route("/clear_json_and_db")
+    @app.route("/clear_db")
     @flask_controller_error_handler
-    def clear_json_and_db():
-        _clear_files_and_db()
-        return render_template_string("<h1>Все json файлы (balance, reports, recordings) и бд очищены</h1>")
+    def clear_db_handler():
+        clear_all_tables()
+        return render_template_string("<h1>Вся бд очищена</h1>")
 
     def _clear_files_and_db():
         clear_mailing_results()
-        clear_all_tables()
 
     @app.route('/show_db')
     def show_all_records():

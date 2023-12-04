@@ -8,6 +8,7 @@ from db_func.repositories.parent_repository import ParentRepository
 from db_func.repositories.processed_lesson_with_absent_child_repository import \
     ProcessedLessonWithAbsentChildrenRepository
 from services.api.alfa.customer import CustomerDataService
+from services.api.alfa.lesson import LessonDataService
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
@@ -22,8 +23,9 @@ class RecordingMailerOnRecordingCompleted:
         moscow_date_y_m_d = DateUtil.utc_to_moscow(start_time)
         group_id = StringUtil.extract_number_in_brackets(zoom_topic)
         room_num = StringUtil.extract_number_from_email(host_email)
+        potential_lesson_id = RecordingMailerOnRecordingCompleted.get_lesson_id_by_group_id_date_zoom_topic(group_id, moscow_date_y_m_d, zoom_topic)
         Logger.recording_completed_process("Получена запись",
-                                           f"Запись с topic: {zoom_topic}")
+                                           f"Запись с topic: {zoom_topic}. Id подходящего урока: {potential_lesson_id}")
 
         res = RecordingMailerOnRecordingCompleted._get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic)
         if res:
@@ -37,6 +39,16 @@ class RecordingMailerOnRecordingCompleted:
             RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info, lesson.lesson_id)
             RecordingMailerOnRecordingCompleted._write_in_json_successful_response(absent_children, lesson, mailing_info)
             RecordingMailerOnRecordingCompleted._clear_tables_on_mailed(lesson)
+
+    @staticmethod
+    def get_lesson_id_by_group_id_date_zoom_topic(group_id, date, zoom_topic):
+        lessons = LessonDataService.get_lesson_by_group_id_date(group_id, date)
+        for lesson in lessons:
+            date, time = DateUtil.extract_date_and_time(lesson.get("time_from"))
+            if time in zoom_topic:
+                return lesson.get("id")
+        return None
+
 
     @staticmethod
     def _clear_tables_on_mailed(lesson):

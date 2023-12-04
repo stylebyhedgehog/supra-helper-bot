@@ -5,6 +5,7 @@ import os
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.api.alfa.lesson import LessonFetcher
 from utils.encryption import Encryption
+from utils.file_utils import FileUtil
 from utils.logger import Logger
 
 
@@ -48,9 +49,23 @@ def register_external_webhook_controllers(app, bot, mailer):
                                      f"Alfa.crm request with lesson data. Lesson id: {lesson_id}")
             lesson_info = LessonFetcher.by_lesson_id(lesson_id)
             if lesson_info:
-                mailer.send_balance(lesson_info)
+                mailer.send_balance_on_expiration(lesson_info)
                 mailer.send_reports(lesson_info)
                 mailer.send_recordings_on_lesson_held(lesson_info)
+        return jsonify(""), 200
+
+    @app.route('/alfa_webhook/participation', methods=["POST"])
+    def alfa_webhook_participation():
+        data = request.json
+        path = FileUtil.get_path_to_mailing_results_file("temp_on_participation.json")
+        FileUtil.add_to_json_file(data, path)
+        return jsonify(""), 200
+
+    @app.route('/alfa_webhook/payment', methods=["POST"])
+    def alfa_webhook_payment():
+        data = request.json
+        path = FileUtil.get_path_to_mailing_results_file("temp_on_payment.json")
+        FileUtil.add_to_json_file(data, path)
         return jsonify(""), 200
 
     def is_lesson_conducted(json):

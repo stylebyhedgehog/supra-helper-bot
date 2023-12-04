@@ -201,9 +201,18 @@ class PPM_ZOOM_RECORDINGS_DISPATCHING:
 
 
 # Сообщения бота при выполнении активности "Рассылка информации о необходимости пополнить баланс"
-class PPM_BALANCE_NOTIFICATION_DISPATCHING:
+class PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING:
     #todo уточнить по поводу случая с двумя привязанными детьми
     RESULT = lambda balance, paid_count, child_name: \
         f"""
 У {child_name} на текущий момент осталось {paid_count} занятий.
+        """
+
+class PPM_BALANCE_PAYMENT_NOTIFICATION_DISPATCHING:
+    RESULT = lambda balance, paid_count, child_name: \
+        f"""
+Хорошего дня!
+
+💴  Ваша оплата за обучение поступила.
+💴  Ваш баланс на данный момент:  {balance} руб. / {paid_count} занятий
         """

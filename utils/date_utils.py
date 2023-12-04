@@ -120,9 +120,9 @@ class DateUtil:
     @staticmethod
     def extract_date_and_time(date_time):
         moscow_datetime = datetime.strptime(date_time, '%Y-%m-%d %H:%M:%S')
-        utc_date = moscow_datetime.strftime('%Y-%m-%d')
-        utc_time = moscow_datetime.strftime('%H:%M')
-        return utc_date, utc_time
+        date = moscow_datetime.strftime('%Y-%m-%d')
+        time = moscow_datetime.strftime('%H:%M')
+        return date, time
 
     @staticmethod
     def get_current_moscow_datetime_as_str():

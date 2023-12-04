@@ -4,14 +4,14 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from db_func.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
-from utils.constants.messages import PPM_BALANCE_NOTIFICATION_DISPATCHING
+from utils.constants.messages import PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING
 from utils.file_utils import FileUtil
 from utils.logger import Logger
 
 
 class BalanceMailer:
     @staticmethod
-    def send(bot, lesson_info):
+    def send_balance_on_expiration(bot, lesson_info):
         for child in lesson_info.get("details"):
             if child.get("is_attend") == 0 and child.get("reason_id") == 7:
                 continue
@@ -24,11 +24,15 @@ class BalanceMailer:
                     date = lesson_info.get("date")
 
                     parent = ParentRepository.find_by_child_alfa_id(child_id)
-                    balance_info = PPM_BALANCE_NOTIFICATION_DISPATCHING.RESULT(balance, paid_count, name)
+                    balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT(balance, paid_count, name)
                     BalanceMailer._write_in_json(child_id, group_id, date, balance_info, parent)
                     BalanceMailer._send_notification_message(parent, balance_info, bot)
             else:
                 Logger.mailing_handled_error("mailing_balance", f"Error on receiving balance of child with alfa_id={child_id}")
+
+    @staticmethod
+    def send_balance_on_payment(bot, lesson_info):
+        pass
 
     @staticmethod
     def _write_in_json(child_id, group_id, date, info, parent):

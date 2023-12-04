@@ -18,6 +18,13 @@ class LessonFetcher:
         return AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
 
     @staticmethod
+    def by_group_id_date(group_alfa_id, date):
+        url = "https://supra.s20.online/v2api/lesson/index"
+        payload = {"group_id": group_alfa_id,
+                   "date_from": date, "date_to": date}
+        return AlfaApiTemplate.fetch_paginated_data(url=url, payload=payload)
+
+    @staticmethod
     def by_lesson_id(lesson_id):
         url = "https://supra.s20.online/v2api/lesson/index"
         payload = {"id": lesson_id}
@@ -30,7 +37,9 @@ class LessonFetcher:
         return AlfaApiTemplate.fetch_single_data(url=url, payload=payload)
 
 class LessonDataService:
-
+    @staticmethod
+    def get_lesson_by_group_id_date(group_id, date):
+        return LessonFetcher.by_group_id_date(group_id, date)
     @staticmethod
     def get_child_lessons_info_for_week(child_alfa_id, group_alfa_id):
         last_week_date_str, current_date_str = DateUtil.get_date_week_ago_and_current()

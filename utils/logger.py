@@ -90,6 +90,10 @@ class Logger:
         Logger._write_log_in_file(text, "unhandled_errors.txt")
 
     @staticmethod
+    def recording_completed_process(step, message):
+        Logger._write_log_in_file(f"Step: {step}\nMessage: {message}", "info_recording_complete.txt")
+
+    @staticmethod
     def _write_log_in_file(text, filename):
         res = f"{10*'-'}{DateUtil.get_current_moscow_datetime_as_str()}{10 * '-'}"
         res += f"\n{text}"

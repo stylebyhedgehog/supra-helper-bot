@@ -29,7 +29,7 @@ class FileUtil:
 
     @staticmethod
     def create_log_and_mailing_results_files():
-        log_files = ["handled_errors.txt", "unhandled_errors.txt", "info.txt"]
+        log_files = ["handled_errors.txt", "unhandled_errors.txt", "info.txt", "info_recording_complete.txt"]
         mailing_files = ["balance.json", "recordings.json", "reports.json"]
 
         for log_file in log_files:

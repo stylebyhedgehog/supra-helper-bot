@@ -22,15 +22,19 @@ class RecordingMailerOnRecordingCompleted:
         moscow_date_y_m_d = DateUtil.utc_to_moscow(start_time)
         group_id = StringUtil.extract_number_in_brackets(zoom_topic)
         room_num = StringUtil.extract_number_from_email(host_email)
+        Logger.recording_completed_process("Получена запись",
+                                           f"Запись с topic: {zoom_topic}")
+
         res = RecordingMailerOnRecordingCompleted._get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic)
         if res:
             lesson, absent_children = res
             recording_url = f"{share_url}?pwd={passcode}"
-            Logger.mailing_info("NOT", "mailing_recording_on_recording_completed", "Found lesson with absent children, Waiting for mailing")
+            Logger.recording_completed_process("Найдено занятие с пропустившими детьми",
+                                               f"Запись с topic: {zoom_topic}. Урок с id: {lesson.lesson_id}")
             mailing_info = PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT(lesson.topic, recording_url, lesson.group_name,
                                                                   lesson.start_date,
                                                                   lesson.start_time)
-            RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info)
+            RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info, lesson.lesson_id)
             RecordingMailerOnRecordingCompleted._write_in_json_successful_response(absent_children, lesson, mailing_info)
             RecordingMailerOnRecordingCompleted._clear_tables_on_mailed(lesson)
 
@@ -43,14 +47,16 @@ class RecordingMailerOnRecordingCompleted:
 
 
     @staticmethod
-    def _send_recording_info_to_parents(bot, absent_children, recording_info):
-        #todo записи не отправляются только в этом случае
+    def _send_recording_info_to_parents(bot, absent_children, recording_info, lesson_id):
         if os.getenv("MAILING_MODE") == "1":
+            Logger.recording_completed_process("Попытка отправить записи",
+                                               f"Урок с id: {lesson_id}")
             unique_parents_tg_ids = RecordingMailerOnRecordingCompleted._get_unique_parents_tg_ids(absent_children)
             for unique_parent_tg_id in unique_parents_tg_ids:
                 bot.send_message(unique_parent_tg_id, recording_info)
                 Logger.mailing_info(unique_parent_tg_id, "mailing_recording_on_recording_completed", "Successfully mailed")
-
+                Logger.recording_completed_process("Запись отправлена",
+                                                   f"Урок с id: {lesson_id}. Родитель: {unique_parent_tg_id}")
     @staticmethod
     def _get_lesson_and_absent_children(group_id, room_num, moscow_date_y_m_d, zoom_topic):
         group_lessons_with_abs_children_on_day = LessonWithAbsentChildrenRepository.find_by_group_id_and_room_num_and_date(
@@ -135,6 +141,9 @@ class RecordingMailerOnRecordingCompleted:
                 "mailing_result": children_info
             }
             FileUtil.add_to_json_file(data, path)
+            Logger.recording_completed_process("Записано в файл",
+                                               f"Урок с id: {lesson_id}")
+
         except Exception as e:
             Logger.mailing_handled_error("mailing_recording_on_recording_completed", f"Error on writing in file: {e}")
 

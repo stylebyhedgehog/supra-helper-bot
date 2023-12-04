@@ -55,7 +55,6 @@ mailer = Mailer(bot)
 #todo zoom api добавить пагинацию
 
 # todo в некоторых вебхуках лишние / (у альфы) и у зума тоже убрать
-# todo добавить дату занятия при получении отчета успеваемости
 
 # @bot.message_handler(func=lambda message: True)
 # def echo_all(message):

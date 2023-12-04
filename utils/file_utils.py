@@ -96,4 +96,19 @@ class FileUtil:
             content = file_to_read.read()
         return content
 
+    @staticmethod
+    def get_data_size():
+        if os.getenv("HOSTING") == "AMVERA":
+            current_directory = os.path.dirname(os.path.abspath(__file__))
+            folder_path = os.path.join(current_directory, f"data")
 
+            total_size = 0
+            for dirpath, dirnames, filenames in os.walk(folder_path):
+                for filename in filenames:
+                    filepath = os.path.join(dirpath, filename)
+                    total_size += os.path.getsize(filepath)
+            size_in_mb =  total_size/ 1024/ 1024/ 1024
+
+            return f"Размер данных: {size_in_mb:.2f} МБ"
+        else:
+            return "Недоступно для хостингов кроме Amvera"

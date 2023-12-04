@@ -106,7 +106,7 @@ class FileUtil:
                 for filename in filenames:
                     filepath = os.path.join(dirpath, filename)
                     total_size += os.path.getsize(filepath)
-            size_in_mb =  total_size/ 1024/ 1024/ 1024
+            size_in_mb =  total_size/ 1024/ 1024
 
             return f"Размер данных: {size_in_mb:.2f} МБ"
         else:

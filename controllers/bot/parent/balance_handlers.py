@@ -5,6 +5,7 @@ from exceptions.bot_error_handler import bot_error_handler
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.callback_names import CPP_MENU, CPP_BALANCE
 from utils.constants.messages import PPM_BALANCE
+from utils.date_utils import DateUtil
 from utils.logger import Logger
 
 
@@ -51,7 +52,9 @@ def register_balance_handlers(bot):
                 button_ind = InlineKeyboardButton(text="Пополнить баланс (Индивидуальный формат)",
                                                   url="https://supraschool.ru/indiv")
                 markup.add(button_grp, button_ind)
-            msg = PPM_BALANCE.RESULT(name, balance, paid_count)
+
+            current_date_y_m_d = DateUtil.get_current_moscow_date_y_m_d_as_str()
+            msg = PPM_BALANCE.RESULT(name, balance, paid_count, current_date_y_m_d)
             bot.edit_message_text(msg, chat_id=message.chat.id, message_id=message.message_id, reply_markup=markup)
             Logger.bot_info(message.chat.id, "balance",
                             f"Balance info for child with alfa_id={child_alfa_id} successfully formed")

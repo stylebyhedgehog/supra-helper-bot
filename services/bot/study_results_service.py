@@ -23,7 +23,7 @@ class StudyResultsService:
             grade = child_lesson_info.get("grade")
             topic = child_lesson_info.get("topic")
             if is_attend:
-                topic_performance += f"\n ▪({date}) {topic} - {grade}%"
+                topic_performance += f"\n ▪{date} {topic} - {grade}%"
             else:
-                topic_performance += f"\n ▪({date}) {topic} - Пропущено"
+                topic_performance += f"\n ▪{date} {topic} - Пропущено"
         return topic_performance

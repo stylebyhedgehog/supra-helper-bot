@@ -125,16 +125,24 @@ class DateUtil:
         return utc_date, utc_time
 
     @staticmethod
-    def get_current_moscow_time_as_str():
+    def get_current_moscow_datetime_as_str():
         current_time_moscow = DateUtil._get_current_moscow_time()
         return current_time_moscow.strftime('%Y-%m-%d %H:%M:%S')
 
     @staticmethod
-    def get_current_moscow_date_y_m():
+    def get_current_moscow_date_y_m_as_str():
         current_time_utc = datetime.utcnow()
         moscow_time_difference = timedelta(hours=3)
         current_time_moscow = current_time_utc + moscow_time_difference
         return current_time_moscow.strftime('%Y-%m')
+
+    @staticmethod
+    def get_current_moscow_date_y_m_d_as_str():
+        current_time_utc = datetime.utcnow()
+        moscow_time_difference = timedelta(hours=3)
+        current_time_moscow = current_time_utc + moscow_time_difference
+        return current_time_moscow.strftime('%Y-%m-%d')
+
     @staticmethod
     def earlier_date(date_str1, date_str2):
         date_format = "%Y-%m"

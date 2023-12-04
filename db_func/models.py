@@ -40,6 +40,17 @@ class LessonWithAbsentChildren(Base):
     group_name = Column(String)
 
 
+class ProcessedLessonWithAbsentChildren(Base):
+    __tablename__ = 'processed_lesson_with_absent_children'
+    lesson_id = Column(Integer, primary_key=True, autoincrement=False)
+    topic = Column(String)
+    room_num = Column(Integer)
+    start_date = Column(String)
+    start_time = Column(String)
+    group_id = Column(Integer)
+    group_name = Column(String)
+
+
 class AbsentChild(Base):
     __tablename__ = 'absent_child'
     id = Column(Integer, primary_key=True, autoincrement=True)

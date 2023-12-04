@@ -13,6 +13,8 @@ class BalanceMailer:
     @staticmethod
     def send(bot, lesson_info):
         for child in lesson_info.get("details"):
+            if child.get("is_attend") == 0 and child.get("reason_id") == 7:
+                continue
             child_id = child.get("customer_id")
             res = CustomerDataService.get_child_balance_by_id(child_id)
             if res:

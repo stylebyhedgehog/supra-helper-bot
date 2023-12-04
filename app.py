@@ -57,6 +57,22 @@ mailer = Mailer(bot)
 # todo в некоторых вебхуках лишние / (у альфы) и у зума тоже убрать
 # todo добавить дату занятия при получении отчета успеваемости
 
+# @bot.message_handler(func=lambda message: True)
+# def echo_all(message):
+#     # Отправка сообщения
+#     sent_message = bot.send_message(message.chat.id, "Привет, это ваше сообщение!")
+#
+#     # Получение идентификатора чата и сообщения
+#     chat_id = sent_message.chat.id
+#     message_id = sent_message.message_id
+#
+#     # Теперь можно проверить, было ли сообщение отправлено пользователю
+#     if message.chat.id == chat_id and message.message_id == message_id:
+#         print("Сообщение было успешно отправлено пользователю!")
+
+
+
+
 if os.getenv("DEV_MODE") == "0":
 
     register_admin_panel_controllers(app)
@@ -85,5 +101,15 @@ else:
     # register_test_controllers(app, mailer)
     # register_log_controllers(app)
     # app.run()
-    bot.polling(none_stop=True)
+
+
+    register_admin_panel_controllers(app)
+    register_external_webhook_controllers(app, bot, mailer)
+    register_mailing_results_controllers(app)
+    register_test_controllers(app, mailer)
+    register_log_controllers(app)
+    if __name__ == '__main__':
+        app.run(port=5000)
+
+    # bot.polling(none_stop=True)
 

@@ -88,7 +88,7 @@ class RecordingMailerOnLessonHeld:
         unique_parents_tg_ids = set()
         for absent_child in absent_children:
             parent = ParentRepository.find_by_child_alfa_id(absent_child.get("child_id"))
-            if parent and parent.telegram_id not in unique_parents_tg_ids:
+            if parent:
                 parent_tg_id = parent.telegram_id
                 unique_parents_tg_ids.add(parent_tg_id)
         return unique_parents_tg_ids

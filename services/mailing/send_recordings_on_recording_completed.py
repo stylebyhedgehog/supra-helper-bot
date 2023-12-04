@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from db_func.repositories.absent_child_repository import AbsentChildRepository
 from db_func.repositories.lesson_with_absent_child_repository import LessonWithAbsentChildrenRepository
 from db_func.repositories.parent_repository import ParentRepository
+from db_func.repositories.processed_lesson_with_absent_child_repository import \
+    ProcessedLessonWithAbsentChildrenRepository
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
@@ -24,16 +26,25 @@ class RecordingMailerOnRecordingCompleted:
         if res:
             lesson, absent_children = res
             recording_url = f"{share_url}?pwd={passcode}"
+            Logger.mailing_info("NOT", "mailing_recording_on_recording_completed", "Found lesson with absent children, Waiting for mailing")
             mailing_info = PPM_ZOOM_RECORDINGS_DISPATCHING.RESULT(lesson.topic, recording_url, lesson.group_name,
                                                                   lesson.start_date,
                                                                   lesson.start_time)
             RecordingMailerOnRecordingCompleted._send_recording_info_to_parents(bot, absent_children, mailing_info)
             RecordingMailerOnRecordingCompleted._write_in_json_successful_response(absent_children, lesson, mailing_info)
-            AbsentChildRepository.delete_all_by_lesson_with_absent_child_id(lesson.lesson_id)
-            LessonWithAbsentChildrenRepository.delete_by_lesson_id(lesson.lesson_id)
+            RecordingMailerOnRecordingCompleted._clear_tables_on_mailed(lesson)
+
+    @staticmethod
+    def _clear_tables_on_mailed(lesson):
+        ProcessedLessonWithAbsentChildrenRepository.save(lesson.lesson_id, lesson.topic, lesson.room_num,
+                                                         lesson.start_date, lesson.start_time, lesson.group_id, lesson.group_name)
+        AbsentChildRepository.delete_all_by_lesson_with_absent_child_id(lesson.lesson_id)
+        LessonWithAbsentChildrenRepository.delete_by_lesson_id(lesson.lesson_id)
+
 
     @staticmethod
     def _send_recording_info_to_parents(bot, absent_children, recording_info):
+        #todo записи не отправляются только в этом случае
         if os.getenv("MAILING_MODE") == "1":
             unique_parents_tg_ids = RecordingMailerOnRecordingCompleted._get_unique_parents_tg_ids(absent_children)
             for unique_parent_tg_id in unique_parents_tg_ids:
@@ -75,7 +86,7 @@ class RecordingMailerOnRecordingCompleted:
         unique_parents_tg_ids = set()
         for absent_child in absent_children:
             parent = ParentRepository.find_by_child_alfa_id(absent_child.child_alfa_id)
-            if parent and parent.telegram_id not in unique_parents_tg_ids:
+            if parent:
                 parent_tg_id = parent.telegram_id
                 unique_parents_tg_ids.add(parent_tg_id)
         return unique_parents_tg_ids

@@ -91,7 +91,8 @@ class LessonDataService:
             absent_children = []
 
             for child_info in lesson_info.get("details"):
-                if child_info.get("is_attend") == 0:
+                # Считаем, что клиенты с заморзкой не пропустили занятие
+                if child_info.get("is_attend") == 0 and child_info.get("reason_id") != 7:
                     absent_children.append({"child_id": child_info.get("customer_id")})
             if len(absent_children) > 0:
                 return absent_children

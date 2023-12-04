@@ -99,8 +99,7 @@ class FileUtil:
     @staticmethod
     def get_data_size():
         if os.getenv("HOSTING") == "AMVERA":
-            current_directory = os.path.dirname(os.path.abspath(__file__))
-            folder_path = os.path.join(current_directory, f"data")
+            folder_path = "/data"
 
             total_size = 0
             for dirpath, dirnames, filenames in os.walk(folder_path):

@@ -56,6 +56,7 @@ class AuthenticationService:
         else:
             return None
 
+    # todo remove later
     @staticmethod
     def logout_parent(parent_telegram_id):
         res1 = ChildRepository.delete_by_parent_tg_id(parent_telegram_id)

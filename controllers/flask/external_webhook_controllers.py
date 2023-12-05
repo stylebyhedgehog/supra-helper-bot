@@ -4,6 +4,7 @@ import os
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.api.alfa.lesson import LessonFetcher
+from services.webhooks.participation import ParticipationService
 from utils.encryption import Encryption
 from utils.file_utils import FileUtil
 from utils.logger import Logger
@@ -59,6 +60,12 @@ def register_external_webhook_controllers(app, bot, mailer):
         data = request.json
         path = FileUtil.get_path_to_mailing_results_file("temp_on_participation.json")
         FileUtil.add_to_json_file(data, path)
+        if data.get("event") == "create":
+            group_id = data.get("fields_new").get("group_id")
+            customer_id = data.get("fields_new").get("customer_id")
+            Logger.webhook_call_info("Alfa.crm", "alfa_webhook_participation", "child joined group",
+                                     f"Alfa.crm request with customer_id: {customer_id}, group_id: {group_id}")
+            ParticipationService.create_and_attach_to_parent_new_child(customer_id, group_id)
         return jsonify(""), 200
 
     @app.route('/alfa_webhook/payment', methods=["POST"])

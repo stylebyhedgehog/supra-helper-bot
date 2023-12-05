@@ -18,6 +18,14 @@ class CustomerFetcher:
 
 class CustomerDataService:
     @staticmethod
+    def get_customer_name_and_phone_numbers_by_customer_id(child_alfa_id):
+        customer_info = CustomerFetcher.by_customer_id(child_alfa_id)
+        if customer_info:
+            return customer_info.get("name"), customer_info.get("phone")
+        else:
+            Logger.entity_not_found_error("Customer (Name And Phone numbers by id)", customer_alfa_id=child_alfa_id)
+            return None
+    @staticmethod
     def get_customer_groups_by_customer_id(child_alfa_id):
         customer_info = CustomerFetcher.by_customer_id(child_alfa_id, True)
         if customer_info:
@@ -27,7 +35,7 @@ class CustomerDataService:
             if len(result) > 0:
                 return result
             else:
-                Logger.entity_not_found_error("Customer (Groups)", customer_alfa_id=child_alfa_id)
+                Logger.entity_not_found_error("Customer (Groups by id)", customer_alfa_id=child_alfa_id)
         else:
             Logger.entity_not_found_error("Customer", customer_alfa_id=child_alfa_id)
             return None
@@ -42,7 +50,7 @@ class CustomerDataService:
             name = customer_info.get("name")
             return name, balance, paid_count
         else:
-            Logger.entity_not_found_error("Customer (Customer balance)", customer_alfa_id=child_alfa_id)
+            Logger.entity_not_found_error("Customer (Balance by id)", customer_alfa_id=child_alfa_id)
             return None
 
     @staticmethod
@@ -52,7 +60,7 @@ class CustomerDataService:
             name = customer_info.get("name")
             return name
         else:
-            Logger.entity_not_found_error("Customer (Customer name)", customer_alfa_id=child_alfa_id)
+            Logger.entity_not_found_error("Customer (Name by id)", customer_alfa_id=child_alfa_id)
             return None
 
     @staticmethod
@@ -72,5 +80,5 @@ class CustomerDataService:
             if len(parent_children) > 0:
                 return parent_children
         else:
-            Logger.entity_not_found_error("Customer", parent_phone_number=parent_phone_number)
+            Logger.entity_not_found_error("Customer (all by phone numbers)", parent_phone_number=parent_phone_number)
             return None

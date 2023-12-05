@@ -26,6 +26,7 @@ class ParentRepository:
             parent = session.query(Parent).filter_by(phone_number=phone_number).first()
             return parent
 
+
     @staticmethod
     def find_by_child_alfa_id(child_alfa_id):
         with DatabaseManager.get_db() as session:

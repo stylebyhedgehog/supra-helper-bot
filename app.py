@@ -19,9 +19,8 @@ from controllers.flask.external_webhook_controllers import register_external_web
 from controllers.flask.test_controllers import register_test_controllers
 
 from db_func.core import DatabaseManager
-from services.admin_service import clear_all_tables, clear_mailing_results, clear_logs
-from services.mailing.mailer import Mailer
-from services.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
+from services.webhooks.mailing.mailer import Mailer
+from services.webhooks.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
 from utils.file_utils import FileUtil
 
 

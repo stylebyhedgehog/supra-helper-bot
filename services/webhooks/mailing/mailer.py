@@ -1,8 +1,8 @@
 from exceptions.mailing_error_handler import mailing_error_handler
-from services.mailing.send_balance import BalanceMailer
-from services.mailing.send_recordings_on_lesson_held import RecordingMailerOnLessonHeld
-from services.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
-from services.mailing.send_reports import ReportMailer
+from services.webhooks.mailing.send_balance import BalanceMailer
+from services.webhooks.mailing.send_recordings_on_lesson_held import RecordingMailerOnLessonHeld
+from services.webhooks.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
+from services.webhooks.mailing.send_reports import ReportMailer
 
 
 class Mailer:

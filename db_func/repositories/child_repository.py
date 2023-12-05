@@ -22,6 +22,12 @@ class ChildRepository:
                 return None
 
     @staticmethod
+    def find_by_alfa_id(child_alfa_id):
+        with DatabaseManager.get_db() as session:
+            child = session.query(Child).filter_by(child_alfa_id=child_alfa_id).first()
+            return child
+
+    @staticmethod
     def find_all():
         with DatabaseManager.get_db() as session:
             children = session.query(Child).all()

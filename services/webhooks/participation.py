@@ -8,6 +8,7 @@ from utils.string_utils import StringUtil
 class ParticipationService:
     @staticmethod
     def create_and_attach_to_parent_new_child(child_id, group_id):
+        # todo не записывается в json
         child = ChildRepository.find_by_alfa_id(child_id)
         if child is None:
             res = CustomerDataService.get_customer_name_and_phone_numbers_by_customer_id(child_id)

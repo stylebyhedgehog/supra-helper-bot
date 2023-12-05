@@ -14,8 +14,8 @@ class Mailer:
         BalanceMailer.send_balance_on_expiration(self.bot, lesson_info)
 
     @mailing_error_handler
-    def send_balance_on_payment(self, lesson_info):
-        BalanceMailer.send_balance_on_payment(self.bot, lesson_info)
+    def send_balance_on_payment(self, child_id):
+        BalanceMailer.send_balance_on_payment(self.bot, child_id)
 
     @mailing_error_handler
     def send_recordings_on_lesson_held(self, lesson_info):

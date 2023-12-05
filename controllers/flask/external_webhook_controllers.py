@@ -73,6 +73,9 @@ def register_external_webhook_controllers(app, bot, mailer):
         data = request.json
         path = FileUtil.get_path_to_mailing_results_file("temp_on_payment.json")
         FileUtil.add_to_json_file(data, path)
+        if data.get("event") == "create":
+            customer_id = data.get("fields_new").get("customer_id")
+            mailer.send_balance_on_payment(customer_id)
         return jsonify(""), 200
 
     def is_lesson_conducted(json):

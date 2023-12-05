@@ -4,7 +4,9 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from db_func.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
-from utils.constants.messages import PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING
+from utils.constants.messages import PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING, \
+    PPM_BALANCE_PAYMENT_NOTIFICATION_DISPATCHING
+from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
 from utils.logger import Logger
 
@@ -27,18 +29,26 @@ class BalanceMailer:
                     if paid_count == 1:
                         balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ONE_REMAINS(balance, paid_count, name)
                     else:
-                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ZERO_REMAINS(balance, paid_count, name)
-                    BalanceMailer._write_in_json(child_id, group_id, date, balance_info, parent)
-                    BalanceMailer._send_notification_message(parent, balance_info, bot)
+                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ZERO_OR_LESS_REMAINS(balance, paid_count, name)
+                    BalanceMailer._send_notification_message_on_expiration(parent, balance_info, bot)
+                    BalanceMailer._write_in_json_on_expiration(child_id, group_id, date, balance_info, parent)
             else:
-                Logger.mailing_handled_error("mailing_balance", f"Error on receiving balance of child with alfa_id={child_id}")
+                Logger.mailing_handled_error("mailing_balance_expiration", f"Error on receiving balance expiration message for child with alfa_id={child_id}")
 
     @staticmethod
-    def send_balance_on_payment(bot, lesson_info):
-        pass
+    def send_balance_on_payment(bot, child_id):
+        # todo не записывается в json mailing results
+        res = CustomerDataService.get_child_balance_by_id(child_id)
+        if res:
+            name, balance, paid_count = res
+            parent = ParentRepository.find_by_child_alfa_id(child_id)
+            balance_info = PPM_BALANCE_PAYMENT_NOTIFICATION_DISPATCHING.RESULT(balance, paid_count, name)
+            BalanceMailer._send_notification_message_on_payment(parent, balance_info, bot)
+        else:
+            Logger.mailing_handled_error("mailing_balance_payment", f"Error on receiving balance expiration message for child with alfa_id={child_id}")
 
     @staticmethod
-    def _write_in_json(child_id, group_id, date, info, parent):
+    def _write_in_json_on_expiration(child_id, group_id, date, info, parent):
         try:
             path = FileUtil.get_path_to_mailing_results_file("balance.json")
 
@@ -54,10 +64,11 @@ class BalanceMailer:
             }
             FileUtil.add_to_json_file(data, path)
         except Exception as e:
-            Logger.mailing_handled_error("mailing_balance", f"Error on writing in file: {e}")
+            Logger.mailing_handled_error("mailing_balance_expiration", f"Error on writing in file: {e}")
+
 
     @staticmethod
-    def _send_notification_message(parent, info, bot):
+    def _send_notification_message_on_expiration(parent, info, bot):
         if os.getenv("MAILING_MODE") == "1":
             if parent:
                 markup = InlineKeyboardMarkup(row_width=1)
@@ -67,5 +78,11 @@ class BalanceMailer:
                                                   url="https://supraschool.ru/indiv")
                 markup.add(button_grp, button_ind)
                 bot.send_message(parent.telegram_id, info, reply_markup=markup)
-                Logger.mailing_info(parent.telegram_id, "mailing_balance", "Successfully mailed")
+                Logger.mailing_info(parent.telegram_id, "mailing_balance_expiration", "Successfully mailed")
 
+    @staticmethod
+    def _send_notification_message_on_payment(parent, info, bot):
+        if os.getenv("MAILING_MODE") == "1":
+            if parent:
+                bot.send_message(parent.telegram_id, info)
+                Logger.mailing_info(parent.telegram_id, "mailing_balance_payment", "Successfully mailed")

@@ -113,8 +113,7 @@ else:
     # if __name__ == '__main__':
     #     app.run(port=5000)
     #
-    x = RecordingMailerOnRecordingCompleted.get_lesson_id_by_group_id_date_zoom_topic(145, "2023-12-04", "Веб-программирование frontend_2 пн/ср 19:30 [145]")
-    print(x)
+
     pass
     # bot.polling(none_stop=True)
 

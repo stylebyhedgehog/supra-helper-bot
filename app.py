@@ -74,7 +74,7 @@ mailer = Mailer(bot)
 
 
 if os.getenv("DEV_MODE") == "0":
-
+    bot.stop_bot()
     register_external_webhook_controllers(app, bot, mailer)
     register_mailing_results_controllers(app)
     register_test_controllers(app, mailer)

@@ -15,4 +15,4 @@ def register_authed_parents_handlers(bot):
         for parent in parents:
             res += f"\n{parent.name} - {parent.phone_number} - @{parent.telegram_username}"
         bot.send_message(call.message.chat.id, res)
-        Logger.bot_info(call.message.chat.id, "get_authed_parents", "Admin got authed parents list")
+        # Logger.bot_info(call.message.chat.id, "get_authed_parents", "Admin got authed parents list")

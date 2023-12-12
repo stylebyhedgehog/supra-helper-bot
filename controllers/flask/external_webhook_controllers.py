@@ -68,14 +68,14 @@ def register_external_webhook_controllers(app, bot, mailer):
             ParticipationService.create_and_attach_to_parent_new_child(customer_id, group_id)
         return jsonify(""), 200
 
-    @app.route('/alfa_webhook/payment', methods=["POST"])
+    @app.route('/alfa_webhook/subscription', methods=["POST"])
     def alfa_webhook_payment():
         data = request.json
         path = FileUtil.get_path_to_mailing_results_file("temp_on_payment.json")
         FileUtil.add_to_json_file(data, path)
-        if data.get("event") == "create":
-            customer_id = data.get("fields_new").get("customer_id")
-            mailer.send_balance_on_payment(customer_id)
+        # if data.get("event") == "create":
+        #     customer_id = data.get("fields_new").get("customer_id")
+        #     mailer.send_balance_on_payment(customer_id)
         return jsonify(""), 200
 
     def is_lesson_conducted(json):

@@ -1,6 +1,7 @@
 from db_func.repositories.parent_repository import ParentRepository
 from exceptions.bot_error_handler import bot_error_handler
 from utils.constants.callback_names import CAP
+from utils.logger import Logger
 
 
 def register_authed_parents_handlers(bot):
@@ -14,3 +15,4 @@ def register_authed_parents_handlers(bot):
         for parent in parents:
             res += f"\n{parent.name} - {parent.phone_number} - @{parent.telegram_username}"
         bot.send_message(call.message.chat.id, res)
+        Logger.bot_info(call.message.chat.id, "get_authed_parents", "Admin got authed parents list")

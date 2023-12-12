@@ -55,6 +55,8 @@ mailer = Mailer(bot)
 
 # todo в некоторых вебхуках лишние / (у альфы) и у зума тоже убрать
 
+# todo не работает логирование при вызове методов бота
+
 # @bot.message_handler(func=lambda message: True)
 # def echo_all(message):
 #     # Отправка сообщения
@@ -113,5 +115,5 @@ else:
     #
 
     pass
-    # bot.polling(none_stop=True)
+    bot.polling(none_stop=True)
 

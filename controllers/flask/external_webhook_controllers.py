@@ -13,11 +13,10 @@ from utils.logger import Logger
 def register_external_webhook_controllers(app, bot, mailer):
     @app.route('/tg_webhook/' + os.getenv("BOT_TOKEN"), methods=['POST'])
     def tg_webhook():
-        pass
-        # json_str = request.get_data().decode('UTF-8')
-        # update = telebot.types.Update.de_json(json_str)
-        # bot.process_new_updates([update])
-        # return '', 200
+        json_str = request.get_data().decode('UTF-8')
+        update = telebot.types.Update.de_json(json_str)
+        bot.process_new_updates([update])
+        return '', 200
 
     @app.route("/update_tg_bot_webhook")
     @flask_controller_error_handler

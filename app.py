@@ -36,15 +36,15 @@ else:
 # Create log files and mailing_results files if not exists
 FileUtil.create_log_and_mailing_results_files()
 
-# register_menu_handlers(bot)
-# register_admin_auth_handlers(bot)
-# register_parent_auth_handlers(bot)
-# register_contact_administrator_handlers(bot)
-# register_authed_parents_handlers(bot)
-# per = PerformanceHandler(bot)
-# att = AttendanceHandler(bot)
-# rec = RecordingsHandler(bot)
-# register_balance_handlers(bot)
+register_menu_handlers(bot)
+register_admin_auth_handlers(bot)
+register_parent_auth_handlers(bot)
+register_contact_administrator_handlers(bot)
+register_authed_parents_handlers(bot)
+per = PerformanceHandler(bot)
+att = AttendanceHandler(bot)
+rec = RecordingsHandler(bot)
+register_balance_handlers(bot)
 
 mailer = Mailer(bot)
 

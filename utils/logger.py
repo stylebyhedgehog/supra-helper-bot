@@ -120,9 +120,11 @@ class Logger:
 
     @staticmethod
     def _write_log_in_file(text, filename):
-        res = f"{10*'-'}{DateUtil.get_current_moscow_datetime_as_str()}{10 * '-'}"
-        res += f"\n{text}"
-        res += f"\n{30*'-'}\n"
-        file_path = FileUtil.get_path_to_log_file(filename)
-        FileUtil.add_to_txt_file(res, file_path)
-
+        try:
+            res = f"{10*'-'}{DateUtil.get_current_moscow_datetime_as_str()}{10 * '-'}"
+            res += f"\n{text}"
+            res += f"\n{30*'-'}\n"
+            file_path = FileUtil.get_path_to_log_file(filename)
+            FileUtil.add_to_txt_file(res, file_path)
+        except Exception as e:
+            logging.error(f"Error on attempt to write in file: {e}")

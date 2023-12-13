@@ -8,23 +8,23 @@ class FileUtil:
     # GET PATH
     @staticmethod
     def get_path_to_db():
-        current_directory = os.path.dirname(os.path.abspath(__file__))
         if os.getenv("HOSTING") == "AMVERA":
             return "/data/sqlite.db"
+        current_directory = os.path.dirname(os.path.abspath(__file__))
         return os.path.join(current_directory, "../data/db/sqlite.db")
 
     @staticmethod
     def get_path_to_mailing_results_file(filename):
-        current_directory = os.path.dirname(os.path.abspath(__file__))
         if os.getenv("HOSTING") == "AMVERA":
             return f"/data/{filename}"
+        current_directory = os.path.dirname(os.path.abspath(__file__))
         return os.path.join(current_directory, f"../data/mailing_results/{filename}")
 
     @staticmethod
     def get_path_to_log_file(filename):
-        current_directory = os.path.dirname(os.path.abspath(__file__))
         if os.getenv("HOSTING") == "AMVERA":
             return f"/data/{filename}"
+        current_directory = os.path.dirname(os.path.abspath(__file__))
         return os.path.join(current_directory, f"../data/logs/{filename}")
 
     @staticmethod

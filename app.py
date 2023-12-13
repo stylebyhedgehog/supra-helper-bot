@@ -5,6 +5,7 @@ import os
 
 from controllers.bot.admin.auth_handler import register_admin_auth_handlers
 from controllers.bot.admin.authed_parents_handlers import register_authed_parents_handlers
+from controllers.bot.admin.health_check_handlers import register_health_check_handlers
 from controllers.bot.menu_handlers import register_menu_handlers
 from controllers.bot.parent.attendance_handlers import  AttendanceHandler
 from controllers.bot.parent.auth_handlers import register_parent_auth_handlers
@@ -45,6 +46,7 @@ per = PerformanceHandler(bot)
 att = AttendanceHandler(bot)
 rec = RecordingsHandler(bot)
 register_balance_handlers(bot)
+register_health_check_handlers(bot)
 
 mailer = Mailer(bot)
 

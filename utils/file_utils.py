@@ -4,6 +4,8 @@ import json
 import shutil
 import threading
 
+from utils.constants.files_names import FN
+
 
 class FileUtil:
     _lock = threading.Lock()
@@ -33,9 +35,8 @@ class FileUtil:
     # endregion
     @staticmethod
     def create_log_and_mailing_results_files():
-        log_files = ["handled_errors.txt", "unhandled_errors.txt", "info.txt", "info_recording_complete.txt"]
-        mailing_files = ["balance.json", "recordings.json", "reports.json", "temp_on_payment.json",
-                         "temp_on_participation.json"]
+        log_files = FN.LIST_LOG_FILES
+        mailing_files = FN.LIST_MAILING_RESULTS_FILES
 
         for log_file in log_files:
             log_path = FileUtil.get_path_to_log_file(log_file)
@@ -81,7 +82,7 @@ class FileUtil:
         return data_list
 
     @staticmethod
-    def create_deprecated_mailing_results_duplicates(filename):
+    def create_deprecated_mailing_results_duplicates_and_clear_original(filename):
         try:
             original_path = FileUtil.get_path_to_mailing_results_file(filename)
             deprecated_filename = f"{filename.split('.')[0]}_deprecated.{filename.split('.')[1]}"
@@ -116,7 +117,7 @@ class FileUtil:
         return content
 
     @staticmethod
-    def create_deprecated_log_duplicates(filename):
+    def create_deprecated_log_duplicates_and_clear_original(filename):
         try:
             original_path = FileUtil.get_path_to_log_file(filename)
             deprecated_filename = f"{filename.split('.')[0]}_deprecated.{filename.split('.')[1]}"

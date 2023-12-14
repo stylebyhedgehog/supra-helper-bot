@@ -4,6 +4,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from db_func.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
+from utils.constants.files_names import FN
 from utils.constants.messages import PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING, \
     PPM_BALANCE_PAYMENT_NOTIFICATION_DISPATCHING
 from utils.date_utils import DateUtil
@@ -50,7 +51,7 @@ class BalanceMailer:
     @staticmethod
     def _write_in_json_on_expiration(child_id, group_id, date, info, parent):
         try:
-            path = FileUtil.get_path_to_mailing_results_file("balance.json")
+            path = FileUtil.get_path_to_mailing_results_file(FN.MR_BALANCE)
 
             status = "Не отправлен (Родитель не зарегистрирован в системе)"
             if parent:

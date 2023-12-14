@@ -4,6 +4,7 @@ from db_func.repositories.parent_repository import ParentRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
 from services.bot.report_service import ReportService
+from utils.constants.files_names import FN
 from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
 from utils.logger import Logger
@@ -38,7 +39,7 @@ class ReportMailer:
     @staticmethod
     def _write_in_json(report_container,parent):
         try:
-            path = FileUtil.get_path_to_mailing_results_file("reports.json")
+            path = FileUtil.get_path_to_mailing_results_file(FN.MR_REPORTS)
 
             status = "Не отправлен (Родитель не зарегистрирован в системе)"
             if parent:

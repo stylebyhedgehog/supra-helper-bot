@@ -5,6 +5,7 @@ import os
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
 from services.api.alfa.lesson import LessonFetcher
 from services.webhooks.participation import ParticipationService
+from utils.constants.files_names import FN
 from utils.encryption import Encryption
 from utils.file_utils import FileUtil
 from utils.logger import Logger
@@ -58,7 +59,7 @@ def register_external_webhook_controllers(app, bot, mailer):
     @app.route('/alfa_webhook/participation', methods=["POST"])
     def alfa_webhook_participation():
         data = request.json
-        path = FileUtil.get_path_to_mailing_results_file("temp_on_participation.json")
+        path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PARTICIPATION)
         FileUtil.add_to_json_file(data, path)
         if data.get("event") == "create":
             group_id = data.get("fields_new").get("group_id")
@@ -71,7 +72,7 @@ def register_external_webhook_controllers(app, bot, mailer):
     @app.route('/alfa_webhook/subscription', methods=["POST"])
     def alfa_webhook_payment():
         data = request.json
-        path = FileUtil.get_path_to_mailing_results_file("temp_on_payment.json")
+        path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PAYMENT)
         FileUtil.add_to_json_file(data, path)
         # if data.get("event") == "create":
         #     customer_id = data.get("fields_new").get("customer_id")

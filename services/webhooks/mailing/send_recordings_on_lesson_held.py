@@ -8,6 +8,7 @@ from services.api.alfa.group import GroupDataService
 from services.api.alfa.lesson import LessonDataService
 from services.api.alfa.room import RoomDataService
 from services.api.zoom.recordings import RecordingsDataService, RecordingFetchingStatus
+from utils.constants.files_names import FN
 from utils.constants.messages import PPM_ZOOM_RECORDINGS_DISPATCHING
 from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
@@ -112,7 +113,7 @@ class RecordingMailerOnLessonHeld:
     def _write_in_json(group_name, lesson_id, lesson_topic, start_date, start_time, mailing_info,
                        children_info):
         try:
-            path = FileUtil.get_path_to_mailing_results_file("recordings.json")
+            path = FileUtil.get_path_to_mailing_results_file(FN.MR_RECORDINGS)
 
             data = {
                 "reason_mailing": "Занятие в alfa.crm заполнено",

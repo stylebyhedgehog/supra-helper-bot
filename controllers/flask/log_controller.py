@@ -1,7 +1,7 @@
 from flask import render_template, render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
-from services.admin_service import clear_logs, AdminService
+from services.dev_service import DevService
 from utils.file_utils import FileUtil
 
 
@@ -38,7 +38,7 @@ def register_log_controllers(app):
     @app.route("/logs/clone_and_clear")
     @flask_controller_error_handler
     def clone_and_clear_logs():
-        res = AdminService.clone_and_clear_logs()
+        res = DevService.clone_and_clear_logs()
         if res:
             return render_template_string("<h1>Для всех logs созданы копии, оригиналы очищены</h1>")
         else:

@@ -3,7 +3,7 @@ from db_func.models import Child, AbsentChild, Parent, Administrator, LessonWith
 from utils.file_utils import FileUtil
 
 
-class AdminService:
+class DevService:
     @staticmethod
     def clear_all_tables():
         with DatabaseManager.get_db() as session:

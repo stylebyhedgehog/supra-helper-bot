@@ -1,7 +1,7 @@
 from flask import render_template, jsonify, render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
-from services.admin_service import clear_mailing_results, AdminService
+from services.dev_service import DevService
 from utils.file_utils import FileUtil
 
 
@@ -46,7 +46,7 @@ def register_mailing_results_controllers(app):
     @app.route("/mailing_results/clone_and_clear")
     @flask_controller_error_handler
     def clone_and_clear_mailing_results():
-        res = AdminService.clone_and_clear_mailing_results()
+        res = DevService.clone_and_clear_mailing_results()
         if res:
             return render_template_string("<h1>Для всех mailing_results созданы копии, оригиналы очищены</h1>")
         else:

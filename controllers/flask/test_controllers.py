@@ -2,7 +2,7 @@ from flask import render_template_string, render_template
 
 from db_func.core import DatabaseManager
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
-from services.admin_service import clear_all_tables, clear_mailing_results
+from services.dev_service import DevService
 from tests.tests_manager import TestManager, TestMode
 
 
@@ -29,11 +29,11 @@ def register_test_controllers(app, mailer):
     @app.route("/clear_db")
     @flask_controller_error_handler
     def clear_db_handler():
-        clear_all_tables()
+        DevService.clear_all_tables()
         return render_template_string("<h1>Вся бд очищена</h1>")
 
     def _clear_files_and_db():
-        clear_mailing_results()
+        DevService.clear_mailing_results()
 
     @app.route('/show_db')
     def show_all_records():

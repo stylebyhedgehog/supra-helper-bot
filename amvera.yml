@@ -1,8 +1,11 @@
+---
 meta:
- environment: python
- toolchain:
-   name: pip
-
+  environment: python
+  toolchain:
+    name: pip
+    version: latest
+build: {}
 run:
- command: gunicorn --bind 0.0.0.0:5000 --timeout 520 app:app
- containerPort: 5000
+  command: gunicorn --bind 0.0.0.0:5000 --timeout 520 app:app
+  containerPort: 5000
+  persistenceMount: /data

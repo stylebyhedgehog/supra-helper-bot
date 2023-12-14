@@ -12,7 +12,8 @@ def register_mailing_results_controllers(app):
     def mailing_results_balance():
         file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_BALANCE)
         data = FileUtil.read_from_json_file(file_path)
-        return render_template("balance_mailing_results.html", data=data, title="Результаты расслыки Информации о балансе")
+        return render_template("balance_mailing_results.html", data=data,
+                               title="Результаты расслыки Информации о балансе")
 
     @app.route("/mailing_results/reports")
     @flask_controller_error_handler
@@ -28,7 +29,6 @@ def register_mailing_results_controllers(app):
         data = FileUtil.read_from_json_file(file_path)
         return render_template("recording_mailing_results.html", data=data, title="Результаты рассылки Записей")
 
-
     @app.route("/mailing_results/payment")
     @flask_controller_error_handler
     def mailing_results_payment():
@@ -42,7 +42,6 @@ def register_mailing_results_controllers(app):
         file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PARTICIPATION)
         data = FileUtil.read_from_json_file(file_path)
         return jsonify(data), 200
-
 
     @app.route("/mailing_results/clone_and_clear")
     @flask_controller_error_handler
@@ -58,31 +57,34 @@ def register_mailing_results_controllers(app):
     @app.route("/mailing_results/balance_deprecated")
     @flask_controller_error_handler
     def mailing_results_balance_deprecated():
-        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_BALANCE+"_deprecated")
+        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_BALANCE_DEPRECATED)
         data = FileUtil.read_from_json_file(file_path)
         last_modified = FileUtil.get_file_last_modified_time(file_path)
-        return render_template("balance_mailing_results.html", data=data, title=f"Устаревшие Результаты расслыки Информации о балансе (Копия создана: {last_modified})")
+        return render_template("balance_mailing_results.html", data=data,
+                               title=f"Устаревшие Результаты расслыки Информации о балансе (Копия создана: {last_modified})")
 
     @app.route("/mailing_results/reports_deprecated")
     @flask_controller_error_handler
     def mailing_results_reports_deprecated():
-        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_REPORTS+"_deprecated")
+        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_REPORTS_DEPRECATED)
         data = FileUtil.read_from_json_file(file_path)
         last_modified = FileUtil.get_file_last_modified_time(file_path)
-        return render_template("report_mailing_results.html", data=data, title=f"Устаревшие Результаты расслыки Отчетов (Копия создана: {last_modified})")
+        return render_template("report_mailing_results.html", data=data,
+                               title=f"Устаревшие Результаты расслыки Отчетов (Копия создана: {last_modified})")
 
     @app.route("/mailing_results/recordings_deprecated")
     @flask_controller_error_handler
     def mailing_results_recordings_deprecated():
-        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_RECORDINGS+"_deprecated")
+        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_RECORDINGS_DEPRECATED)
         data = FileUtil.read_from_json_file(file_path)
         last_modified = FileUtil.get_file_last_modified_time(file_path)
-        return render_template("recording_mailing_results.html", data=data, title=f"Устаревшие Результаты рассылки Записей (Копия создана: {last_modified})")
+        return render_template("recording_mailing_results.html", data=data,
+                               title=f"Устаревшие Результаты рассылки Записей (Копия создана: {last_modified})")
 
     @app.route("/mailing_results/payment_deprecated")
     @flask_controller_error_handler
     def mailing_results_payment_deprecated():
-        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PAYMENT+"_deprecated")
+        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PAYMENT_DEPRECATED)
         last_modified = FileUtil.get_file_last_modified_time(file_path)
         data = FileUtil.read_from_json_file(file_path)
         return jsonify(data), 200
@@ -90,7 +92,7 @@ def register_mailing_results_controllers(app):
     @app.route("/mailing_results/participation_deprecated")
     @flask_controller_error_handler
     def mailing_results_participation_deprecated():
-        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PARTICIPATION+"_deprecated")
+        file_path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PARTICIPATION_DEPRECATED)
         last_modified = FileUtil.get_file_last_modified_time(file_path)
         data = FileUtil.read_from_json_file(file_path)
         return jsonify(data), 200

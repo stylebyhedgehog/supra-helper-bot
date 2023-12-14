@@ -13,3 +13,14 @@ class FN:
     LIST_LOG_FILES = [LOG_HANDLED_ERRORS, LOG_UNHANDLED_ERRORS, LOG_INFO, LOG_INFO_RECORDINGS_COMPLETE]
     LIST_MAILING_RESULTS_FILES = [MR_BALANCE, MR_RECORDINGS, MR_REPORTS, MR_TEMP_ON_PAYMENT,
                                   MR_TEMP_ON_PARTICIPATION]
+
+    MR_BALANCE_DEPRECATED = "balance_deprecated.json"
+    MR_RECORDINGS_DEPRECATED = "recordings_deprecated.json"
+    MR_REPORTS_DEPRECATED = "reports_deprecated.json"
+    MR_TEMP_ON_PAYMENT_DEPRECATED = "temp_on_payment_deprecated.json"
+    MR_TEMP_ON_PARTICIPATION_DEPRECATED = "temp_on_participation_deprecated.json"
+
+    LOG_INFO_DEPRECATED = "info_deprecated.txt"
+    LOG_INFO_RECORDINGS_COMPLETE_DEPRECATED = "info_recording_complete_deprecated.txt"
+    LOG_HANDLED_ERRORS_DEPRECATED = "handled_errors_deprecated.txt"
+    LOG_UNHANDLED_ERRORS_DEPRECATED = "unhandled_errors_deprecated.txt"

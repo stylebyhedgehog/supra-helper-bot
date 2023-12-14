@@ -1,3 +1,4 @@
+import datetime
 import logging
 import os
 import json
@@ -139,6 +140,8 @@ class FileUtil:
 
     # endregion
 
+    # region MONITORING FUNCS
+
     @staticmethod
     def get_data_size():
         if os.getenv("HOSTING") == "AMVERA":
@@ -154,3 +157,19 @@ class FileUtil:
             return f"Размер данных: {size_in_mb:.2f} МБ"
         else:
             return "Недоступно для хостингов кроме Amvera"
+
+    @staticmethod
+    def get_file_last_modified_time(file_path):
+        try:
+            # Получаем время последнего обновления файла в секундах с эпохи (timestamp)
+            timestamp = os.path.getmtime(file_path)
+
+            # Преобразуем timestamp в объект datetime
+            last_modified_time = datetime.datetime.fromtimestamp(timestamp)
+
+            return last_modified_time
+        except FileNotFoundError:
+            print(f"Файл {file_path} не найден.")
+            return None
+
+    # endregion

@@ -31,19 +31,48 @@
 <body>
     <div class="admin-panel">
         <h2>Панель администратора</h2>
-        <a style="color:green" class="link" href="{{ url_for('mailing_results_balance') }}">Результаты расслыки Информации о балансе</a>
-        <a style="color:green" class="link" href="{{ url_for('mailing_results_reports') }}">Результаты расслыки Отчетов</a>
-        <a style="color:green" class="link" href="{{ url_for('mailing_results_recordings') }}">Результаты расслыки Записей</a>
+        <div class="link">
+                <a style="color:green" href="{{ url_for('mailing_results_balance') }}">Результаты расслыки Информации о балансе</a>
+                |
+                <a href="{{ url_for('mailing_results_balance_deprecated') }}">Устаревшая версия</a>
+        </div>
+        <div class="link">
+                <a style="color:green" href="{{ url_for('mailing_results_reports') }}">Результаты расслыки Отчетов</a>
+                |
+                <a href="{{ url_for('mailing_results_reports_deprecated') }}">Устаревшая версия</a>
+        </div>
+        <div class="link">
+                <a style="color:green" href="{{ url_for('mailing_results_recordings') }}">Результаты расслыки Записей</a>
+                |
+                <a href="{{ url_for('mailing_results_recordings_deprecated') }}">Устаревшая версия</a>
+        </div>
         <br>
         <a style="color:green" class="link" href="{{ url_for('mailing_results_payment') }}">Результаты рассылки информации о пополнении баланса (Temp)</a>
         <a style="color:green" class="link" href="{{ url_for('mailing_results_participation') }}">Результаты изменения состава групп (Temp)</a>
         <br>
         <hr>
         <br>
-        <a style="color:cornflowerblue" class="link" href="{{ url_for('info_logs') }}">Информационные логи</a>
-        <a style="color:cornflowerblue" class="link" href="{{ url_for('unhandled_errors_logs') }}">Логи критических ошибок</a>
-        <a style="color:cornflowerblue" class="link" href="{{ url_for('handled_errors_logs') }}">Логи обработанных ошибок</a>
-        <a style="color:cornflowerblue" class="link" href="{{ url_for('mailing_recording_process_logs') }}">Логи процесса рассылки записей при их готовности</a>
+        <div class="link">
+                <a style="color:cornflowerblue"  href="{{ url_for('info_logs') }}">Информационные логи</a>
+                |
+                <a  href="{{ url_for('info_logs_deprecated') }}">Устаревшая версия</a>
+
+        </div>
+        <div class="link">
+                <a style="color:cornflowerblue" href="{{ url_for('unhandled_errors_logs') }}">Логи критических ошибок</a>
+                |
+                <a href="{{ url_for('unhandled_errors_logs_deprecated') }}">Устаревшая версия</a>
+        </div>
+        <div class="link">
+                <a style="color:cornflowerblue" href="{{ url_for('handled_errors_logs') }}">Логи обработанных ошибок</a>
+                |
+                <a href="{{ url_for('handled_errors_logs_deprecated') }}">Устаревшая версия</a>
+        </div>
+        <div class="link">
+                <a style="color:cornflowerblue" href="{{ url_for('mailing_recording_process_logs') }}">Логи процесса рассылки записей при их готовности</a>
+                |
+                <a href="{{ url_for('mailing_recording_process_logs_deprecated') }}">Устаревшая версия</a>
+        </div>
         <br>
         <hr>
         <br>

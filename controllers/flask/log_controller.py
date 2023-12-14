@@ -44,3 +44,35 @@ def register_log_controllers(app):
             return render_template_string("<h1>Для всех logs созданы копии, оригиналы очищены</h1>")
         else:
             return render_template_string("<h1>Ошибка очистки logs, проверьте консоль приложения</h1>")
+
+    @app.route("/logs/info_deprecated")
+    @flask_controller_error_handler
+    def info_logs_deprecated():
+        file_path = FileUtil.get_path_to_log_file(FN.LOG_INFO+"_deprecated")
+        data = FileUtil.read_from_txt_file(file_path)
+        last_modified = FileUtil.get_file_last_modified_time(file_path)
+        return render_template("logs.html", data=data, title=f"Устаревшие Информационные логи (Копия создана: {last_modified})")
+
+    @app.route("/logs/unhandled_errors_deprecated")
+    @flask_controller_error_handler
+    def unhandled_errors_logs_deprecated():
+        file_path = FileUtil.get_path_to_log_file(FN.LOG_UNHANDLED_ERRORS+"_deprecated")
+        data = FileUtil.read_from_txt_file(file_path)
+        last_modified = FileUtil.get_file_last_modified_time(file_path)
+        return render_template("logs.html", data=data, title=f"Устаревшие Логи необработанных(критических) ошибок (Копия создана: {last_modified})")
+
+    @app.route("/logs/handled_errors_deprecated")
+    @flask_controller_error_handler
+    def handled_errors_logs_deprecated():
+        file_path = FileUtil.get_path_to_log_file(FN.LOG_HANDLED_ERRORS+"_deprecated")
+        data = FileUtil.read_from_txt_file(file_path)
+        last_modified = FileUtil.get_file_last_modified_time(file_path)
+        return render_template("logs.html", data=data, title=f"Устаревшие Логи обработанных ошибок (Копия создана: {last_modified})")
+
+    @app.route("/logs/mailing_recording_proces_deprecated")
+    @flask_controller_error_handler
+    def mailing_recording_process_logs_deprecated():
+        file_path = FileUtil.get_path_to_log_file(FN.LOG_INFO_RECORDINGS_COMPLETE+"_deprecated")
+        data = FileUtil.read_from_txt_file(file_path)
+        last_modified = FileUtil.get_file_last_modified_time(file_path)
+        return render_template("logs.html", data=data, title=f"Устаревшие Логи процесса отправки записей после готовности (Копия создана: {last_modified})")

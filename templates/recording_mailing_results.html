@@ -66,7 +66,7 @@
 </head>
 <body>
     <h2><a href="{{ url_for("admin_panel") }}">Назад</a></h2>
-    <h2>Результаты рассылки Записей</h2>
+    <h2>{{ title }}</h2>
     {% for entry in data %}
     <div class="record-entry">
         <div class="group-name">{{ entry['group_name'] }}</div>

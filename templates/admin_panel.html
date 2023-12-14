@@ -55,17 +55,18 @@
         <br>
         <hr>
         <br>
-        <a style="color:red" class="link" href="{{ url_for('start_onethread_tests') }}">Запустить однопоточные тесты</a>
-        <a style="color:red" class="link" href="{{ url_for('start_multythread_tests') }}">Запустить многопоточные тесты</a>
-        <a style="color:red" class="link" href="{{ url_for('clear_logs_handler') }}">Очистить логи</a>
-        <a style="color:red" class="link" href="{{ url_for('clear_mailing_results_handler') }}">Очистить результаты рассылок</a>
+{#        Deprecated #}
+{#        <a style="color:red" class="link" href="{{ url_for('start_onethread_tests') }}">Запустить однопоточные тесты</a>#}
+{#        <a style="color:red" class="link" href="{{ url_for('start_multythread_tests') }}">Запустить многопоточные тесты</a>#}
+        <a style="color:red" class="link" href="{{ url_for('clone_and_clear_logs') }}">Создать дубликаты и очистить логи</a>
+        <a style="color:red" class="link" href="{{ url_for('clone_and_clear_mailing_results') }}">Создать дубликаты и очистить результаты рассылок</a>
         <a style="color:red" class="link" href="{{ url_for('clear_db_handler') }}">Очистить таблицы бд</a>
 
         <br>
         <hr>
         <br>
         <div>{{ size }}</div>
-        <div>v. 1.1.0</div>
+        <div>v. 1.1.2</div>
     </div>
 </body>
 </html>

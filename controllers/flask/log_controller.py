@@ -1,7 +1,7 @@
 from flask import render_template, render_template_string
 
 from exceptions.flask_controller_error_handler import flask_controller_error_handler
-from services.admin_service import clear_logs
+from services.admin_service import clear_logs, AdminService
 from utils.file_utils import FileUtil
 
 
@@ -35,8 +35,11 @@ def register_log_controllers(app):
         data = FileUtil.read_from_txt_file(file_path)
         return render_template("logs.html", data=data, title="Логи процесса отправки записей после готовности")
 
-    @app.route("/clear_logs")
+    @app.route("/logs/clone_and_clear")
     @flask_controller_error_handler
-    def clear_logs_handler():
-        clear_logs()
-        return render_template_string("<h1>Все логи очищены</h1>")
+    def clone_and_clear_logs():
+        res = AdminService.clone_and_clear_logs()
+        if res:
+            return render_template_string("<h1>Для всех logs созданы копии, оригиналы очищены</h1>")
+        else:
+            return render_template_string("<h1>Ошибка очистки logs, проверьте консоль приложения</h1>")

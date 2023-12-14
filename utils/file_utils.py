@@ -161,13 +161,13 @@ class FileUtil:
     @staticmethod
     def get_file_last_modified_time(file_path):
         try:
-            # Получаем время последнего обновления файла в секундах с эпохи (timestamp)
             timestamp = os.path.getmtime(file_path)
 
-            # Преобразуем timestamp в объект datetime
-            last_modified_time = datetime.datetime.fromtimestamp(timestamp)
+            last_modified_time_utc = datetime.datetime.utcfromtimestamp(timestamp)
 
-            return last_modified_time
+            last_modified_time_moscow = last_modified_time_utc + datetime.timedelta(hours=3)
+
+            return last_modified_time_moscow
         except FileNotFoundError:
             print(f"Файл {file_path} не найден.")
             return None

@@ -52,3 +52,6 @@ data/logs/*
 
 data/mailing_results/*
 !data/mailing_results/.gitkeep
+
+# amvera confs
+amvera.yml

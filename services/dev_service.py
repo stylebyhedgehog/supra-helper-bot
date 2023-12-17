@@ -30,7 +30,7 @@ class DevService:
         FileUtil.clear_json(file_path1)
         FileUtil.clear_json(file_path2)
         FileUtil.clear_json(file_path3)
-
+        #todo добавить остальные
     @staticmethod
     def clone_and_clear_logs():
         unh_res = FileUtil.create_deprecated_log_duplicates_and_clear_original(FN.LOG_UNHANDLED_ERRORS)

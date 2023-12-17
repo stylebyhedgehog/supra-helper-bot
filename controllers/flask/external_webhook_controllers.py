@@ -73,6 +73,7 @@ def register_external_webhook_controllers(app, bot, mailer):
     def alfa_webhook_payment():
         data = request.json
         path = FileUtil.get_path_to_mailing_results_file(FN.MR_TEMP_ON_PAYMENT)
+        Logger.webhook_call_info("Alfa.crm", "alfa_webhook_payment", "payment recieved", data)
         FileUtil.add_to_json_file(data, path)
         # if data.get("event") == "create":
         #     customer_id = data.get("fields_new").get("customer_id")

@@ -27,20 +27,22 @@ def register_external_webhook_controllers(app, bot, mailer):
         bot.set_webhook(url=os.getenv("HOST_ROOT") + "/tg_webhook/" + os.getenv("BOT_TOKEN"))
         return render_template_string(f"<h2>Обновленный url вебхука - {full_url}</h2>")
 
-    @app.route('/zoom_webhook/recording_completed/', methods=['POST'])
-    def zoom_webhook_recording_completed():
-        if request.method == "POST":
-            if request.json["event"] == "endpoint.url_validation":
-                Logger.webhook_call_info("Zoom", "zoom_webhook_recording_completed", "zoom validation", "Zoom request for validation")
-                res = Encryption.generate_encrypted_token(request.json, os.getenv("ZOOM_SECRET"))
-                return jsonify(res), 200
-            elif request.json["event"] == "recording.completed":
-                object_id = request.json.get('payload').get('object').get('id')
-                object_topic = request.json.get('payload').get('object').get('topic')
-                Logger.webhook_call_info("Zoom", "zoom_webhook_recording_completed", "recording completed",
-                                         f"Zoom request with recording data. Id: {object_id}, Meeting Topic: {object_topic}")
-                mailer.send_recordings_on_recording_completed(request.json)
-        return jsonify(""), 200
+
+    # deprecated (not working)
+    # @app.route('/zoom_webhook/recording_completed/', methods=['POST'])
+    # def zoom_webhook_recording_completed():
+    #     if request.method == "POST":
+    #         if request.json["event"] == "endpoint.url_validation":
+    #             Logger.webhook_call_info("Zoom", "zoom_webhook_recording_completed", "zoom validation", "Zoom request for validation")
+    #             res = Encryption.generate_encrypted_token(request.json, os.getenv("ZOOM_SECRET"))
+    #             return jsonify(res), 200
+    #         elif request.json["event"] == "recording.completed":
+    #             object_id = request.json.get('payload').get('object').get('id')
+    #             object_topic = request.json.get('payload').get('object').get('topic')
+    #             Logger.webhook_call_info("Zoom", "zoom_webhook_recording_completed", "recording completed",
+    #                                      f"Zoom request with recording data. Id: {object_id}, Meeting Topic: {object_topic}")
+    #             mailer.send_recordings_on_recording_completed(request.json)
+    #     return jsonify(""), 200
 
     @app.route('/alfa_webhook/lesson_changed', methods=["POST"])
     def alfa_webhook_lesson_changed():

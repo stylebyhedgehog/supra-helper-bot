@@ -29,13 +29,6 @@ def register_log_controllers(app):
         return render_template("logs.html", data=data, title="Логи обработанных ошибок")
 
 
-    @app.route("/logs/mailing_recording_proces")
-    @flask_controller_error_handler
-    def mailing_recording_process_logs():
-        file_path = FileUtil.get_path_to_log_file(FN.LOG_INFO_RECORDINGS_COMPLETE)
-        data = FileUtil.read_from_txt_file(file_path)
-        return render_template("logs.html", data=data, title="Логи процесса отправки записей после готовности")
-
     @app.route("/logs/clone_and_clear")
     @flask_controller_error_handler
     def clone_and_clear_logs():
@@ -69,10 +62,3 @@ def register_log_controllers(app):
         last_modified = FileUtil.get_file_last_modified_time(file_path)
         return render_template("logs.html", data=data, title=f"Устаревшие Логи обработанных ошибок (Копия создана: {last_modified})")
 
-    @app.route("/logs/mailing_recording_proces_deprecated")
-    @flask_controller_error_handler
-    def mailing_recording_process_logs_deprecated():
-        file_path = FileUtil.get_path_to_log_file(FN.LOG_INFO_RECORDINGS_COMPLETE_DEPRECATED)
-        data = FileUtil.read_from_txt_file(file_path)
-        last_modified = FileUtil.get_file_last_modified_time(file_path)
-        return render_template("logs.html", data=data, title=f"Устаревшие Логи процесса отправки записей после готовности (Копия создана: {last_modified})")

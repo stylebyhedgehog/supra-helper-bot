@@ -6,6 +6,7 @@ import os
 from controllers.bot.admin.auth_handler import register_admin_auth_handlers
 from controllers.bot.admin.authed_parents_handlers import register_authed_parents_handlers
 from controllers.bot.admin.health_check_handlers import register_health_check_handlers
+from controllers.bot.admin.notify_parents_handlers import register_notify_parents_handlers
 from controllers.bot.menu_handlers import register_menu_handlers
 from controllers.bot.parent.attendance_handlers import  AttendanceHandler
 from controllers.bot.parent.auth_handlers import register_parent_auth_handlers
@@ -20,10 +21,13 @@ from controllers.flask.external_webhook_controllers import register_external_web
 from controllers.flask.test_controllers import register_test_controllers
 
 from db_func.core import DatabaseManager
+from services.api.alfa.customer import CustomerDataService
+from services.bot.authentication_service import AuthenticationService
+from services.dev_service import DevService
 from services.webhooks.mailing.mailer import Mailer
 from services.webhooks.mailing.send_recordings_on_recording_completed import RecordingMailerOnRecordingCompleted
 from utils.file_utils import FileUtil
-
+from utils.string_utils import StringUtil
 
 load_dotenv()
 # Initialize db. If where are no db file it will be created with all tables from models
@@ -42,6 +46,7 @@ register_admin_auth_handlers(bot)
 register_parent_auth_handlers(bot)
 register_contact_administrator_handlers(bot)
 register_authed_parents_handlers(bot)
+register_notify_parents_handlers(bot)
 per = PerformanceHandler(bot)
 att = AttendanceHandler(bot)
 rec = RecordingsHandler(bot)
@@ -114,6 +119,21 @@ else:
     # if __name__ == '__main__':
     #     app.run(port=5000)
     #
-
-    pass
-    # bot.polling(none_stop=True)
+    # a = StringUtil.remove_brackets_dashes_and_spaces("+79601255730")
+    # print(CustomerDataService.get_customers_by_phone_number("+7 (960) 125-57-30"))
+    # print(AuthenticationService.authorize_parent("+7 (960) 125-57-30", 1, "fff"))
+    DevService.clear_all_tables()
+    phone_number = "+79811985712"
+    # if AuthenticationService.is_parent_with_phone_number_authorized(phone_number):
+    #     print("authed already")
+    #
+    # result = AuthenticationService.authorize_parent(phone_number, 5, "a")
+    # if result:
+    #     parent_name, saved_children_names = result
+    #     string_children_names = StringUtil.list_to_string(saved_children_names)
+    #     print(string_children_names)
+    #     print("success")
+    # else:
+    #     print("error")
+    # pass
+    bot.polling(none_stop=True)

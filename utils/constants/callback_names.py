@@ -36,7 +36,9 @@ class CPP_BALANCE:
 
 class CAP:
     AUTH_PARENT_LIST = "adm_show_authed_parents"
+    NOTIFY_AUTHED_PARENTS = "adm_notify_parents"
 
     menu = [
-        {'text': 'Просмотр авторизованных в системе родителей', 'callback_data': AUTH_PARENT_LIST}
+        {'text': 'Просмотр авторизованных в системе родителей', 'callback_data': AUTH_PARENT_LIST},
+        {'text': 'Отправить сообщение авторизованным родителям', 'callback_data': NOTIFY_AUTHED_PARENTS}
     ]

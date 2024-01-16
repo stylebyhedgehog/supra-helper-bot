@@ -6,12 +6,22 @@ class PaymentLinkRepository:
     @staticmethod
     def get_group_payment_link():
         with DatabaseManager.get_db() as session:
-            return session.query(PaymentLink).first().group
+            payment_link = session.query(PaymentLink).first()
+            if not payment_link:
+                payment_link = PaymentLink(group=None, individual=None)
+                session.add(payment_link)
+                session.commit()
+            return payment_link.group
 
     @staticmethod
     def get_individual_payment_link():
         with DatabaseManager.get_db() as session:
-            return session.query(PaymentLink).first().individual
+            payment_link = session.query(PaymentLink).first()
+            if not payment_link:
+                payment_link = PaymentLink(group=None, individual=None)
+                session.add(payment_link)
+                session.commit()
+            return payment_link.individual
 
 
     @staticmethod

@@ -2,12 +2,12 @@ import os
 
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from db_func.repositories.parent_repository import ParentRepository
+from db_func.repositories.payment_link_repository import PaymentLinkRepository
 from services.api.alfa.customer import CustomerDataService
 from services.api.alfa.group import GroupDataService
 from utils.constants.files_names import FN
 from utils.constants.messages import PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING, \
     PPM_BALANCE_PAYMENT_NOTIFICATION_DISPATCHING
-from utils.date_utils import DateUtil
 from utils.file_utils import FileUtil
 from utils.logger import Logger
 
@@ -28,9 +28,12 @@ class BalanceMailer:
 
                     parent = ParentRepository.find_by_child_alfa_id(child_id)
                     if paid_count == 1:
-                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ONE_REMAINS(balance, paid_count, name)
+                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ONE_REMAINS(balance,
+                                                                                                          paid_count, name, PaymentLinkRepository.get_group_payment_link(),
+                                                                                                          PaymentLinkRepository.get_individual_payment_link())
                     else:
-                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ZERO_OR_LESS_REMAINS(balance, paid_count, name)
+                        balance_info = PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING.RESULT_ZERO_OR_LESS_REMAINS(balance, paid_count, name,PaymentLinkRepository.get_group_payment_link(),
+                                                                                                          PaymentLinkRepository.get_individual_payment_link())
                     BalanceMailer._send_notification_message_on_expiration(parent, balance_info, bot)
                     BalanceMailer._write_in_json_on_expiration(child_id, group_id, date, balance_info, parent)
             else:
@@ -74,9 +77,9 @@ class BalanceMailer:
             if parent:
                 markup = InlineKeyboardMarkup(row_width=1)
                 button_grp = InlineKeyboardButton(text="Пополнить баланс (Групповой формат)",
-                                                  url="https://supraschool.ru/payment2023")
+                                                  url=PaymentLinkRepository.get_group_payment_link())
                 button_ind = InlineKeyboardButton(text="Пополнить баланс (Индивидуальный формат)",
-                                                  url="https://supraschool.ru/indiv")
+                                                  url=PaymentLinkRepository.get_individual_payment_link())
                 markup.add(button_grp, button_ind)
                 bot.send_message(parent.telegram_id, info, reply_markup=markup)
                 Logger.mailing_info(parent.telegram_id, "mailing_balance_expiration", "Successfully mailed")

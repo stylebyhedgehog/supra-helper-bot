@@ -202,26 +202,26 @@ class PPM_ZOOM_RECORDINGS_DISPATCHING:
 
 # Сообщения бота при выполнении активности "Рассылка информации о необходимости пополнить баланс"
 class PPM_BALANCE_EXPIRATION_NOTIFICATION_DISPATCHING:
-    RESULT_ONE_REMAINS = lambda balance, paid_count, child_name: \
+    RESULT_ONE_REMAINS = lambda balance, paid_count, child_name, group_pay_ling, indiv_pay_link: \
     f"""
 Хорошего дня!
 
 💵  Напоминаем, что на балансе ученика {child_name} осталось 1 занятие. 
 
 Пополнить баланс вы можете по ссылке:
-Групповой формат: https://supraschool.ru/payment2023
-Индивидуальный формат: https://supraschool.ru/indiv
+Групповой формат: {group_pay_ling}
+Индивидуальный формат: {indiv_pay_link}
     """
 
-    RESULT_ZERO_OR_LESS_REMAINS = lambda balance, paid_count, child_name: \
+    RESULT_ZERO_OR_LESS_REMAINS = lambda balance, paid_count, child_name, group_pay_ling, indiv_pay_link: \
         f"""
 Хорошего дня!
 
 💵  Напоминаем, что на балансе ученика {child_name} осталось {paid_count} занятий. 
 
 Пополнить баланс вы можете по ссылке:
-Групповой формат: https://supraschool.ru/payment2023
-Индивидуальный формат: https://supraschool.ru/indiv
+Групповой формат: {group_pay_ling}
+Индивидуальный формат: {indiv_pay_link}
         """
 
 

@@ -58,3 +58,9 @@ class AbsentChild(Base):
     child_name = Column(String)
     lesson_with_absent_children_id = Column(Integer, ForeignKey('lesson_with_absent_children.lesson_id', ondelete='CASCADE'))
     lesson = relationship('LessonWithAbsentChildren')
+
+class PaymentLink(Base):
+    __tablename__ = 'payment_link'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    group = Column(String)
+    individual = Column(String)

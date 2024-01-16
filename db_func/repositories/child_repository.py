@@ -48,3 +48,25 @@ class ChildRepository:
                 return True
             else:
                 return False
+
+    @staticmethod
+    def delete_by_parent_id(parent_id):
+        with DatabaseManager.get_db() as session:
+            parent = session.query(Parent).filter_by(id=parent_id).first()
+
+            if parent:
+                children = session.query(Child).filter_by(parent_id=parent.id).all()
+                for child in children:
+                    session.delete(child)
+
+                session.commit()
+
+                return True
+            else:
+                return False
+
+    @staticmethod
+    def find_by_parent_id(parent_id):
+        with DatabaseManager.get_db() as session:
+            children = session.query(Child).filter_by(parent_id=parent_id).all()
+            return children

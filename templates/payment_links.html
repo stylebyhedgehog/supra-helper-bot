@@ -1,0 +1,32 @@
+<!-- templates/payment_links.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Links</title>
+    <style>
+         a{
+            color:black;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h2><a href="{{ url_for("admin_panel") }}">Назад</a></h2>
+    <h1>Ссылки на оплату</h1>
+    <form method="POST" action="{{ url_for('update_group_link') }}">
+        <label for="group">Ссылка на оплату группового формата:</label>
+        <input type="text" id="group" name="group" value="{{ group_link }}" required>
+        <br>
+        <button type="submit">Обновить ссылку (групп)</button>
+    </form>
+    <br>
+    <form method="POST" action="{{ url_for('update_individual_link') }}">
+        <label for="individual">Ссылка на оплату индивидуального формата:</label>
+        <input type="text" id="individual" name="individual" value="{{ individual_link }}" required>
+        <br>
+        <button type="submit">Обновить ссылку (индив)</button>
+    </form>
+</body>
+</html>

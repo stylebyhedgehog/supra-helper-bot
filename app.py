@@ -18,6 +18,8 @@ from controllers.flask.admin_panel_controllers import register_admin_panel_contr
 from controllers.flask.log_controller import register_log_controllers
 from controllers.flask.mailing_result_controllers import register_mailing_results_controllers
 from controllers.flask.external_webhook_controllers import register_external_webhook_controllers
+from controllers.flask.parent_controllers import register_parent_controller
+from controllers.flask.payment_link_controllers import register_payment_link_controllers
 from controllers.flask.test_controllers import register_test_controllers
 
 from db_func.core import DatabaseManager
@@ -86,6 +88,8 @@ if os.getenv("DEV_MODE") == "0":
     register_test_controllers(app, mailer)
     register_log_controllers(app)
     register_admin_panel_controllers(app)
+    register_parent_controller(app)
+    register_payment_link_controllers(app)
 
     if __name__ == '__main__':
         app.run(port=5000)
@@ -122,7 +126,7 @@ else:
     # a = StringUtil.remove_brackets_dashes_and_spaces("+79601255730")
     # print(CustomerDataService.get_customers_by_phone_number("+7 (960) 125-57-30"))
     # print(AuthenticationService.authorize_parent("+7 (960) 125-57-30", 1, "fff"))
-    DevService.clear_all_tables()
+    # DevService.clear_all_tables()
     phone_number = "+79811985712"
     # if AuthenticationService.is_parent_with_phone_number_authorized(phone_number):
     #     print("authed already")
@@ -136,4 +140,14 @@ else:
     # else:
     #     print("error")
     # pass
-    bot.polling(none_stop=True)
+    # bot.polling(none_stop=True)
+    register_external_webhook_controllers(app, bot, mailer)
+    register_mailing_results_controllers(app)
+    register_test_controllers(app, mailer)
+    register_log_controllers(app)
+    register_admin_panel_controllers(app)
+    register_parent_controller(app)
+    register_payment_link_controllers(app)
+
+    if __name__ == '__main__':
+        app.run(port=5000)

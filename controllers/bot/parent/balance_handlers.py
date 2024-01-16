@@ -1,6 +1,7 @@
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 from db_func.repositories.child_repository import ChildRepository
+from db_func.repositories.payment_link_repository import PaymentLinkRepository
 from exceptions.bot_error_handler import bot_error_handler
 from services.api.alfa.customer import CustomerDataService
 from utils.constants.callback_names import CPP_MENU, CPP_BALANCE
@@ -48,9 +49,9 @@ def register_balance_handlers(bot):
             if paid_count <= 1:
                 markup = InlineKeyboardMarkup(row_width=1)
                 button_grp = InlineKeyboardButton(text="Пополнить баланс (Групповой формат)",
-                                                  url="https://supraschool.ru/payment2023")
+                                                  url=PaymentLinkRepository.get_group_payment_link())
                 button_ind = InlineKeyboardButton(text="Пополнить баланс (Индивидуальный формат)",
-                                                  url="https://supraschool.ru/indiv")
+                                                  url=PaymentLinkRepository.get_individual_payment_link())
                 markup.add(button_grp, button_ind)
 
             current_date_y_m_d = DateUtil.get_current_moscow_date_y_m_d_as_str()

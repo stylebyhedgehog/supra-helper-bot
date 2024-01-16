@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Родители</title>
+    <style>
+        table {
+            border-collapse: collapse; /* Объединение границ ячеек */
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Толщина и цвет границы ячеек */
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2; /* Цвет фона заголовков */
+        }
+
+         a{
+            color:black;
+            text-decoration: none;
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2><a href="{{ url_for("admin_panel") }}">Назад</a></h2>
+    <h1>Перечень авторизованных родителей</h1>
+       <form id="addParentForm">
+           <h4>Добавить родителя</h4>
+        <label for="telegram_id">ID телеграм:</label>
+        <input type="text" id="telegram_id" name="telegram_id" required>
+
+        <label for="telegram_username">Логин телеграм:</label>
+        <input type="text" id="telegram_username" name="telegram_username">
+
+        <label for="phone_number">Номер телефона:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+
+        <button type="button" onclick="submitForm()">Добавить родителя</button>
+    </form>
+    <br>
+    <hr>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>ID бд</th>
+                <th>ID телеграм</th>
+                <th>Имя</th>
+                <th>Логин телеграм</th>
+                <th>Номер телефона</th>
+                <th>Дети</th> <!-- Новая колонка для отображения детей -->
+                <th>Действие</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parent in parents %}
+                <tr>
+                    <td>{{ parent.id }}</td>
+                    <td>{{ parent.telegram_id }}</td>
+                    <td>{{ parent.name }}</td>
+                    <td>{{ parent.telegram_username }}</td>
+                    <td>{{ parent.phone_number }}</td>
+                    <td>
+                        {% for child in parent.children %}
+                            {{ child.child_name }} - {{ child.child_alfa_id }}<br>
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <button onclick="confirmDelete('{{ parent.name }}', {{ parent.id }}, {{ parent.phone_number }})">Удалить</button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p id="modalText"></p>
+        <input id="id" type="number" disabled hidden>
+        <p>Дети:</p>
+        <ul id="childrenList"></ul>
+        <button onclick="deleteParent()">Удалить</button>
+        <button onclick="closeModal()">Отмена</button>
+    </div>
+</div>
+
+<script>
+      function submitForm() {
+            var form = document.getElementById('addParentForm');
+
+            var formData = new FormData(form);
+
+            fetch('/parent', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    console.error('Error adding parent:', response.status);
+                }
+            })
+            .catch(error => console.error('Error adding parent:', error));
+        }
+
+    function confirmDelete(name, id, phone_number) {
+        var modal = document.getElementById('deleteModal');
+        var modalText = document.getElementById('modalText');
+        document.getElementById("id").value = id
+        modalText.innerHTML = "Вы планируете удалить родителя " + name + " (ID:" + id + ", phone_number:" + phone_number + ") и всех привязанных к нему детей?";
+        modal.style.display = 'block';
+
+        fetchChildrenList(id);
+    }
+
+    function fetchChildrenList(parentId) {
+        var childrenList = document.getElementById('childrenList');
+
+        fetch(`/get_children/${parentId}`)
+            .then(response => response.json())
+            .then(children => {
+                childrenList.innerHTML = '';
+
+                children.forEach(child => {
+                    var listItem = document.createElement('li');
+                    listItem.textContent = `${child.child_name} - ${child.child_alfa_id}`;
+                    childrenList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching children:', error));
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('deleteModal');
+        modal.style.display = 'none';
+    }
+
+    function deleteParent() {
+        var idInput = document.getElementById("id").value;
+        var url = "{{ url_for('delete_parent', id='') }}";
+        window.location.href = url + idInput;
+    }
+
+</script>
+</body>
+</html>

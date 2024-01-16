@@ -1,5 +1,6 @@
 from db_func.core import DatabaseManager
 from db_func.models import Parent, Child
+from db_func.repositories.child_repository import ChildRepository
 
 
 class ParentRepository:
@@ -52,3 +53,24 @@ class ParentRepository:
                 return True
             else:
                 return False
+
+    @staticmethod
+    def delete_by_id(parent_id):
+        with DatabaseManager.get_db() as session:
+            parent = session.query(Parent).get(parent_id)
+
+            if parent:
+                session.delete(parent)
+                session.commit()
+
+                return True
+            else:
+                return False
+
+    @staticmethod
+    def find_all_with_children():
+        with DatabaseManager.get_db() as session:
+            parents = session.query(Parent).all()
+            for parent in parents:
+                parent.children = ChildRepository.find_by_parent_id(parent.id)
+            return parents

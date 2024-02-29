@@ -140,14 +140,14 @@ else:
     # else:
     #     print("error")
     # pass
-    # bot.polling(none_stop=True)
-    register_external_webhook_controllers(app, bot, mailer)
-    register_mailing_results_controllers(app)
-    register_test_controllers(app, mailer)
-    register_log_controllers(app)
-    register_admin_panel_controllers(app)
-    register_parent_controller(app)
-    register_payment_link_controllers(app)
-
-    if __name__ == '__main__':
-        app.run(port=5000)
+    bot.polling(none_stop=True)
+    # register_external_webhook_controllers(app, bot, mailer)
+    # register_mailing_results_controllers(app)
+    # register_test_controllers(app, mailer)
+    # register_log_controllers(app)
+    # register_admin_panel_controllers(app)
+    # register_parent_controller(app)
+    # register_payment_link_controllers(app)
+    #
+    # if __name__ == '__main__':
+    #     app.run(port=5000)
